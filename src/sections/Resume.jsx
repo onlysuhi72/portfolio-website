@@ -6,7 +6,7 @@ const EDUCATION = [
     role: 'Bachelor of Science in Information Technology',
     org: 'Bulacan State University - Bustos Campus',
     period: '2023 – Present',
-    desc: 'In my first year, I continued learning Java fundamentals. During my second year, I focused on web development using HTML, CSS, JavaScript, PHP, and SQL. In my third year, I advanced to web development with deployment, utilizing React, Tailwind CSS, Vite, and JavaScript.',
+    desc: 'In my first year, I continued learning Java fundamentals. During my second year, I focused on web development using HTML, CSS, JavaScript, PHP, and SQL, with project work across backend functionality and database management. In my third year, I advanced to web development with deployment, utilizing React, Tailwind CSS, Vite, and JavaScript for both front-end and full web experiences.',
   },
   {
     role: 'Senior High School — ICT',
@@ -18,10 +18,10 @@ const EDUCATION = [
 
 const EXPERIENCE = [
   {
-    role: 'No work experience yet',
+    role: 'No professional experience yet',
     org: '',
     period: '',
-    desc: 'Currently focused on my studies and building my skills as a BSIT student.'
+    desc: 'Currently focused on my studies and building my skills as a web developer.'
   }
 ]
 
@@ -39,9 +39,9 @@ const HIGHLIGHTS = [
 
 const DownloadIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-    <polyline points="7 10 12 15 17 10"/>
-    <line x1="12" y1="15" x2="12" y2="3"/>
+    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+    <polyline points="7 10 12 15 17 10" />
+    <line x1="12" y1="15" x2="12" y2="3" />
   </svg>
 )
 

@@ -18,20 +18,20 @@ export default function About() {
           {/* Left column — avatar */}
           <div className="about__image-wrapper reveal">
             <div className="about__avatar" style={{ position: 'relative', width: '100%', height: '100%' }}>
-              <img 
-                src={PaoloImg} 
-                alt="Juan Paolo Peralta" 
-                style={{ 
-                  width: '100%', 
-                  height: '100%', 
-                  objectFit: 'cover', 
+              <img
+                src={PaoloImg}
+                alt="Juan Paolo Peralta"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
                   borderRadius: '1.2rem'
-                }} 
+                }}
               />
               {/* Floating badge in lower right */}
               <div className="about__badge" style={{ position: 'absolute', right: '0.5rem', bottom: '0.5rem', zIndex: 2 }}>
                 <span className="about__badge-number">3+</span>
-                <span className="about__badge-text">Years learning<br/>and improving</span>
+                <span className="about__badge-text">Years learning<br />and improving</span>
               </div>
             </div>
           </div>
@@ -40,7 +40,7 @@ export default function About() {
           <div className="about__content">
             <p className="section-label reveal">About Me</p>
             <h2 className="section-title reveal reveal-delay-1">
-              Building things<br/>for the <span>web</span>
+              Building things<br />for the <span>web</span>
             </h2>
 
             <p className="reveal reveal-delay-2">
@@ -58,9 +58,10 @@ export default function About() {
             </p>
 
             <p className="reveal reveal-delay-4">
-              My goal is to land a <strong>front-end web developer role</strong> where I can
-              contribute to real products, grow alongside a great team, and continue
-              leveling up my craft every single day.
+              In my past projects, I have often focused on the <strong>backend and database work</strong> behind
+              each application, including data management, authentication, and system functionality. I also
+              contribute to the <strong>front-end</strong>, building interfaces that make those systems clear,
+              responsive, and easy to use.
             </p>
 
             {/* Quick facts */}
