@@ -23,7 +23,9 @@ Contact
 You can connect with me through the contact form on the website or through my social media profiles.
 
 GitHub: https://github.com/onlysuhi72
+
 LinkedIn: https://www.linkedin.com/in/juan-paolo-peralta-8b3900435
+
 Email: paoloperalta246@gmail.com
 
 License
