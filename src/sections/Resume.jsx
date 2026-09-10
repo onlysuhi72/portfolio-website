@@ -1,5 +1,6 @@
 import React from 'react'
 import './Resume.css'
+import resumePdf from '../components/JuanPaoloPeralta-Resume.pdf'
 
 const EDUCATION = [
   {
@@ -11,7 +12,7 @@ const EDUCATION = [
   {
     role: 'Senior High School — ICT',
     org: 'Carlos F. Gonzales High School',
-    period: '2022 – 2023',
+    period: '2021 – 2023',
     desc: 'Completed Java programming coursework covering variables, loops, conditional statements, and other fundamental programming concepts.',
   },
 ]
@@ -38,7 +39,7 @@ const CERTIFICATIONS = [
   {
     role: 'Getting Started with Cisco Packet Tracer',
     org: 'Cisco Networking Academy',
-    period: '',
+    period: 'Feb 2023',
     desc: 'Introductory training on network simulation and the fundamentals of using Cisco Packet Tracer.',
   },
 ]
@@ -92,12 +93,11 @@ export default function Resume() {
             <p className="resume__download-title">My Resume</p>
             <p className="resume__download-sub">Juan Paolo I. Peralta · 2026</p>
 
-            {/* Replace href with your actual resume PDF path, e.g. "/resume.pdf" */}
             <button
               className="btn btn-primary"
               style={{ width: '100%', justifyContent: 'center', display: 'flex', alignItems: 'center', gap: '0.5rem', paddingTop: '1.1rem', paddingBottom: '1.1rem' }}
               onClick={() => {
-                window.open('/resume.pdf', '_blank');
+                window.open(resumePdf, '_blank');
               }}
             >
               <DownloadIcon />
@@ -105,7 +105,7 @@ export default function Resume() {
             </button>
 
             {/* Career snapshot */}
-            <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border)', textAlign: 'left' }}>              
+            <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border)', textAlign: 'left' }}>
               <div style={{ display: 'grid', gap: '0.85rem' }}>
                 <div>
                   <p style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginBottom: '0.2rem' }}>Based in</p>
