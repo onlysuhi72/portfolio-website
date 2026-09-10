@@ -38,3 +38,11 @@
 .cursor-dot.clicking {
   transform: translate(-50%, -50%) scale(1.8);
 }
+
+@media (max-width: 768px) {
+
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}

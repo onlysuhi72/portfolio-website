@@ -89,8 +89,8 @@ export default function Resume() {
           {/* Left — download card */}
           <div className="resume__download-card reveal">
             <div className="resume__doc-icon">📄</div>
-            <p className="resume__download-title">Curriculum Vitae</p>
-            <p className="resume__download-sub">Juan Paolo Peralta · 2026</p>
+            <p className="resume__download-title">My Resume</p>
+            <p className="resume__download-sub">Juan Paolo I. Peralta · 2026</p>
 
             {/* Replace href with your actual resume PDF path, e.g. "/resume.pdf" */}
             <button

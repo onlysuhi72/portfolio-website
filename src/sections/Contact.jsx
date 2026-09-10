@@ -105,7 +105,7 @@ export default function Contact() {
 
           {/* Right: form */}
           <div className="contact__form-wrapper reveal reveal-delay-2">
-            <form className="contact__form" onSubmit={handleSubmit} noValidate>
+            <form className="contact__form" onSubmit={handleSubmit}>
 
               <div className="form__row">
                 <div className="form__group">
@@ -146,6 +146,7 @@ export default function Contact() {
                   className="form__input"
                   value={form.subject}
                   onChange={handleChange}
+                  required
                 />
               </div>
 

@@ -14,7 +14,7 @@ export default function About() {
             <div className="about__avatar" style={{ position: 'relative', width: '100%', height: '100%' }}>
               <img
                 src={PaoloImg}
-                alt="Juan Paolo Peralta"
+                alt="Juan Paolo I. Peralta"
                 style={{
                   width: '100%',
                   height: '100%',
@@ -38,7 +38,7 @@ export default function About() {
             </h2>
             <br></br>
             <p className="reveal reveal-delay-2">
-              Hi, I'm Juan Paolo Peralta, a student developer passionate about
+              Hi, I'm Juan Paolo I. Peralta, a student developer passionate about
               building digital experiences that are functional and visually engaging.
             </p>
 

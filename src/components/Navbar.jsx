@@ -94,8 +94,9 @@ export default function Navbar() {
 
         {/* Hamburger */}
         <button
+          type="button"
           className={`navbar__hamburger ${menuOpen ? 'open' : ''}`}
-          aria-label="Toggle menu"
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={menuOpen}
           aria-controls="mobile-navigation"
           onClick={() => setMenuOpen((v) => !v)}
@@ -110,6 +111,7 @@ export default function Navbar() {
           <a
             key={href}
             href={href}
+            className={activeSection === href.replace('#', '') ? 'active' : ''}
             onClick={(e) => handleNavClick(e, href)}
           >
             {label}
