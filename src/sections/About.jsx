@@ -50,10 +50,10 @@ export default function About() {
             </p>
 
             <p className="reveal reveal-delay-3">
-              I am currently pursuing a Bachelor of Science in Information Technology (BSIT) program at
-              Bulacan State University – Bustos Campus. I started with <strong>Java</strong> in my first year, then
+              I am currently a fourth-year Bachelor of Science in Information Technology (BSIT) student at
+              Bulacan State University - Bustos Campus. I started with <strong>Java</strong> in my first year, then
               moved into web development in my second year, learning <strong>HTML, CSS, JavaScript, PHP,</strong> and <strong>SQL</strong>.
-              Now in my third year, I’m focusing on modern front-end tools like <strong>React, Tailwind CSS,</strong> and <strong>Vite</strong>,
+              Now in my fourth year, I’m focusing on modern front-end tools like <strong>React, Tailwind CSS,</strong> and <strong>Vite</strong>,
               while improving my ability to build responsive and user-friendly interfaces.
             </p>
 

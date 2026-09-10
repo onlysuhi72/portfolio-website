@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react'
 import './Navbar.css'
 
 const NAV_LINKS = [
-  { label: 'About',    href: '#about'    },
-  { label: 'Skills',   href: '#skills'   },
+  { label: 'About', href: '#about' },
+  { label: 'Skills', href: '#skills' },
   { label: 'Projects', href: '#projects' },
-  { label: 'Resume',   href: '#resume'   },
-  { label: 'Contact',  href: '#contact', cta: true },
+  { label: 'Resume', href: '#resume' },
+  { label: 'Contact', href: '#contact', cta: true },
 ]
 
 export default function Navbar() {
-  const [scrolled,    setScrolled]    = useState(false)
-  const [menuOpen,    setMenuOpen]    = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
 
   // Add shadow/bg on scroll
@@ -49,6 +49,14 @@ export default function Navbar() {
     return () => { document.body.style.overflow = '' }
   }, [menuOpen])
 
+  useEffect(() => {
+    const closeOnEscape = (e) => {
+      if (e.key === 'Escape') setMenuOpen(false)
+    }
+    window.addEventListener('keydown', closeOnEscape)
+    return () => window.removeEventListener('keydown', closeOnEscape)
+  }, [])
+
   const handleNavClick = (e, href) => {
     e.preventDefault()
     setMenuOpen(false)
@@ -74,7 +82,7 @@ export default function Navbar() {
               <a
                 href={href}
                 className={
-                  `${cta ? 'navbar__cta' : ''} ${activeSection === href.replace('#','') ? 'active' : ''}`
+                  `${cta ? 'navbar__cta' : ''} ${activeSection === href.replace('#', '') ? 'active' : ''}`
                 }
                 onClick={(e) => handleNavClick(e, href)}
               >
@@ -88,6 +96,8 @@ export default function Navbar() {
         <button
           className={`navbar__hamburger ${menuOpen ? 'open' : ''}`}
           aria-label="Toggle menu"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-navigation"
           onClick={() => setMenuOpen((v) => !v)}
         >
           <span /><span /><span />
@@ -95,7 +105,7 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`navbar__mobile ${menuOpen ? 'open' : ''}`}>
+      <div id="mobile-navigation" className={`navbar__mobile ${menuOpen ? 'open' : ''}`}>
         {NAV_LINKS.map(({ label, href }) => (
           <a
             key={href}

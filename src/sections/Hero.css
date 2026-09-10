@@ -5,7 +5,8 @@
   align-items: center;
   position: relative;
   overflow: hidden;
-  padding-top: 5rem; /* offset for fixed navbar */
+  padding-top: 5rem;
+  /* offset for fixed navbar */
 }
 
 /* Animated background grid */
@@ -13,8 +14,8 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
   background-size: 60px 60px;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
@@ -30,7 +31,7 @@
   font-size: clamp(14rem, 28vw, 28rem);
   font-weight: 800;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(255,255,255,0.04);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.04);
   user-select: none;
   pointer-events: none;
   letter-spacing: -0.05em;
@@ -51,8 +52,17 @@
 }
 
 @keyframes orb-pulse {
-  0%, 100% { opacity: 0.6; transform: scale(1); }
-  50%       { opacity: 1;   transform: scale(1.15); }
+
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
 }
 
 /* Content */
@@ -85,8 +95,15 @@
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.3; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
 }
 
 .hero__title {
@@ -114,6 +131,26 @@
   margin-bottom: 1.5rem;
   opacity: 0;
   animation: fade-up 0.8s var(--ease-out) 0.55s forwards;
+}
+
+.hero__availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero__availability span {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 0.25rem var(--accent-glow);
 }
 
 .hero__description {
@@ -167,15 +204,33 @@
 }
 
 @keyframes scroll-pulse {
-  0%   { transform: scaleY(1);   opacity: 1; }
-  50%  { transform: scaleY(0.5); opacity: 0.4; }
-  100% { transform: scaleY(1);   opacity: 1; }
+  0% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scaleY(0.5);
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
 }
 
 /* --- Shared fade-up keyframe --- */
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Available badge */
@@ -202,7 +257,19 @@
 
 /* Responsive */
 @media (max-width: 600px) {
-  .hero__orb     { width: 240px; height: 240px; right: -2rem; top: 10%; }
-  .hero__actions { flex-direction: column; align-items: flex-start; }
-  .hero__badge   { margin-left: 0; }
+  .hero__orb {
+    width: 240px;
+    height: 240px;
+    right: -2rem;
+    top: 10%;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero__badge {
+    margin-left: 0;
+  }
 }

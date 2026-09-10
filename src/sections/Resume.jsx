@@ -5,8 +5,8 @@ const EDUCATION = [
   {
     role: 'Bachelor of Science in Information Technology',
     org: 'Bulacan State University - Bustos Campus',
-    period: '2023 – Present',
-    desc: 'In my first year, I continued learning Java fundamentals. During my second year, I focused on web development using HTML, CSS, JavaScript, PHP, and SQL, with project work across backend functionality and database management. In my third year, I advanced to web development with deployment, utilizing React, Tailwind CSS, Vite, and JavaScript for both front-end and full web experiences.',
+    period: '2023 – Present · 4th Year',
+    desc: 'I started with Java fundamentals, then focused on web development using HTML, CSS, JavaScript, PHP, and SQL. I am now advancing my front-end and full-stack skills with React, Tailwind CSS, Vite, JavaScript, and deployment workflows.',
   },
   {
     role: 'Senior High School — ICT',

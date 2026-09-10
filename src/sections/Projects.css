@@ -29,10 +29,10 @@
 
 /* Featured project (spans 7 cols) */
 .project-card {
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -85,8 +85,8 @@
   font-size: 4rem;
   /* subtle grid pattern */
   background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 32px 32px;
   transition: transform 0.6s var(--ease-out);
 }
@@ -100,12 +100,14 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(184,255,87,0.08), transparent);
+  background: linear-gradient(135deg, rgba(184, 255, 87, 0.08), transparent);
   opacity: 0;
   transition: opacity var(--t-med);
 }
 
-.project-card:hover .project-card__image::after { opacity: 1; }
+.project-card:hover .project-card__image::after {
+  opacity: 1;
+}
 
 /* Body */
 .project-card__body {
@@ -137,15 +139,15 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--accent);
-  background: rgba(184,255,87,0.08);
+  background: rgba(184, 255, 87, 0.08);
   padding: 0.25rem 0.65rem;
   border-radius: 99px;
-  border: 1px solid rgba(184,255,87,0.2);
+  border: 1px solid rgba(184, 255, 87, 0.2);
 }
 
 .project-card__tag--blue {
   color: #3498db;
-  background: rgba(52,152,219,0.10);
+  background: rgba(52, 152, 219, 0.10);
   border: 1px solid #3498db33;
 }
 
@@ -165,6 +167,24 @@
   line-height: 1.7;
   flex: 1;
   margin-bottom: 1.25rem;
+}
+
+.project-card__details {
+  display: grid;
+  gap: 0.35rem;
+  padding-block: 0.85rem;
+  margin-bottom: 1.25rem;
+  border-block: 1px solid var(--border);
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.project-card__details strong {
+  display: inline-block;
+  min-width: 6.8rem;
+  color: var(--accent);
+  font-weight: 500;
 }
 
 /* Tech stack chips */
@@ -224,14 +244,17 @@
 
 /* Responsive */
 @media (max-width: 900px) {
+
   .project-card--featured,
   .project-card--secondary,
   .project-card--full {
     grid-column: span 12;
   }
+
   .project-card--full {
     flex-direction: column;
   }
+
   .project-card--full .project-card__image {
     width: 100%;
     aspect-ratio: 16/9;

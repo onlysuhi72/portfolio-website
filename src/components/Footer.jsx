@@ -11,7 +11,7 @@ export default function Footer() {
 
         <div className="footer__brand">
           <h2 className="footer__name">Juan Paolo I. Peralta</h2>
-          <p className="footer__tagline">4th Year College Student &amp; Web Developer</p>
+          <p className="footer__tagline">4th Year BSIT Student &amp; Web Developer</p>
         </div>
 
       </div>

@@ -7,39 +7,40 @@
 /* --- CSS Custom Properties (Design Tokens) --- */
 :root {
   /* Colors */
-  --bg:          #181c1f;
-  --bg-2:        #23272a;
-  --bg-3:        #2c3136;
-  --surface:     #23272a;
-  --surface-2:   #2c3136;
-  --border:      #353a40;
-  --border-hover:#7eb6b0;
+  --bg: #181c1f;
+  --bg-2: #23272a;
+  --bg-3: #2c3136;
+  --surface: #23272a;
+  --surface-2: #2c3136;
+  --border: #353a40;
+  --border-hover: #7eb6b0;
 
-  --text-primary:   #f3f4f6;
+  --text-primary: #f3f4f6;
   --text-secondary: #b3b8be;
-  --text-muted:     #7a8699;
+  --text-muted: #7a8699;
 
-  --accent:       #7eb6b0;   /* soft teal accent */
-  --accent-dim:   #4e7c77;
-  --accent-glow:  rgba(126, 182, 176, 0.15);
+  --accent: #7eb6b0;
+  /* soft teal accent */
+  --accent-dim: #4e7c77;
+  --accent-glow: rgba(126, 182, 176, 0.15);
 
-  --red:    #ff5757;
-  --blue:   #57b8ff;
+  --red: #ff5757;
+  --blue: #57b8ff;
 
   /* Typography */
   --font-display: 'Syne', sans-serif;
-  --font-body:    'DM Sans', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
 
   /* Spacing */
   --section-pad: clamp(5rem, 10vw, 9rem);
-  --container:   min(90%, 1100px);
+  --container: min(90%, 1100px);
 
   /* Transitions */
-  --ease:     cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --t-fast:   150ms var(--ease);
-  --t-med:    300ms var(--ease);
-  --t-slow:   500ms var(--ease-out);
+  --t-fast: 150ms var(--ease);
+  --t-med: 300ms var(--ease);
+  --t-slow: 500ms var(--ease-out);
 
   /* Borders */
   --radius-sm: 6px;
@@ -48,7 +49,9 @@
 }
 
 /* --- Reset & Base --- */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -67,12 +70,31 @@ body {
   font-weight: 300;
   line-height: 1.7;
   overflow-x: hidden;
-  cursor: none; /* hidden for custom cursor */
+  cursor: none;
+  /* hidden for custom cursor */
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1100;
+  padding: 0.6rem 1rem;
+  color: #0a0a0a;
+  background: var(--accent);
+  transform: translateY(-150%);
+  transition: transform var(--t-fast);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
 }
 
 /* Restore default cursor on touch devices */
 @media (hover: none) {
-  body { cursor: auto; }
+  body {
+    cursor: auto;
+  }
 }
 
 a {
@@ -80,7 +102,8 @@ a {
   text-decoration: none;
 }
 
-img, svg {
+img,
+svg {
   display: block;
   max-width: 100%;
 }
@@ -92,7 +115,9 @@ button {
   background: none;
 }
 
-ul { list-style: none; }
+ul {
+  list-style: none;
+}
 
 /* --- Utility Classes --- */
 .container {
@@ -108,6 +133,7 @@ ul { list-style: none; }
 .section:nth-child(odd) {
   background-color: var(--bg);
 }
+
 .section:nth-child(even) {
   background-color: var(--bg-2);
 }
@@ -124,11 +150,25 @@ ul { list-style: none; }
   transform: translateY(0);
 }
 
-.reveal-delay-1 { transition-delay: 100ms; }
-.reveal-delay-2 { transition-delay: 200ms; }
-.reveal-delay-3 { transition-delay: 300ms; }
-.reveal-delay-4 { transition-delay: 400ms; }
-.reveal-delay-5 { transition-delay: 500ms; }
+.reveal-delay-1 {
+  transition-delay: 100ms;
+}
+
+.reveal-delay-2 {
+  transition-delay: 200ms;
+}
+
+.reveal-delay-3 {
+  transition-delay: 300ms;
+}
+
+.reveal-delay-4 {
+  transition-delay: 400ms;
+}
+
+.reveal-delay-5 {
+  transition-delay: 500ms;
+}
 
 /* --- Section Labels --- */
 .section-label {
@@ -191,8 +231,13 @@ ul { list-style: none; }
   transition: opacity var(--t-fast);
 }
 
-.btn:hover::after { opacity: 0.08; }
-.btn:active::after { opacity: 0.16; }
+.btn:hover::after {
+  opacity: 0.08;
+}
+
+.btn:active::after {
+  opacity: 0.16;
+}
 
 .btn-primary {
   background: var(--accent);
@@ -226,10 +271,22 @@ ul { list-style: none; }
 }
 
 /* --- Scrollbar --- */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent-dim); }
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-hover);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-dim);
+}
 
 /* --- Selection --- */
 ::selection {
@@ -242,4 +299,24 @@ ul { list-style: none; }
   outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }

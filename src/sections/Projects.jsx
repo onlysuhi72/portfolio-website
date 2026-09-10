@@ -8,44 +8,56 @@ import './Projects.css'
 const PROJECTS = [
   {
     id: '01',
-    tag: '  ',
     emoji: '🛒',
     title: 'Adlaon Optical',
     desc: 'A web-based management system for an optical clinic, combining a customer-facing interface with backend workflows for products, appointments, orders, and eye care services.',
     stack: ['HTML5', 'CSS3', 'JavaScript', 'PHP'],
-    github: 'https://github.com/juanpaolo',
-    demo: '#',
+    date: '2025',
+    team: 'Collaborative project',
+    role: 'Backend and database developer',
+    contributions: ['Backend workflows', 'Database design', 'Authentication', 'UI implementation'],
+    github: '',
+    demo: '',
     layout: 'featured',
   },
   {
     id: '02',
-    tag: '3rd Year',
     emoji: '✅',
     title: 'Homezy',
     desc: 'A web-based management system for short-term rentals and experiences, with front-end booking flows and backend functionality for listings, reservations, users, and platform operations.',
     stack: ['Node.js', 'React', 'JavaScript'],
+    date: '2026',
+    team: 'Collaborative project',
+    role: 'Full-stack developer',
+    contributions: ['UI implementation', 'Backend functionality', 'Authentication', 'Deployment'],
     github: 'https://github.com/paoloperalta246/homezy.git',
     demo: 'https://homezy-beta.vercel.app/',
     layout: 'secondary',
   },
   {
     id: '03',
-    tag: '3rd Year',
     emoji: '🌿',
     title: 'OneData',
     desc: 'A web application designed for managing users, files, and organizational data. I worked across its data-focused functionality and front-end interface, including authentication, file uploads, audit logs, dashboards, and role-based access controls.',
     stack: ['JavaScript', 'TypeScript', 'HTML', 'Tailwind CSS', 'Vite'],
+    date: '2026',
+    team: 'Collaborative project',
+    role: 'Full-stack developer',
+    contributions: ['Authentication', 'File management', 'Database workflows', 'UI implementation'],
     github: 'https://github.com/ainthens/one-data.git',
     demo: 'https://onedata-baliwag.com/',
     layout: 'secondary',
   },
   {
     id: '04',
-    tag: '3rd Year',
     emoji: '🌿',
     title: 'Clash Circuit',
     desc: 'A modern website for a 2D Unity top-down mobile game. This site provides comprehensive information about the game, including its description, story, characters, factions, game modes, features, screenshots, and developer details. The website also allows visitors to easily download and install the mobile game on their devices.',
     stack: ['React', 'JavaScript', 'CSS', 'Vite'],
+    date: '2026',
+    team: 'Collaborative project',
+    role: 'Frontend developer',
+    contributions: ['UI implementation', 'Responsive design', 'Content structure', 'Deployment'],
     github: 'https://github.com/paoloperalta246/clash-circuit-website.git',
     demo: 'https://clash-circuit-website.vercel.app/',
     layout: 'secondary',
@@ -81,13 +93,13 @@ function ProjectCard({ project }) {
         <div className="project-card__image-inner">
           {/* Show AdlaonImg for project 01, HomezyImg for 02, OneDataImg above emoji for 03 */}
           {project.id === '01' ? (
-            <img src={AdlaonImg} alt="ShopEase Preview" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
+            <img src={AdlaonImg} alt="Adlaon Optical project preview" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
           ) : project.id === '02' ? (
-            <img src={HomezyImg} alt="TaskFlow Preview" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
+            <img src={HomezyImg} alt="Homezy project preview" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
           ) : project.id === '03' ? (
-            <img src={OneDataImg} alt="OneData Preview" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
+            <img src={OneDataImg} alt="OneData project preview" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
           ) : project.id === '04' ? (
-            <img src={ClashCircuitImg} alt="Clash Circuit Preview" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
+            <img src={ClashCircuitImg} alt="Clash Circuit project preview" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
           ) : (
             project.emoji
           )}
@@ -98,11 +110,17 @@ function ProjectCard({ project }) {
       <div className="project-card__body">
         <div className="project-card__meta">
           <span className="project-card__num">Project {project.id}</span>
-          <span className={`project-card__tag${['2nd Year', '3rd Year'].includes(project.tag) ? ' project-card__tag--blue' : ''}`}>{project.tag}</span>
+          <span className="project-card__tag">{project.date}</span>
         </div>
 
         <h3 className="project-card__title">{project.title}</h3>
         <p className="project-card__desc">{project.desc}</p>
+
+        <div className="project-card__details">
+          <p><strong>Role</strong> {project.role}</p>
+          <p><strong>Type</strong> {project.team}</p>
+          <p><strong>Contributions</strong> {project.contributions.join(' · ')}</p>
+        </div>
 
         {/* Tech stack */}
         <div className="project-card__stack">
@@ -112,17 +130,17 @@ function ProjectCard({ project }) {
         </div>
 
         {/* Links */}
-        {project.id !== '01' && (
+        {(project.github || project.demo) && (
           <div className="project-card__actions">
-            <a
+            {project.github && <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
               className="project-card__link"
             >
               <GitHubIcon /> GitHub
-            </a>
-            <a
+            </a>}
+            {project.demo && <a
               href={project.demo}
               target="_blank"
               rel="noopener noreferrer"
@@ -135,7 +153,7 @@ function ProjectCard({ project }) {
                 <polyline points="15 3 21 3 21 9" />
                 <line x1="10" y1="14" x2="21" y2="3" />
               </svg>
-            </a>
+            </a>}
           </div>
         )}
       </div>

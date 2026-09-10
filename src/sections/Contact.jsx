@@ -173,8 +173,9 @@ export default function Contact() {
               </button>
 
               {status === 'success' && (
-                <p className="form__status form__status--success">
-                  ✅ Message sent! I'll get back to you soon.
+                <p className="form__status form__status--success" role="status">
+                  <span className="form__status-mark" aria-hidden="true">✓</span>
+                  <span><strong>Thanks for reaching out.</strong> I'll get back to you soon.</span>
                 </p>
               )}
               {status === 'error' && (
