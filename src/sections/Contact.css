@@ -6,9 +6,6 @@
   align-items: start;
 }
 
-/* Left: info */
-.contact__info {}
-
 .contact__tagline {
   font-size: 1rem;
   color: var(--text-secondary);

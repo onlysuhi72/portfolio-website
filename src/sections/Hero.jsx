@@ -26,7 +26,7 @@ export default function Hero() {
 
         {/* Description */}
         <p className="hero__description">
-          I build <strong>full web experiences</strong> across backend systems, databases,
+          I build full web experiences across backend systems, databases,
           and clean, responsive front-end interfaces.
         </p>
 

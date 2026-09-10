@@ -109,9 +109,6 @@
   box-shadow: 0 12px 32px rgba(87,184,255,0.33);
 }
 
-/* Right: Timeline */
-.resume__timeline-col {}
-
 .resume__block {
   margin-bottom: 3rem;
 }
@@ -173,8 +170,6 @@
   border-color: var(--accent);
   background: rgba(184,255,87,0.15);
 }
-
-.resume__item-body {}
 
 .resume__item-role {
   font-family: var(--font-display);

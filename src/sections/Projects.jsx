@@ -1,6 +1,7 @@
 import React from 'react'
 import AdlaonImg from '../images/Adlaon.png'
 import HomezyImg from '../images/Homezy.png'
+import SwiftEatsImg from '../images/SwiftEats.png'
 import ClashCircuitImg from '../images/ClashCircuit.png'
 import OneDataImg from '../images/OneData.png'
 import './Projects.css'
@@ -10,14 +11,15 @@ const PROJECTS = [
     id: '01',
     emoji: '🛒',
     title: 'Adlaon Optical',
-    desc: 'A web-based management system for an optical clinic, combining a customer-facing interface with backend workflows for products, appointments, orders, and eye care services.',
-    stack: ['HTML5', 'CSS3', 'JavaScript', 'PHP'],
+    desc: 'A web-based management system for an optical clinic. It combines a customer-facing interface with backend workflows. These workflows support products, appointments, orders, and eye care services.',
+    stack: ['HTML5', 'CSS3', 'JavaScript', 'PHP', 'MySQL'],
     date: '2025',
     team: 'Collaborative project',
     role: 'Backend and database developer',
     contributions: ['Backend workflows', 'Database design', 'Authentication', 'UI implementation'],
     github: '',
     demo: '',
+    showPlaceholders: true,
     layout: 'featured',
   },
   {
@@ -26,8 +28,8 @@ const PROJECTS = [
     title: 'Homezy',
     desc: 'A web-based management system for short-term rentals and experiences, with front-end booking flows and backend functionality for listings, reservations, users, and platform operations.',
     stack: ['Node.js', 'React', 'JavaScript'],
-    date: '2026',
-    team: 'Collaborative project',
+    date: '2025',
+    team: 'Individual project',
     role: 'Full-stack developer',
     contributions: ['UI implementation', 'Backend functionality', 'Authentication', 'Deployment'],
     github: 'https://github.com/paoloperalta246/homezy.git',
@@ -36,28 +38,43 @@ const PROJECTS = [
   },
   {
     id: '03',
-    emoji: '🌿',
-    title: 'OneData',
-    desc: 'A web application designed for managing users, files, and organizational data. I worked across its data-focused functionality and front-end interface, including authentication, file uploads, audit logs, dashboards, and role-based access controls.',
-    stack: ['JavaScript', 'TypeScript', 'HTML', 'Tailwind CSS', 'Vite'],
-    date: '2026',
-    team: 'Collaborative project',
-    role: 'Full-stack developer',
-    contributions: ['Authentication', 'File management', 'Database workflows', 'UI implementation'],
-    github: 'https://github.com/ainthens/one-data.git',
-    demo: 'https://onedata-baliwag.com/',
+    emoji: '🍔',
+    title: 'SwiftEats',
+    desc: 'A food delivery platform where customers can browse, customize, order, and track meals. Delivery riders can manage their assigned deliveries through dedicated features. Administrators can monitor orders, users, analytics, and platform settings.',
+    stack: ['Figma'],
+    date: '2025',
+    team: 'Individual project',
+    role: 'UI/UX designer and prototyping',
+    contributions: ['User flows', 'Wireframes', 'Interface design', 'Interactive prototype'],
+    github: '',
+    demo: '',
+    showPlaceholders: true,
     layout: 'secondary',
   },
   {
     id: '04',
     emoji: '🌿',
+    title: 'OneData',
+    desc: 'A web application designed for managing users, files, and organizational data. I worked across its data-focused functionality and database, including authentication, file uploads, audit logs, dashboards, and role-based access controls.',
+    stack: ['React', 'JavaScript', 'Tailwind CSS', 'Vite'],
+    date: '2026',
+    team: 'Collaborative project',
+    role: 'Back-end developer',
+    contributions: ['Authentication', 'File management', 'Database workflows', 'Role-based access control'],
+    github: 'https://github.com/Robb730/onedata',
+    demo: 'https://onedata-baliwag.com/',
+    layout: 'secondary',
+  },
+  {
+    id: '05',
+    emoji: '🌿',
     title: 'Clash Circuit',
-    desc: 'A modern website for a 2D Unity top-down mobile game. This site provides comprehensive information about the game, including its description, story, characters, factions, game modes, features, screenshots, and developer details. The website also allows visitors to easily download and install the mobile game on their devices.',
+    desc: 'A modern website for a 2D Unity top-down mobile game. It features the game\'s story, characters, factions, game modes, screenshots, and developer details. Visitors can also download and install the mobile game.',
     stack: ['React', 'JavaScript', 'CSS', 'Vite'],
     date: '2026',
     team: 'Collaborative project',
-    role: 'Frontend developer',
-    contributions: ['UI implementation', 'Responsive design', 'Content structure', 'Deployment'],
+    role: 'Full-stack developer',
+    contributions: ['Backend functionality', 'Responsive design', 'Content structure', 'Deployment'],
     github: 'https://github.com/paoloperalta246/clash-circuit-website.git',
     demo: 'https://clash-circuit-website.vercel.app/',
     layout: 'secondary',
@@ -71,15 +88,6 @@ const GitHubIcon = () => (
   </svg>
 )
 
-/** External link icon */
-const LinkIcon = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
-    <polyline points="15 3 21 3 21 9" />
-    <line x1="10" y1="14" x2="21" y2="3" />
-  </svg>
-)
-
 function ProjectCard({ project }) {
   const layoutClass =
     project.layout === 'featured' ? 'project-card--featured' :
@@ -88,17 +96,17 @@ function ProjectCard({ project }) {
 
   return (
     <article className={`project-card ${layoutClass} reveal`}>
-      {/* Image / preview placeholder */}
       <div className="project-card__image">
         <div className="project-card__image-inner">
-          {/* Show AdlaonImg for project 01, HomezyImg for 02, OneDataImg above emoji for 03 */}
           {project.id === '01' ? (
             <img src={AdlaonImg} alt="Adlaon Optical project preview" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
           ) : project.id === '02' ? (
             <img src={HomezyImg} alt="Homezy project preview" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
           ) : project.id === '03' ? (
-            <img src={OneDataImg} alt="OneData project preview" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
+            <img src={SwiftEatsImg} alt="SwiftEats mobile app prototype preview" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
           ) : project.id === '04' ? (
+            <img src={OneDataImg} alt="OneData project preview" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
+          ) : project.id === '05' ? (
             <img src={ClashCircuitImg} alt="Clash Circuit project preview" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
           ) : (
             project.emoji
@@ -110,7 +118,9 @@ function ProjectCard({ project }) {
       <div className="project-card__body">
         <div className="project-card__meta">
           <span className="project-card__num">Project {project.id}</span>
-          <span className="project-card__tag">{project.date}</span>
+          <span className={`project-card__tag${project.date === '2025' || project.date === '2026' ? ' project-card__tag--blue' : ''}`}>
+            {project.date}
+          </span>
         </div>
 
         <h3 className="project-card__title">{project.title}</h3>
@@ -130,7 +140,7 @@ function ProjectCard({ project }) {
         </div>
 
         {/* Links */}
-        {(project.github || project.demo) && (
+        {(project.github || project.demo || project.showPlaceholders) && (
           <div className="project-card__actions">
             {project.github && <a
               href={project.github}
@@ -140,6 +150,11 @@ function ProjectCard({ project }) {
             >
               <GitHubIcon /> GitHub
             </a>}
+            {project.showPlaceholders && !project.github && (
+              <button type="button" className="project-card__link" disabled>
+                <GitHubIcon /> GitHub
+              </button>
+            )}
             {project.demo && <a
               href={project.demo}
               target="_blank"
@@ -154,6 +169,21 @@ function ProjectCard({ project }) {
                 <line x1="10" y1="14" x2="21" y2="3" />
               </svg>
             </a>}
+            {project.showPlaceholders && !project.demo && (
+              <button
+                type="button"
+                className="btn btn-primary"
+                disabled
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.28em', fontSize: '0.85rem', fontWeight: 600, padding: '0.38rem 0.8rem' }}
+              >
+                Live Demo
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.1">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+              </button>
+            )}
           </div>
         )}
       </div>

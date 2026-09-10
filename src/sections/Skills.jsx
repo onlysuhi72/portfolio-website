@@ -1,75 +1,40 @@
 import React from 'react'
 import './Skills.css'
 
-const SKILLS = [
+const SKILL_GROUPS = [
   {
-    icon: '🌐',
-    title: 'HTML5',
-    desc: 'Semantic markup, accessibility, and modern HTML structure.',
-    levelLabel: 'Comfortable',
+    category: 'Core',
+    number: '01',
+    items: [
+      { name: 'HTML5', note: 'Semantic markup, accessibility' },
+      { name: 'CSS3', note: 'Flexbox, grid, animations' },
+      { name: 'JavaScript', note: 'ES6+, DOM, fetch API' },
+      { name: 'PHP', note: 'Server-side scripting, web development' },      
+    ],
   },
   {
-    icon: '🎨',
-    title: 'CSS3',
-    desc: 'Flexbox, grid, animations, and custom property designs.',
-    levelLabel: 'Comfortable',
+    category: 'Framework & Tools',
+    number: '02',
+    items: [
+      { name: 'React', note: 'Hooks, component design' },
+      { name: 'Tailwind CSS', note: 'Utility-first styling' },      
+      { name: 'SQL', note: 'Queries, joins, schema design' },
+      { name: 'Git & GitHub', note: 'Branching, collaboration' },
+    ],
   },
   {
-    icon: '⚡',
-    title: 'JavaScript',
-    desc: 'ES6+, DOM manipulation, fetch API, and core programming concepts.',
-    levelLabel: 'Working knowledge',
-  },
-  {
-    icon: '🗄️',
-    title: 'SQL',
-    desc: 'Database design, queries, joins, and data manipulation.',
-    levelLabel: 'Comfortable',
-  },
-  {
-    icon: '⚛️',
-    title: 'React',
-    desc: 'Functional components, hooks, and component design.',
-    levelLabel: 'Working knowledge',
-  },
-  {
-    icon: '📱',
-    title: 'Responsive Design',
-    desc: 'Mobile-first layouts, media queries, and adaptive UI patterns.',
-    levelLabel: 'Comfortable',
-  },
-  {
-    icon: '🖌️',
-    title: 'UI / UX Basics',
-    desc: 'Design principles, typography, and Figma basics & fundamentals.',
-    levelLabel: 'Working knowledge',
-  },
-  {
-    icon: '🔧',
-    title: 'Git & GitHub',
-    desc: 'Version control, branching, commits, and project collaboration.',
-    levelLabel: 'Currently learning',
+    category: 'Design',
+    number: '03',
+    items: [
+      { name: 'UI / UX Basics', note: 'Typography, Figma fundamentals' },
+      { name: 'Prototyping', note: 'Interactive mockups and user flows' },
+      { name: 'Responsive Design', note: 'Mobile-first layouts' },
+      { name: 'Visual Hierarchy', note: 'Spacing, contrast, composition' },
+    ],
   },
 ]
 
-const ALSO_LEARNING = ['Tailwind CSS', 'Node.js', 'Figma', 'TypeScript', 'Firebase']
-
-/**
- * SkillCard — individual card with an animated visual familiarity bar.
- */
-function SkillCard({ icon, title, desc, levelLabel, delay }) {
-  return (
-    <div className="skill-card reveal" style={{ transitionDelay: `${delay}ms` }}>
-      <span className="skill-card__icon">{icon}</span>
-      <p className="skill-card__title">{title}</p>
-      <p className="skill-card__desc">{desc}</p>
-
-      <div className="skill-card__level">
-        <span>{levelLabel}</span>
-      </div>
-    </div>
-  )
-}
+const ALSO_LEARNING = ['Python', 'C#', 'Unity', 'Supabase', 'Vercel', 'Hostinger']
 
 export default function Skills() {
   return (
@@ -83,21 +48,31 @@ export default function Skills() {
           </h2>
         </div>
 
-        <div className="skills__grid">
-          {SKILLS.map((skill, i) => (
-            <SkillCard key={skill.title} {...skill} delay={i * 60} />
+        <div className="skills__list">
+          {SKILL_GROUPS.map((group, gi) => (
+            <div className="skills__group reveal" key={group.category} style={{ transitionDelay: `${gi * 80}ms` }}>
+              <div className="skills__group-head">
+                <span className="skills__group-number">{group.number}</span>
+                <p className="skills__group-label">{group.category}</p>
+              </div>
+              <ul className="skills__items">
+                {group.items.map((item) => (
+                  <li className="skills__item" key={item.name}>
+                    <span className="skills__item-name">{item.name}</span>
+                    <span className="skills__item-note">{item.note}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
         </div>
 
-        {/* Current learning goals */}
         <div className="skills__also reveal">
           <p className="skills__also-label">Currently learning</p>
-          <div className="skills__tags">
-            {ALSO_LEARNING.map((tag) => (
-              <span key={tag} className="skills__tag">{tag}</span>
-            ))}
-          </div>
-          <p className="skills__learning-goal">My short-term goal is to strengthen my TypeScript and Node.js skills while building and deploying more complete full-stack applications.</p>
+          <p className="skills__also-list">{ALSO_LEARNING.join(' · ')}</p>
+          <p className="skills__learning-goal">
+            My short-term goal is to strengthen my Python and Unity skills while building and deploying more complete full-stack applications.
+          </p>
         </div>
 
       </div>

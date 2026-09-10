@@ -3,12 +3,6 @@ import React from 'react'
 import './About.css'
 import PaoloImg from '../images/Paolo.png'
 
-const FACTS = [
-  { icon: '🎓', label: 'IT Student' },
-  { icon: '📍', label: 'Bulacan, Philippines' },
-  { icon: '💼', label: 'Open to Internships' },
-]
-
 export default function About() {
   return (
     <section className="about section" id="about">
@@ -42,37 +36,25 @@ export default function About() {
             <h2 className="section-title reveal reveal-delay-1">
               Building things<br />for the <span>web</span>
             </h2>
-
+            <br></br>
             <p className="reveal reveal-delay-2">
-              Hi, I'm <strong>Juan Paolo Peralta</strong> — a student developer
-              with a genuine passion for building digital experiences that are both
-              <strong> functional and visually engaging</strong>.
+              Hi, I'm Juan Paolo Peralta, a student developer passionate about
+              building digital experiences that are functional and visually engaging.
             </p>
 
             <p className="reveal reveal-delay-3">
-              I am currently a fourth-year Bachelor of Science in Information Technology (BSIT) student at
-              Bulacan State University - Bustos Campus. I started with <strong>Java</strong> in my first year, then
-              moved into web development in my second year, learning <strong>HTML, CSS, JavaScript, PHP,</strong> and <strong>SQL</strong>.
-              Now in my fourth year, I’m focusing on modern front-end tools like <strong>React, Tailwind CSS,</strong> and <strong>Vite</strong>,
-              while improving my ability to build responsive and user-friendly interfaces.
+              I am a fourth-year BSIT student at Bulacan State University - Bustos Campus.
+              I started with Java and web development using HTML, CSS, JavaScript, PHP, and SQL.
+              I later learned 2D and 3D game development with Unity and C#, along with Python,
+              Django, and tools like Vercel, Hostinger, and Supabase.
             </p>
 
             <p className="reveal reveal-delay-4">
-              In my past projects, I have often focused on the <strong>backend and database work</strong> behind
-              each application, including data management, authentication, and system functionality. I also
-              contribute to the <strong>front-end</strong>, building interfaces that make those systems clear,
-              responsive, and easy to use.
+              My projects focuses on backend and database work, including data management, 
+              authentication, and system functionality. I've also contributed to creating clear, 
+              responsive, and user-friendly interfaces.
             </p>
 
-            {/* Quick facts */}
-            <div className="about__facts reveal reveal-delay-4">
-              {FACTS.map(({ icon, label }) => (
-                <span key={label} className="about__fact">
-                  <span>{icon}</span>
-                  {label}
-                </span>
-              ))}
-            </div>
           </div>
 
         </div>

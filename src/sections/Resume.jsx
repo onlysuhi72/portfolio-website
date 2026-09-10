@@ -6,13 +6,40 @@ const EDUCATION = [
     role: 'Bachelor of Science in Information Technology',
     org: 'Bulacan State University - Bustos Campus',
     period: '2023 – Present · 4th Year',
-    desc: 'I started with Java fundamentals, then focused on web development using HTML, CSS, JavaScript, PHP, and SQL. I am now advancing my front-end and full-stack skills with React, Tailwind CSS, Vite, JavaScript, and deployment workflows.',
+    desc: 'Coursework in web development using HTML, CSS, JavaScript, PHP, and SQL, with hands-on projects using React, Tailwind CSS, Vite, and deployment workflows.',
   },
   {
     role: 'Senior High School — ICT',
     org: 'Carlos F. Gonzales High School',
     period: '2022 – 2023',
-    desc: 'The main programming language was Java, where I learned the basics and fundamentals such as variables, loops, if/else statements, and more.',
+    desc: 'Completed Java programming coursework covering variables, loops, conditional statements, and other fundamental programming concepts.',
+  },
+]
+
+const CERTIFICATIONS = [
+  {
+    role: '3rd ASICS Summit: Tools of Tomorrow - Empowering Potential Through Tech',
+    org: 'ASICS Summit',
+    period: 'March 2025',
+    desc: 'Seminar focused on technology tools and their potential to empower learners and future professionals.',
+  },
+  {
+    role: '2nd ASICS Summit: Reimagine Tomorrow - Decoding the Future Through AI',
+    org: 'ASICS Summit',
+    period: 'March 2024',
+    desc: 'Seminar exploring artificial intelligence and its role in shaping the future.',
+  },
+  {
+    role: '1st ASICS Summit: InnoVision - IT Insights for Tomorrow',
+    org: 'ASICS Summit',
+    period: 'March 2023',
+    desc: 'Seminar covering emerging information technology insights and innovations.',
+  },
+  {
+    role: 'Getting Started with Cisco Packet Tracer',
+    org: 'Cisco Networking Academy',
+    period: '',
+    desc: 'Introductory training on network simulation and the fundamentals of using Cisco Packet Tracer.',
   },
 ]
 
@@ -23,18 +50,6 @@ const EXPERIENCE = [
     period: '',
     desc: 'Currently focused on my studies and building my skills as a web developer.'
   }
-]
-
-const HIGHLIGHTS = [
-  'HTML5',
-  'CSS3',
-  'JavaScript',
-  'React',
-  'GitHub',
-  'Tailwind CSS',
-  'Node.js',
-  'Figma',
-  'Firebase',
 ]
 
 const DownloadIcon = () => (
@@ -89,27 +104,21 @@ export default function Resume() {
               Download Resume
             </button>
 
-            {/* Skill highlights */}
-            <div style={{ marginTop: '2rem', textAlign: 'left' }}>
-              <p style={{ fontSize: '0.72rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
-                Key Skills
-              </p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
-                {HIGHLIGHTS.map((s) => (
-                  <span
-                    key={s}
-                    style={{
-                      fontSize: '0.75rem',
-                      color: 'var(--text-secondary)',
-                      background: 'var(--bg-3)',
-                      border: '1px solid var(--border)',
-                      padding: '0.25rem 0.65rem',
-                      borderRadius: '4px',
-                    }}
-                  >
-                    {s}
-                  </span>
-                ))}
+            {/* Career snapshot */}
+            <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border)', textAlign: 'left' }}>              
+              <div style={{ display: 'grid', gap: '0.85rem' }}>
+                <div>
+                  <p style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginBottom: '0.2rem' }}>Based in</p>
+                  <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)' }}>Bulacan, Philippines</p>
+                </div>
+                <div>
+                  <p style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginBottom: '0.2rem' }}>Current focus</p>
+                  <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)' }}>Web development and system building</p>
+                </div>
+                <div>
+                  <p style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginBottom: '0.2rem' }}>Open to</p>
+                  <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)' }}>Internships and entry-level opportunities</p>
+                </div>
               </div>
             </div>
           </div>
@@ -124,8 +133,16 @@ export default function Resume() {
               ))}
             </div>
 
-            {/* Experience */}
+            {/* Certifications and seminars */}
             <div className="resume__block reveal reveal-delay-2">
+              <p className="resume__block-title">Seminars / Training</p>
+              {CERTIFICATIONS.map((item) => (
+                <TimelineItem key={item.role} {...item} />
+              ))}
+            </div>
+
+            {/* Experience */}
+            <div className="resume__block reveal reveal-delay-3">
               <p className="resume__block-title">Experience</p>
               {EXPERIENCE.map((item) => (
                 <TimelineItem key={item.role} {...item} />
