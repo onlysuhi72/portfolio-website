@@ -85,7 +85,7 @@
   transition: height var(--t-fast);
 }
 
-.skills__group:hover .skills__item::before {
+.skills__item:hover::before {
   height: 60%;
 }
 
