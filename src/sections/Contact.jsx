@@ -82,10 +82,10 @@ export default function Contact() {
 
             <div className="contact__links">
               <p className="contact__socials-label">Email me at</p>
-              <div className="contact__link-item" style={{ marginBottom: '1rem', cursor: 'default', color: 'inherit', textDecoration: 'none' }}>
+              <a href="mailto:paoloperalta246@gmail.com" className="contact__link-item" style={{ marginBottom: '1rem', color: 'inherit', textDecoration: 'none' }}>
                 <span className="contact__link-icon">📧</span>
                 paoloperalta246@gmail.com
-              </div>
+              </a>
               <p className="contact__socials-label">You can also find me on</p>
               {CONTACT_LINKS.map(({ icon, label, href }) => (
                 href ? (

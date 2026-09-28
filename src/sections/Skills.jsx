@@ -29,7 +29,7 @@ const SKILL_GROUPS = [
       { name: 'UI / UX Basics', note: 'Typography, Figma fundamentals' },
       { name: 'Prototyping', note: 'Interactive mockups and user flows' },
       { name: 'Responsive Design', note: 'Mobile-first layouts' },
-      { name: 'Visual Hierarchy', note: 'Spacing, contrast, composition' },
+      { name: 'Visual Hierarchy', note: 'Spacing, contrast, composition' }, 
     ],
   },
 ]

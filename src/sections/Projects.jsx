@@ -2,6 +2,7 @@ import React from 'react'
 import AdlaonImg from '../images/Adlaon.png'
 import HomezyImg from '../images/Homezy.png'
 import SwiftEatsImg from '../images/SwiftEats.png'
+import BulSUEHandbookImg from '../images/BulSU-E-Handbook.jpg'
 import ClashCircuitImg from '../images/ClashCircuit.png'
 import OneDataImg from '../images/OneData.png'
 import './Projects.css'
@@ -17,7 +18,7 @@ const PROJECTS = [
     team: 'Collaborative project',
     role: 'Backend and database developer',
     contributions: ['Backend workflows', 'Database design', 'Authentication', 'UI implementation'],
-    github: '',
+    github: 'https://github.com/ainthens/adlaon-optical-e-commerce-system',
     demo: '',
     showPlaceholders: true,
     layout: 'featured',
@@ -53,6 +54,17 @@ const PROJECTS = [
   },
   {
     id: '04',
+    title: 'BulSU E-Handbook',
+    desc: 'An Android-based digital student handbook for Bulacan State University – Bustos Campus. It provides students with offline access to university policies, student regulations, campus information, academic guidelines, directories, and other essential resources.',
+    stack: ['Java', 'Android Studio', 'Android SDK'],
+    team: 'Collaborative project',
+    role: 'Android Developer',
+    contributions: ['UI Design', 'Android Development', 'Feature Implementation'],
+    github: 'https://github.com/Robb730/bulsu-handbook',
+    layout: 'secondary',
+  },
+  {
+    id: '05',
     emoji: '🌿',
     title: 'OneData',
     desc: 'A web application designed for managing users, files, and organizational data. I worked across its data-focused functionality and database, including authentication, file uploads, audit logs, dashboards, and role-based access controls.',
@@ -66,7 +78,7 @@ const PROJECTS = [
     layout: 'secondary',
   },
   {
-    id: '05',
+    id: '06',
     emoji: '🌿',
     title: 'Clash Circuit',
     desc: 'A modern website for a 2D Unity top-down mobile game. It features the game\'s story, characters, factions, game modes, screenshots, and developer details. Visitors can also download and install the mobile game.',
@@ -115,8 +127,10 @@ function ProjectCard({ project }) {
           ) : project.id === '03' ? (
             <img src={SwiftEatsImg} alt="SwiftEats mobile app prototype preview" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
           ) : project.id === '04' ? (
-            <img src={OneDataImg} alt="OneData project preview" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
+            <img src={BulSUEHandbookImg} alt="BulSU E-Handbook project preview" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
           ) : project.id === '05' ? (
+            <img src={OneDataImg} alt="OneData project preview" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
+          ) : project.id === '06' ? (
             <img src={ClashCircuitImg} alt="Clash Circuit project preview" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
           ) : (
             project.emoji
@@ -128,23 +142,23 @@ function ProjectCard({ project }) {
       <div className="project-card__body">
         <div className="project-card__meta">
           <span className="project-card__num">Project {project.id}</span>
-          <span className={`project-card__tag${project.date === '2025' || project.date === '2026' ? ' project-card__tag--blue' : ''}`}>
+          {project.date && <span className={`project-card__tag${project.date === '2025' || project.date === '2026' ? ' project-card__tag--blue' : ''}`}>
             {project.date}
-          </span>
+          </span>}
         </div>
 
         <h3 className="project-card__title">{project.title}</h3>
         <p className="project-card__desc">{project.desc}</p>
 
-        <div className="project-card__details">
-          <p><strong>Role</strong> {project.role}</p>
-          <p><strong>Type</strong> {project.team}</p>
-          <p><strong>Contributions</strong> {project.contributions.join(' · ')}</p>
-        </div>
+        {(project.role || project.team || project.contributions) && <div className="project-card__details">
+          {project.role && <p><strong>Role</strong> {project.role}</p>}
+          {project.team && <p><strong>Type</strong> {project.team}</p>}
+          {project.contributions && <p><strong>Contributions</strong> {project.contributions.join(' · ')}</p>}
+        </div>}
 
         {/* Tech stack */}
         <div className="project-card__stack">
-          {project.stack.map((tech) => (
+          {(project.stack ?? []).map((tech) => (
             <span key={tech} className="project-card__chip">{tech}</span>
           ))}
         </div>
