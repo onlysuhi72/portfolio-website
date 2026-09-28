@@ -1,13 +1,13 @@
 import React from 'react'
 import './Hero.css'
 
-export default function Hero() {
+export default function Hero({ isReady }) {
   const scrollTo = (id) => {
     document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
-    <section className="hero section" id="hero">
+    <section className={`hero section${isReady ? ' hero--ready' : ''}`} id="hero">
       {/* Background decoration */}
       <div className="hero__grid-bg" aria-hidden="true" />
       <div className="hero__bg-number" aria-hidden="true">01</div>

@@ -83,6 +83,9 @@
   color: var(--text-secondary);
   margin-bottom: 1.5rem;
   opacity: 0;
+}
+
+.hero--ready .hero__eyebrow {
   animation: fade-up 0.7s var(--ease-out) 0.2s forwards;
 }
 
@@ -115,6 +118,9 @@
   color: var(--text-primary);
   margin-bottom: 0.5rem;
   opacity: 0;
+}
+
+.hero--ready .hero__title {
   animation: fade-up 0.8s var(--ease-out) 0.4s forwards;
 }
 
@@ -130,6 +136,9 @@
   color: var(--text-secondary);
   margin-bottom: 1.5rem;
   opacity: 0;
+}
+
+.hero--ready .hero__subtitle {
   animation: fade-up 0.8s var(--ease-out) 0.55s forwards;
 }
 
@@ -160,6 +169,9 @@
   line-height: 1.75;
   margin-bottom: 2.5rem;
   opacity: 0;
+}
+
+.hero--ready .hero__description {
   animation: fade-up 0.8s var(--ease-out) 0.7s forwards;
 }
 
@@ -175,6 +187,9 @@
   flex-wrap: wrap;
   gap: 1rem;
   opacity: 0;
+}
+
+.hero--ready .hero__actions {
   animation: fade-up 0.8s var(--ease-out) 0.85s forwards;
 }
 
@@ -192,8 +207,11 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-muted);
-  animation: fade-up 1s var(--ease-out) 1.5s both;
   z-index: 2;
+}
+
+.hero--ready .hero__scroll {
+  animation: fade-up 1s var(--ease-out) 1.5s both;
 }
 
 .hero__scroll-line {
