@@ -5,13 +5,13 @@ import SwiftEatsImg from '../images/SwiftEats.png'
 import BulSUEHandbookImg from '../images/BulSU-E-Handbook.jpg'
 import ClashCircuitImg from '../images/ClashCircuit.png'
 import OneDataImg from '../images/OneData.png'
-import './Projects.css'
 
 const PROJECTS = [
   {
     id: '01',
     emoji: '🛒',
     title: 'Adlaon Optical',
+    category: 'Web Development',
     desc: 'A web-based management system for an optical clinic. It combines a customer-facing interface with backend workflows. These workflows support products, appointments, orders, and eye care services.',
     stack: ['HTML5', 'CSS3', 'JavaScript', 'PHP', 'MySQL'],
     date: '2025',
@@ -27,6 +27,7 @@ const PROJECTS = [
     id: '02',
     emoji: '✅',
     title: 'Homezy',
+    category: 'Web Development',
     desc: 'A web-based management system for short-term rentals and experiences, with front-end booking flows and backend functionality for listings, reservations, users, and platform operations.',
     stack: ['Node.js', 'React', 'JavaScript'],
     date: '2025',
@@ -41,6 +42,7 @@ const PROJECTS = [
     id: '03',
     emoji: '🍔',
     title: 'SwiftEats',
+    category: 'UI/UX Design',
     desc: 'A food delivery platform where customers can browse, customize, order, and track meals. Delivery riders can manage their assigned deliveries through dedicated features. Administrators can monitor orders, users, analytics, and platform settings.',
     stack: ['Figma', 'UI/UX Design', 'Wireframing', 'Prototyping'],
     date: '2025',
@@ -55,6 +57,7 @@ const PROJECTS = [
   {
     id: '04',
     title: 'BulSU E-Handbook',
+    category: 'Android App',
     desc: 'An Android-based digital student handbook for Bulacan State University – Bustos Campus. It provides students with offline access to university policies, student regulations, campus information, academic guidelines, directories, and other essential resources.',
     stack: ['Java', 'Android Studio', 'Android SDK'],
     team: 'Collaborative project',
@@ -67,6 +70,7 @@ const PROJECTS = [
     id: '05',
     emoji: '🌿',
     title: 'OneData',
+    category: 'Web Development',
     desc: 'A web application designed for managing users, files, and organizational data. I worked across its data-focused functionality and database, including authentication, file uploads, audit logs, dashboards, and role-based access controls.',
     stack: ['React', 'JavaScript', 'Tailwind CSS', 'Vite'],
     date: '2026',
@@ -81,6 +85,7 @@ const PROJECTS = [
     id: '06',
     emoji: '🌿',
     title: 'Clash Circuit',
+    category: 'Web Development',
     desc: 'A modern website for a 2D Unity top-down mobile game. It features the game\'s story, characters, factions, game modes, screenshots, and developer details. Visitors can also download and install the mobile game.',
     stack: ['React', 'JavaScript', 'CSS', 'Vite'],
     date: '2026',
@@ -111,27 +116,25 @@ const FigmaIcon = () => (
 )
 
 function ProjectCard({ project }) {
-  const layoutClass =
-    project.layout === 'featured' ? 'project-card--featured' :
-      project.layout === 'secondary' ? 'project-card--secondary' :
-        'project-card--full'
+  const isFull = project.layout !== 'featured' && project.layout !== 'secondary'
+  const isFeatured = project.layout === 'featured'
 
   return (
-    <article className={`project-card ${layoutClass} reveal`}>
-      <div className="project-card__image">
-        <div className="project-card__image-inner">
+    <article className={`group relative mx-auto flex w-full max-w-[900px] flex-col overflow-hidden rounded-lg border border-border bg-surface transition-[border-color,transform] duration-300 ease-portfolio-out hover:-translate-y-1.5 hover:border-border-hover opacity-0 translate-y-8 transition-[opacity,transform,border-color] duration-[700ms] ease-portfolio-out [&.visible]:translate-y-0 [&.visible]:opacity-100 ${project.revealed ? 'visible' : ''} ${isFull ? 'col-span-12 flex-row max-[900px]:flex-col' : 'col-span-6 max-[900px]:col-span-12'}`}>
+      <div className={`relative aspect-video shrink-0 overflow-hidden bg-bg-3 after:absolute after:inset-0 after:bg-[linear-gradient(135deg,rgba(184,255,87,0.08),transparent)] after:opacity-0 after:transition-opacity after:duration-300 group-hover:after:opacity-100 ${isFull ? 'w-[340px] aspect-auto max-[900px]:w-full max-[900px]:aspect-video' : ''}`}>
+        <div className="absolute inset-0 flex items-center justify-center bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[length:32px_32px] text-6xl transition-transform duration-500 ease-portfolio-out group-hover:scale-105">
           {project.id === '01' ? (
-            <img src={AdlaonImg} alt="Adlaon Optical project preview" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
+            <img src={AdlaonImg} alt="Adlaon Optical project preview" loading="lazy" className="h-full w-full rounded-2xl object-cover" />
           ) : project.id === '02' ? (
-            <img src={HomezyImg} alt="Homezy project preview" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
+            <img src={HomezyImg} alt="Homezy project preview" loading="lazy" className="h-full w-full rounded-2xl object-cover" />
           ) : project.id === '03' ? (
-            <img src={SwiftEatsImg} alt="SwiftEats mobile app prototype preview" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
+            <img src={SwiftEatsImg} alt="SwiftEats mobile app prototype preview" loading="lazy" className="h-full w-full rounded-2xl object-cover" />
           ) : project.id === '04' ? (
-            <img src={BulSUEHandbookImg} alt="BulSU E-Handbook project preview" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
+            <img src={BulSUEHandbookImg} alt="BulSU E-Handbook project preview" loading="lazy" className="h-full w-full rounded-2xl object-cover" />
           ) : project.id === '05' ? (
-            <img src={OneDataImg} alt="OneData project preview" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
+            <img src={OneDataImg} alt="OneData project preview" loading="lazy" className="h-full w-full rounded-2xl object-cover" />
           ) : project.id === '06' ? (
-            <img src={ClashCircuitImg} alt="Clash Circuit project preview" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
+            <img src={ClashCircuitImg} alt="Clash Circuit project preview" loading="lazy" className="h-full w-full rounded-2xl object-cover" />
           ) : (
             project.emoji
           )}
@@ -139,43 +142,43 @@ function ProjectCard({ project }) {
       </div>
 
       {/* Body */}
-      <div className="project-card__body">
-        <div className="project-card__meta">
-          <span className="project-card__num">Project {project.id}</span>
-          {project.date && <span className={`project-card__tag${project.date === '2025' || project.date === '2026' ? ' project-card__tag--blue' : ''}`}>
+      <div className="flex flex-1 flex-col p-6">
+        <div className="mb-3 flex items-center justify-between">
+          <span className="font-display text-[0.7rem] font-bold tracking-[0.1em] text-muted">Project {project.id}</span>
+          {project.date && <span className={`rounded-full border px-2.5 py-1 text-[0.7rem] font-medium uppercase tracking-[0.08em] ${project.date === '2025' || project.date === '2026' ? 'border-[#3498db33] bg-[rgba(52,152,219,0.10)] text-[#3498db]' : 'border-[rgba(184,255,87,0.2)] bg-[rgba(184,255,87,0.08)] text-accent'}`}>
             {project.date}
           </span>}
         </div>
 
-        <h3 className="project-card__title">{project.title}</h3>
-        <p className="project-card__desc">{project.desc}</p>
+        <h3 className="mb-2 font-display text-xl font-extrabold leading-tight text-primary [letter-spacing:-0.02em]">{project.title}</h3>
+        <p className={`mb-5 flex-1 text-[0.85rem] leading-[1.7] text-secondary ${isFeatured ? 'flex-none' : ''}`}>{project.desc}</p>
 
-        {(project.role || project.team || project.contributions) && <div className="project-card__details">
+        {(project.role || project.team || project.contributions) && <div className="mb-5 grid gap-1 border-y border-border py-3.5 text-[0.76rem] leading-[1.5] text-secondary [&_strong]:inline-block [&_strong]:min-w-[6.8rem] [&_strong]:font-medium [&_strong]:text-accent">
           {project.role && <p><strong>Role</strong> {project.role}</p>}
           {project.team && <p><strong>Type</strong> {project.team}</p>}
           {project.contributions && <p><strong>Contributions</strong> {project.contributions.join(' · ')}</p>}
         </div>}
 
         {/* Tech stack */}
-        <div className="project-card__stack">
+        <div className="mb-5 flex flex-wrap gap-1.5">
           {(project.stack ?? []).map((tech) => (
-            <span key={tech} className="project-card__chip">{tech}</span>
+            <span key={tech} className="rounded-sm border border-border bg-bg-3 px-2.5 py-1 text-[0.72rem] text-muted">{tech}</span>
           ))}
         </div>
 
         {/* Links */}
         {(project.github || project.demo || project.figma || project.showPlaceholders) && (
-          <div className="project-card__actions">
+          <div className="flex flex-wrap gap-3 [&_.btn]:leading-[inherit] [&_button:disabled]:cursor-not-allowed [&_button:disabled]:opacity-[0.55]">
             {project.github && <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="project-card__link"
+              className="inline-flex items-center gap-1.5 rounded-sm border border-border px-3.5 py-2 text-[0.8rem] font-medium leading-[inherit] text-secondary transition-all duration-150 hover:border-accent hover:text-accent"
             >
               <GitHubIcon /> GitHub
             </a>}
             {project.showPlaceholders && !project.github && (
-              <button type="button" className="project-card__link" disabled>
+              <button type="button" className="inline-flex items-center gap-1.5 rounded-sm border border-border px-3.5 py-2 text-[0.8rem] font-medium leading-[inherit] text-secondary opacity-[0.55]" disabled>
                 <GitHubIcon /> GitHub
               </button>
             )}
@@ -183,8 +186,7 @@ function ProjectCard({ project }) {
               href={project.demo}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-primary"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.28em', fontSize: '0.85rem', fontWeight: 600, padding: '0.38rem 0.8rem' }}
+              className="relative inline-flex items-center gap-1 rounded-sm bg-accent px-3 py-1.5 text-[0.85rem] font-semibold text-[#0a0a0a] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-accent-glow after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity hover:after:opacity-[0.08]"
             >
               Live Demo
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.1">
@@ -197,16 +199,15 @@ function ProjectCard({ project }) {
               href={project.figma}
               target="_blank"
               rel="noopener noreferrer"
-              className="project-card__link"
+              className="inline-flex items-center gap-1.5 rounded-sm border border-border px-3.5 py-2 text-[0.8rem] font-medium leading-[inherit] text-secondary transition-all duration-150 hover:border-accent hover:text-accent"
             >
               <FigmaIcon /> Figma
             </a>}
             {project.showPlaceholders && !project.demo && (
               <button
                 type="button"
-                className="btn btn-primary"
+                className="relative inline-flex items-center gap-1 rounded-sm bg-accent px-3 py-1.5 text-[0.85rem] font-semibold text-[#0a0a0a] opacity-[0.55] after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity"
                 disabled
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.28em', fontSize: '0.85rem', fontWeight: 600, padding: '0.38rem 0.8rem' }}
               >
                 Live Demo
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.1">
@@ -224,26 +225,92 @@ function ProjectCard({ project }) {
 }
 
 export default function Projects() {
-  return (
-    <section className="projects section" id="projects">
-      <div className="container">
+  const [search, setSearch] = React.useState('')
+  const [category, setCategory] = React.useState('All types')
+  const [hasInteracted, setHasInteracted] = React.useState(false)
+  const categories = ['All types', ...new Set(PROJECTS.map((project) => project.category))]
+  const filteredProjects = PROJECTS.filter((project) => {
+    const searchText = [
+      project.title,
+      project.desc,
+      project.category,
+      project.role,
+      project.team,
+      ...(project.stack ?? []),
+      ...(project.contributions ?? []),
+    ].join(' ').toLowerCase()
+    return searchText.includes(search.trim().toLowerCase()) &&
+      (category === 'All types' || project.category === category)
+  })
 
-        <div className="projects__header">
-          <div className="projects__header-text">
-            <p className="section-label reveal">Projects</p>
-            <h2 className="section-title reveal reveal-delay-1">
-              Things I've <span>built</span>
+  return (
+    <section className="bg-bg py-[clamp(5rem,10vw,9rem)] odd:bg-bg even:bg-bg-2" id="projects">
+      <div className="mx-auto w-[min(94%,1280px)]">
+
+        <div className="mb-[clamp(2.5rem,5vw,4rem)] flex flex-wrap items-end justify-between gap-6 max-[480px]:flex-col max-[480px]:items-start">
+          <div>
+            <p className="relative mb-5 flex items-center gap-3 pl-6 font-body text-[0.72rem] font-medium uppercase tracking-[0.18em] text-accent opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out [&.visible]:translate-y-0 [&.visible]:opacity-100 before:absolute before:left-0 before:top-1/2 before:h-0.5 before:w-4 before:-translate-y-1/2 before:bg-accent">Projects</p>
+            <h2 className="font-display text-[clamp(2rem,5vw,3.25rem)] font-extrabold leading-[1.08] text-primary [letter-spacing:-0.03em] opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out delay-[100ms] [&.visible]:translate-y-0 [&.visible]:opacity-100">
+              Things I've <span className="text-accent">built</span>
             </h2>
           </div>
-          <p className="projects__count reveal reveal-delay-2">
-            {PROJECTS.length} projects
-          </p>
+          <div className="flex flex-1 flex-wrap items-center justify-center gap-3 max-[480px]:w-full max-[480px]:justify-start">
+            <label className="relative min-w-[min(100%,15rem)] flex-1 max-w-[20rem] max-[480px]:max-w-none">
+              <span className="sr-only">Search projects</span>
+              <svg className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <circle cx="11" cy="11" r="7" />
+                <path d="m20 20-4-4" />
+              </svg>
+              <input
+                type="search"
+                value={search}
+                onChange={(event) => {
+                  setSearch(event.target.value)
+                  setHasInteracted(true)
+                }}
+                placeholder="Search projects or tech..."
+                className="w-full rounded-sm border border-border bg-surface py-2.5 pl-10 pr-3 text-sm text-primary placeholder:text-muted focus:border-accent focus:outline-none"
+              />
+            </label>
+            <label>
+              <span className="sr-only">Filter projects by type</span>
+              <select
+                value={category}
+                onChange={(event) => {
+                  setCategory(event.target.value)
+                  setHasInteracted(true)
+                }}
+                className="min-h-10 rounded-sm border border-border bg-surface px-3 py-2 text-sm text-secondary focus:border-accent focus:outline-none"
+              >
+                {categories.map((option) => <option key={option} value={option}>{option}</option>)}
+              </select>
+            </label>
+            <p className="whitespace-nowrap font-display text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-muted">
+              {filteredProjects.length === PROJECTS.length ? `${PROJECTS.length} projects` : `${filteredProjects.length} of ${PROJECTS.length} projects`}
+            </p>
+          </div>
         </div>
 
-        <div className="projects__grid">
-          {PROJECTS.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
+        <div className="grid grid-cols-12 gap-5">
+          {filteredProjects.length > 0 ? filteredProjects.map((project) => (
+            <ProjectCard key={project.id} project={{ ...project, revealed: hasInteracted }} />
+          )) : (
+            <div className="col-span-12 py-12 text-center">
+              <p className="font-display text-lg font-bold text-primary">No projects found</p>
+              <p className="mt-2 text-sm text-muted">Try another search or project type.</p>
+              <button
+                type="button"
+                onClick={() => {
+                  setSearch('')
+                  setCategory('All types')
+                  setHasInteracted(true)
+                }}
+                className="mt-4 rounded-sm border border-border px-3.5 py-2 text-sm text-secondary transition-colors hover:border-accent hover:text-accent"
+              >
+                Clear filters
+              </button>
+            </div>
+          )}
         </div>
 
       </div>

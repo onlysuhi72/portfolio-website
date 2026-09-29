@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import './Contact.css'
 import emailjs from '@emailjs/browser'
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
@@ -64,38 +63,38 @@ export default function Contact() {
   )
 
   return (
-    <section className="contact section" id="contact">
-      <div className="container">
-        <p className="section-label reveal">Contact</p>
-        <h2 className="section-title reveal reveal-delay-1" style={{ marginBottom: 'clamp(2rem, 4vw, 3.5rem)' }}>
-          Let's <span>connect</span>
+    <section className="bg-bg py-[clamp(5rem,10vw,9rem)] odd:bg-bg even:bg-bg-2" id="contact">
+      <div className="mx-auto w-[min(90%,1100px)]">
+        <p className="relative mb-5 flex items-center gap-3 pl-6 font-body text-[0.72rem] font-medium uppercase tracking-[0.18em] text-accent opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out [&.visible]:translate-y-0 [&.visible]:opacity-100 before:absolute before:left-0 before:top-1/2 before:h-0.5 before:w-4 before:-translate-y-1/2 before:bg-accent">Contact</p>
+        <h2 className="mb-[clamp(2rem,4vw,3.5rem)] font-display text-[clamp(2rem,5vw,3.25rem)] font-extrabold leading-[1.08] text-primary [letter-spacing:-0.03em] opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out delay-[100ms] [&.visible]:translate-y-0 [&.visible]:opacity-100">
+          Let's <span className="text-accent">connect</span>
         </h2>
 
-        <div className="contact__inner">
+        <div className="grid grid-cols-[1fr_1.3fr] items-start gap-[clamp(3rem,6vw,6rem)] max-[768px]:grid-cols-1">
 
           {/* Left: info */}
-          <div className="contact__info reveal">
-            <p className="contact__tagline">
+          <div className="opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out [&.visible]:translate-y-0 [&.visible]:opacity-100">
+            <p className="mb-10 max-w-[340px] text-base leading-[1.75] text-secondary [&_strong]:font-medium [&_strong]:text-primary">
               I'm currently open to internships, freelance projects, and
               entry-level opportunities. If you have something in mind, let's talk!
             </p>
 
-            <div className="contact__links">
-              <p className="contact__socials-label">Email me at</p>
-              <a href="mailto:paoloperalta246@gmail.com" className="contact__link-item" style={{ marginBottom: '1rem', color: 'inherit', textDecoration: 'none' }}>
-                <span className="contact__link-icon">📧</span>
+            <div className="mb-10 flex flex-col gap-3.5">
+              <p className="mb-1 text-[0.72rem] uppercase tracking-[0.12em] text-muted">Email me at</p>
+              <a href="mailto:paoloperalta246@gmail.com" className="mb-4 flex items-center gap-3.5 text-[0.9rem] text-primary">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm border border-border bg-surface text-base">📧</span>
                 paoloperalta246@gmail.com
               </a>
-              <p className="contact__socials-label">You can also find me on</p>
+              <p className="mb-1 text-[0.72rem] uppercase tracking-[0.12em] text-muted">You can also find me on</p>
               {CONTACT_LINKS.map(({ icon, label, href }) => (
                 href ? (
-                  <a key={label} href={href} className="contact__link-item" target="_blank" rel="noopener noreferrer">
-                    <span className="contact__link-icon">{icon}</span>
+                  <a key={label} href={href} className="flex items-center gap-3.5 text-[0.9rem] text-secondary transition-colors duration-150 hover:text-accent [&:hover_span]:border-accent [&:hover_span]:bg-accent-glow" target="_blank" rel="noopener noreferrer">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm border border-border bg-surface text-base transition-colors duration-150">{icon}</span>
                     {label}
                   </a>
                 ) : (
-                  <div key={label} className="contact__link-item" style={{ cursor: 'default', color: 'inherit', textDecoration: 'none' }}>
-                    <span className="contact__link-icon">{icon}</span>
+                  <div key={label} className="flex cursor-default items-center gap-3.5 text-[0.9rem] text-secondary">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm border border-border bg-surface text-base">{icon}</span>
                     {label}
                   </div>
                 )
@@ -104,31 +103,31 @@ export default function Contact() {
           </div>
 
           {/* Right: form */}
-          <div className="contact__form-wrapper reveal reveal-delay-2">
-            <form className="contact__form" onSubmit={handleSubmit}>
+          <div className="rounded-lg border border-border bg-surface p-[clamp(1.5rem,4vw,2.5rem)] opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out delay-[200ms] [&.visible]:translate-y-0 [&.visible]:opacity-100">
+            <form className="flex flex-col gap-[1.1rem]" onSubmit={handleSubmit}>
 
-              <div className="form__row">
-                <div className="form__group">
-                  <label className="form__label" htmlFor="name">Name</label>
+              <div className="grid grid-cols-2 gap-4 max-[768px]:grid-cols-1">
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[0.78rem] font-medium tracking-[0.05em] text-secondary" htmlFor="name">Name</label>
                   <input
                     id="name"
                     name="name"
                     type="text"
                     placeholder="Your name"
-                    className="form__input"
+                    className="w-full resize-none rounded-sm border border-border bg-bg-3 px-4 py-3 font-body text-[0.9rem] text-primary outline-none transition-[border-color,box-shadow] duration-150 placeholder:text-muted focus:border-accent focus:shadow-[0_0_0_3px_rgba(184,255,87,0.1)]"
                     value={form.name}
                     onChange={handleChange}
                     required
                   />
                 </div>
-                <div className="form__group">
-                  <label className="form__label" htmlFor="email">Email</label>
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[0.78rem] font-medium tracking-[0.05em] text-secondary" htmlFor="email">Email</label>
                   <input
                     id="email"
                     name="email"
                     type="email"
                     placeholder="your@email.com"
-                    className="form__input"
+                    className="w-full resize-none rounded-sm border border-border bg-bg-3 px-4 py-3 font-body text-[0.9rem] text-primary outline-none transition-[border-color,box-shadow] duration-150 placeholder:text-muted focus:border-accent focus:shadow-[0_0_0_3px_rgba(184,255,87,0.1)]"
                     value={form.email}
                     onChange={handleChange}
                     required
@@ -136,27 +135,27 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div className="form__group">
-                <label className="form__label" htmlFor="subject">Subject</label>
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[0.78rem] font-medium tracking-[0.05em] text-secondary" htmlFor="subject">Subject</label>
                 <input
                   id="subject"
                   name="subject"
                   type="text"
                   placeholder="Internship opportunity / Project inquiry / etc."
-                  className="form__input"
+                  className="w-full resize-none rounded-sm border border-border bg-bg-3 px-4 py-3 font-body text-[0.9rem] text-primary outline-none transition-[border-color,box-shadow] duration-150 placeholder:text-muted focus:border-accent focus:shadow-[0_0_0_3px_rgba(184,255,87,0.1)]"
                   value={form.subject}
                   onChange={handleChange}
                   required
                 />
               </div>
 
-              <div className="form__group">
-                <label className="form__label" htmlFor="message">Message</label>
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[0.78rem] font-medium tracking-[0.05em] text-secondary" htmlFor="message">Message</label>
                 <textarea
                   id="message"
                   name="message"
                   placeholder="Tell me what you have in mind..."
-                  className="form__textarea"
+                  className="min-h-[140px] w-full resize-none rounded-sm border border-border bg-bg-3 px-4 py-3 font-body text-[0.9rem] text-primary outline-none transition-[border-color,box-shadow] duration-150 placeholder:text-muted focus:border-accent focus:shadow-[0_0_0_3px_rgba(184,255,87,0.1)]"
                   value={form.message}
                   onChange={handleChange}
                   required
@@ -165,12 +164,11 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="btn btn-primary"
+                className="relative flex h-[3.2rem] w-full items-center justify-center gap-1.5 rounded-sm bg-accent font-body text-[0.98rem] font-semibold text-[#0a0a0a] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(184,255,87,0.25)] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity hover:after:opacity-[0.08]"
                 disabled={loading}
-                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4em', width: '100%', height: '3.2rem', fontSize: '0.98rem' }}
               >
                 {loading ? 'Sending...' : (
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '0.4em' }}>
+                  <span className="flex items-center gap-1.5">
                     <SendIcon />
                     Send Message
                   </span>
@@ -178,13 +176,13 @@ export default function Contact() {
               </button>
 
               {status === 'success' && (
-                <p className="form__status form__status--success" role="status">
-                  <span className="form__status-mark" aria-hidden="true">✓</span>
-                  <span><strong>Thanks for reaching out.</strong> I'll get back to you soon.</span>
+                <p className="mt-3 flex items-center gap-2.5 border-l-2 border-accent bg-[rgba(126,182,176,0.08)] px-3.5 py-3 text-left text-[0.85rem] leading-6 text-accent" role="status">
+                  <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full border border-accent text-[0.7rem] font-bold" aria-hidden="true">✓</span>
+                  <span><strong className="font-medium text-primary">Thanks for reaching out.</strong> I'll get back to you soon.</span>
                 </p>
               )}
               {status === 'error' && (
-                <p className="form__status form__status--error">
+                <p className="mt-3 border border-[rgba(255,87,87,0.3)] bg-[rgba(255,87,87,0.1)] px-3.5 py-3 text-[0.85rem] leading-6 text-red">
                   ❌ Something went wrong. Please try again.
                 </p>
               )}

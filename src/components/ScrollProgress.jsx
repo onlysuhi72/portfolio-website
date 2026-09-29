@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import './ScrollProgress.css'
 
 /** Thin acid-green line at the top that grows as you scroll */
 export default function ScrollProgress() {
@@ -15,5 +14,5 @@ export default function ScrollProgress() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  return <div className="scroll-progress" style={{ width: `${width}%` }} />
+  return <div className="fixed left-0 top-0 z-[1000] h-0.5 origin-left bg-accent shadow-[0_0_8px_var(--accent)] transition-[width] duration-[50ms] ease-linear" style={{ width: `${width}%` }} />
 }
