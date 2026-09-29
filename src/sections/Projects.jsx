@@ -120,21 +120,21 @@ function ProjectCard({ project }) {
   const isFeatured = project.layout === 'featured'
 
   return (
-    <article className={`group relative mx-auto flex w-full max-w-[900px] flex-col overflow-hidden rounded-lg border border-border bg-surface transition-[border-color,transform] duration-300 ease-portfolio-out hover:-translate-y-1.5 hover:border-border-hover opacity-0 translate-y-8 transition-[opacity,transform,border-color] duration-[700ms] ease-portfolio-out [&.visible]:translate-y-0 [&.visible]:opacity-100 ${project.revealed ? 'visible' : ''} ${isFull ? 'col-span-12 flex-row max-[900px]:flex-col' : 'col-span-6 max-[900px]:col-span-12'}`}>
-      <div className={`relative aspect-video shrink-0 overflow-hidden bg-bg-3 after:absolute after:inset-0 after:bg-[linear-gradient(135deg,rgba(184,255,87,0.08),transparent)] after:opacity-0 after:transition-opacity after:duration-300 group-hover:after:opacity-100 ${isFull ? 'w-[340px] aspect-auto max-[900px]:w-full max-[900px]:aspect-video' : ''}`}>
-        <div className="absolute inset-0 flex items-center justify-center bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[length:32px_32px] text-6xl transition-transform duration-500 ease-portfolio-out group-hover:scale-105">
+    <article className={`glass-card group relative mx-auto flex w-full max-w-[900px] flex-col overflow-hidden rounded-2xl opacity-0 translate-y-8 transition-all duration-[700ms] ease-portfolio-out [&.visible]:translate-y-0 [&.visible]:opacity-100 ${project.revealed ? 'visible' : ''} ${isFull ? 'col-span-12 flex-row max-[900px]:flex-col' : 'col-span-6 max-[900px]:col-span-12'}`}>
+      <div className={`relative aspect-video shrink-0 overflow-hidden bg-bg-3/40 after:absolute after:inset-0 after:bg-[linear-gradient(135deg,rgba(126,182,176,0.12),transparent)] after:opacity-0 after:transition-opacity after:duration-300 group-hover:after:opacity-100 ${isFull ? 'w-[340px] aspect-auto max-[900px]:w-full max-[900px]:aspect-video' : ''}`}>
+        <div className="absolute inset-0 flex items-center justify-center bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[length:24px_24px] text-6xl transition-transform duration-700 ease-portfolio-out group-hover:scale-105">
           {project.id === '01' ? (
-            <img src={AdlaonImg} alt="Adlaon Optical project preview" loading="lazy" className="h-full w-full rounded-2xl object-cover" />
+            <img src={AdlaonImg} alt="Adlaon Optical project preview" loading="lazy" className="h-full w-full object-cover" />
           ) : project.id === '02' ? (
-            <img src={HomezyImg} alt="Homezy project preview" loading="lazy" className="h-full w-full rounded-2xl object-cover" />
+            <img src={HomezyImg} alt="Homezy project preview" loading="lazy" className="h-full w-full object-cover" />
           ) : project.id === '03' ? (
-            <img src={SwiftEatsImg} alt="SwiftEats mobile app prototype preview" loading="lazy" className="h-full w-full rounded-2xl object-cover" />
+            <img src={SwiftEatsImg} alt="SwiftEats mobile app prototype preview" loading="lazy" className="h-full w-full object-cover" />
           ) : project.id === '04' ? (
-            <img src={BulSUEHandbookImg} alt="BulSU E-Handbook project preview" loading="lazy" className="h-full w-full rounded-2xl object-cover" />
+            <img src={BulSUEHandbookImg} alt="BulSU E-Handbook project preview" loading="lazy" className="h-full w-full object-cover" />
           ) : project.id === '05' ? (
-            <img src={OneDataImg} alt="OneData project preview" loading="lazy" className="h-full w-full rounded-2xl object-cover" />
+            <img src={OneDataImg} alt="OneData project preview" loading="lazy" className="h-full w-full object-cover" />
           ) : project.id === '06' ? (
-            <img src={ClashCircuitImg} alt="Clash Circuit project preview" loading="lazy" className="h-full w-full rounded-2xl object-cover" />
+            <img src={ClashCircuitImg} alt="Clash Circuit project preview" loading="lazy" className="h-full w-full object-cover" />
           ) : (
             project.emoji
           )}
@@ -145,15 +145,15 @@ function ProjectCard({ project }) {
       <div className="flex flex-1 flex-col p-6">
         <div className="mb-3 flex items-center justify-between">
           <span className="font-display text-[0.7rem] font-bold tracking-[0.1em] text-muted">Project {project.id}</span>
-          {project.date && <span className={`rounded-full border px-2.5 py-1 text-[0.7rem] font-medium uppercase tracking-[0.08em] ${project.date === '2025' || project.date === '2026' ? 'border-[#3498db33] bg-[rgba(52,152,219,0.10)] text-[#3498db]' : 'border-[rgba(184,255,87,0.2)] bg-[rgba(184,255,87,0.08)] text-accent'}`}>
+          {project.date && <span className={`glass-pill rounded-full px-2.5 py-0.5 text-[0.7rem] font-medium uppercase tracking-[0.08em] ${project.date === '2025' || project.date === '2026' ? 'text-[#57b8ff] border-[#57b8ff]/30' : 'text-accent border-accent/30'}`}>
             {project.date}
           </span>}
         </div>
 
-        <h3 className="mb-2 font-display text-xl font-extrabold leading-tight text-primary [letter-spacing:-0.02em]">{project.title}</h3>
+        <h3 className="mb-2 font-display text-xl font-extrabold leading-tight text-primary [letter-spacing:-0.02em] group-hover:text-accent transition-colors duration-200">{project.title}</h3>
         <p className={`mb-5 flex-1 text-[0.85rem] leading-[1.7] text-secondary ${isFeatured ? 'flex-none' : ''}`}>{project.desc}</p>
 
-        {(project.role || project.team || project.contributions) && <div className="mb-5 grid gap-1 border-y border-border py-3.5 text-[0.76rem] leading-[1.5] text-secondary [&_strong]:inline-block [&_strong]:min-w-[6.8rem] [&_strong]:font-medium [&_strong]:text-accent">
+        {(project.role || project.team || project.contributions) && <div className="mb-5 grid gap-1 border-y border-white/5 py-3.5 text-[0.76rem] leading-[1.5] text-secondary [&_strong]:inline-block [&_strong]:min-w-[6.8rem] [&_strong]:font-medium [&_strong]:text-accent">
           {project.role && <p><strong>Role</strong> {project.role}</p>}
           {project.team && <p><strong>Type</strong> {project.team}</p>}
           {project.contributions && <p><strong>Contributions</strong> {project.contributions.join(' · ')}</p>}
@@ -162,7 +162,7 @@ function ProjectCard({ project }) {
         {/* Tech stack */}
         <div className="mb-5 flex flex-wrap gap-1.5">
           {(project.stack ?? []).map((tech) => (
-            <span key={tech} className="rounded-sm border border-border bg-bg-3 px-2.5 py-1 text-[0.72rem] text-muted">{tech}</span>
+            <span key={tech} className="glass-pill rounded-full px-2.5 py-0.5 text-[0.72rem] text-muted font-mono">{tech}</span>
           ))}
         </div>
 
@@ -173,12 +173,12 @@ function ProjectCard({ project }) {
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-sm border border-border px-3.5 py-2 text-[0.8rem] font-medium leading-[inherit] text-secondary transition-all duration-150 hover:border-accent hover:text-accent"
+              className="glass-button inline-flex items-center gap-1.5 rounded-md px-3.5 py-2 text-[0.8rem] font-medium leading-[inherit] text-secondary hover:text-accent"
             >
               <GitHubIcon /> GitHub
             </a>}
             {project.showPlaceholders && !project.github && (
-              <button type="button" className="inline-flex items-center gap-1.5 rounded-sm border border-border px-3.5 py-2 text-[0.8rem] font-medium leading-[inherit] text-secondary opacity-[0.55]" disabled>
+              <button type="button" className="glass-button inline-flex items-center gap-1.5 rounded-md px-3.5 py-2 text-[0.8rem] font-medium leading-[inherit] text-secondary opacity-[0.55]" disabled>
                 <GitHubIcon /> GitHub
               </button>
             )}
@@ -186,7 +186,7 @@ function ProjectCard({ project }) {
               href={project.demo}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative inline-flex items-center gap-1 rounded-sm bg-accent px-3 py-1.5 text-[0.85rem] font-semibold text-[#0a0a0a] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-accent-glow after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity hover:after:opacity-[0.08]"
+              className="relative inline-flex items-center gap-1 rounded-md bg-accent px-3.5 py-2 text-[0.85rem] font-semibold text-[#0a0a0a] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-accent-glow after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity hover:after:opacity-[0.08]"
             >
               Live Demo
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.1">
@@ -199,14 +199,14 @@ function ProjectCard({ project }) {
               href={project.figma}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-sm border border-border px-3.5 py-2 text-[0.8rem] font-medium leading-[inherit] text-secondary transition-all duration-150 hover:border-accent hover:text-accent"
+              className="glass-button inline-flex items-center gap-1.5 rounded-md px-3.5 py-2 text-[0.8rem] font-medium leading-[inherit] text-secondary hover:text-accent"
             >
               <FigmaIcon /> Figma
             </a>}
             {project.showPlaceholders && !project.demo && (
               <button
                 type="button"
-                className="relative inline-flex items-center gap-1 rounded-sm bg-accent px-3 py-1.5 text-[0.85rem] font-semibold text-[#0a0a0a] opacity-[0.55] after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity"
+                className="relative inline-flex items-center gap-1 rounded-md bg-accent px-3.5 py-2 text-[0.85rem] font-semibold text-[#0a0a0a] opacity-[0.55] after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity"
                 disabled
               >
                 Live Demo
@@ -244,8 +244,16 @@ export default function Projects() {
   })
 
   return (
-    <section className="bg-transparent py-[clamp(5rem,10vw,9rem)]" id="projects">
-      <div className="mx-auto w-[min(94%,1280px)]">
+    <section className="relative bg-transparent py-[clamp(4rem,8vw,7rem)] overflow-hidden" id="projects">
+      {/* Background Watermark */}
+      <div
+        className="watermark-text left-[-1rem] top-1/6 text-[clamp(10rem,20vw,20rem)] opacity-[0.03]"
+        aria-hidden="true"
+      >
+        PROJECTS
+      </div>
+
+      <div className="mx-auto w-[min(94%,1280px)] relative z-10">
 
         <div className="mb-[clamp(2.5rem,5vw,4rem)] flex flex-wrap items-end justify-between gap-6 max-[480px]:flex-col max-[480px]:items-start">
           <div>
@@ -269,7 +277,7 @@ export default function Projects() {
                   setHasInteracted(true)
                 }}
                 placeholder="Search projects or tech..."
-                className="w-full rounded-sm border border-border bg-surface py-2.5 pl-10 pr-3 text-sm text-primary placeholder:text-muted focus:border-accent focus:outline-none"
+                className="glass-input w-full rounded-xl py-2.5 pl-10 pr-3 text-sm text-primary placeholder:text-muted focus:outline-none"
               />
             </label>
             <label>
@@ -280,12 +288,12 @@ export default function Projects() {
                   setCategory(event.target.value)
                   setHasInteracted(true)
                 }}
-                className="min-h-10 rounded-sm border border-border bg-surface px-3 py-2 text-sm text-secondary focus:border-accent focus:outline-none"
+                className="glass-input min-h-10 rounded-xl px-3 py-2 text-sm text-secondary focus:outline-none"
               >
-                {categories.map((option) => <option key={option} value={option}>{option}</option>)}
+                {categories.map((option) => <option key={option} value={option} className="bg-bg text-primary">{option}</option>)}
               </select>
             </label>
-            <p className="whitespace-nowrap font-display text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-muted">
+            <p className="glass-pill rounded-full px-3.5 py-1 whitespace-nowrap font-display text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-muted">
               {filteredProjects.length === PROJECTS.length ? `${PROJECTS.length} projects` : `${filteredProjects.length} of ${PROJECTS.length} projects`}
             </p>
           </div>

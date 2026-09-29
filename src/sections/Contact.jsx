@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import emailjs from '@emailjs/browser'
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
@@ -27,6 +27,20 @@ export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
   const [status, setStatus] = useState(null) // null | 'success' | 'error'
   const [loading, setLoading] = useState(false)
+  const [offsetY, setOffsetY] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const el = document.getElementById('contact')
+      if (!el) return
+      const rect = el.getBoundingClientRect()
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        setOffsetY((window.innerHeight - rect.top) * 0.08)
+      }
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -63,8 +77,17 @@ export default function Contact() {
   )
 
   return (
-    <section className="bg-transparent py-[clamp(5rem,10vw,9rem)]" id="contact">
-      <div className="mx-auto w-[min(90%,1100px)]">
+    <section className="relative bg-transparent py-[clamp(4rem,8vw,7rem)] overflow-hidden" id="contact">
+      {/* Background Watermark */}
+      <div
+        className="watermark-text left-[-1rem] top-1/4 text-[clamp(10rem,20vw,20rem)] opacity-[0.03]"
+        style={{ transform: `translateY(${offsetY}px)` }}
+        aria-hidden="true"
+      >
+        CONNECT
+      </div>
+
+      <div className="mx-auto w-[min(90%,1100px)] relative z-10">
         <p className="relative mb-5 flex items-center gap-3 pl-6 font-body text-[0.72rem] font-medium uppercase tracking-[0.18em] text-accent opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out [&.visible]:translate-y-0 [&.visible]:opacity-100 before:absolute before:left-0 before:top-1/2 before:h-0.5 before:w-4 before:-translate-y-1/2 before:bg-accent">Contact</p>
         <h2 className="mb-[clamp(2rem,4vw,3.5rem)] font-display text-[clamp(2rem,5vw,3.25rem)] font-extrabold leading-[1.08] text-primary [letter-spacing:-0.03em] opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out delay-[100ms] [&.visible]:translate-y-0 [&.visible]:opacity-100">
           Let's <span className="text-accent">connect</span>
@@ -81,30 +104,32 @@ export default function Contact() {
 
             <div className="mb-10 flex flex-col gap-3.5">
               <p className="mb-1 text-[0.72rem] uppercase tracking-[0.12em] text-muted">Email me at</p>
-              <a href="mailto:paoloperalta246@gmail.com" className="mb-4 flex items-center gap-3.5 text-[0.9rem] text-primary">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm border border-border bg-surface text-base">📧</span>
+              <a href="mailto:paoloperalta246@gmail.com" className="glass-card mb-4 flex items-center gap-3.5 rounded-xl p-3 text-[0.9rem] text-primary group">
+                <span className="glass-pill flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-base group-hover:border-accent group-hover:text-accent transition-colors">📧</span>
                 paoloperalta246@gmail.com
               </a>
               <p className="mb-1 text-[0.72rem] uppercase tracking-[0.12em] text-muted">You can also find me on</p>
-              {CONTACT_LINKS.map(({ icon, label, href }) => (
-                href ? (
-                  <a key={label} href={href} className="flex items-center gap-3.5 text-[0.9rem] text-secondary transition-colors duration-150 hover:text-accent [&:hover_span]:border-accent [&:hover_span]:bg-accent-glow" target="_blank" rel="noopener noreferrer">
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm border border-border bg-surface text-base transition-colors duration-150">{icon}</span>
-                    {label}
-                  </a>
-                ) : (
-                  <div key={label} className="flex cursor-default items-center gap-3.5 text-[0.9rem] text-secondary">
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm border border-border bg-surface text-base">{icon}</span>
-                    {label}
-                  </div>
-                )
-              ))}
+              <div className="flex flex-col gap-2.5">
+                {CONTACT_LINKS.map(({ icon, label, href }) => (
+                  href ? (
+                    <a key={label} href={href} className="glass-button flex items-center gap-3.5 rounded-xl p-3 text-[0.9rem] text-secondary hover:text-accent" target="_blank" rel="noopener noreferrer">
+                      <span className="glass-pill flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-base">{icon}</span>
+                      <span className="font-medium">{label}</span>
+                    </a>
+                  ) : (
+                    <div key={label} className="glass-card flex cursor-default items-center gap-3.5 rounded-xl p-3 text-[0.9rem] text-secondary">
+                      <span className="glass-pill flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-base">{icon}</span>
+                      <span className="font-medium">{label}</span>
+                    </div>
+                  )
+                ))}
+              </div>
             </div>
           </div>
 
           {/* Right: form */}
-          <div className="rounded-lg border border-border bg-surface p-[clamp(1.5rem,4vw,2.5rem)] opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out delay-[200ms] [&.visible]:translate-y-0 [&.visible]:opacity-100">
-            <form className="flex flex-col gap-[1.1rem]" onSubmit={handleSubmit}>
+          <div className="glass-card rounded-2xl p-[clamp(1.5rem,4vw,2.5rem)] shadow-2xl opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out delay-[200ms] [&.visible]:translate-y-0 [&.visible]:opacity-100 relative overflow-hidden before:absolute before:top-0 before:left-0 before:h-[2px] before:w-full before:bg-gradient-to-r before:from-transparent before:via-accent before:to-transparent">
+            <form className="flex flex-col gap-[1.2rem]" onSubmit={handleSubmit}>
 
               <div className="grid grid-cols-2 gap-4 max-[768px]:grid-cols-1">
                 <div className="flex flex-col gap-1.5">
@@ -114,7 +139,7 @@ export default function Contact() {
                     name="name"
                     type="text"
                     placeholder="Your name"
-                    className="w-full resize-none rounded-sm border border-border bg-bg-3 px-4 py-3 font-body text-[0.9rem] text-primary outline-none transition-[border-color,box-shadow] duration-150 placeholder:text-muted focus:border-accent focus:shadow-[0_0_0_3px_rgba(184,255,87,0.1)]"
+                    className="glass-input w-full rounded-xl px-4 py-3 font-body text-[0.9rem] text-primary placeholder:text-muted focus:outline-none"
                     value={form.name}
                     onChange={handleChange}
                     required
@@ -127,7 +152,7 @@ export default function Contact() {
                     name="email"
                     type="email"
                     placeholder="your@email.com"
-                    className="w-full resize-none rounded-sm border border-border bg-bg-3 px-4 py-3 font-body text-[0.9rem] text-primary outline-none transition-[border-color,box-shadow] duration-150 placeholder:text-muted focus:border-accent focus:shadow-[0_0_0_3px_rgba(184,255,87,0.1)]"
+                    className="glass-input w-full rounded-xl px-4 py-3 font-body text-[0.9rem] text-primary placeholder:text-muted focus:outline-none"
                     value={form.email}
                     onChange={handleChange}
                     required
@@ -142,7 +167,7 @@ export default function Contact() {
                   name="subject"
                   type="text"
                   placeholder="Internship opportunity / Project inquiry / etc."
-                  className="w-full resize-none rounded-sm border border-border bg-bg-3 px-4 py-3 font-body text-[0.9rem] text-primary outline-none transition-[border-color,box-shadow] duration-150 placeholder:text-muted focus:border-accent focus:shadow-[0_0_0_3px_rgba(184,255,87,0.1)]"
+                  className="glass-input w-full rounded-xl px-4 py-3 font-body text-[0.9rem] text-primary placeholder:text-muted focus:outline-none"
                   value={form.subject}
                   onChange={handleChange}
                   required
@@ -155,7 +180,7 @@ export default function Contact() {
                   id="message"
                   name="message"
                   placeholder="Tell me what you have in mind..."
-                  className="min-h-[140px] w-full resize-none rounded-sm border border-border bg-bg-3 px-4 py-3 font-body text-[0.9rem] text-primary outline-none transition-[border-color,box-shadow] duration-150 placeholder:text-muted focus:border-accent focus:shadow-[0_0_0_3px_rgba(184,255,87,0.1)]"
+                  className="glass-input min-h-[140px] w-full resize-none rounded-xl px-4 py-3 font-body text-[0.9rem] text-primary placeholder:text-muted focus:outline-none"
                   value={form.message}
                   onChange={handleChange}
                   required
@@ -164,7 +189,7 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="relative flex h-[3.2rem] w-full items-center justify-center gap-1.5 rounded-sm bg-accent font-body text-[0.98rem] font-semibold text-[#0a0a0a] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(184,255,87,0.25)] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity hover:after:opacity-[0.08]"
+                className="relative flex h-[3.2rem] w-full items-center justify-center gap-1.5 rounded-xl bg-accent font-body text-[0.98rem] font-semibold text-[#0a0a0a] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(184,255,87,0.25)] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity hover:after:opacity-[0.08]"
                 disabled={loading}
               >
                 {loading ? 'Sending...' : (
@@ -176,13 +201,13 @@ export default function Contact() {
               </button>
 
               {status === 'success' && (
-                <p className="mt-3 flex items-center gap-2.5 border-l-2 border-accent bg-[rgba(126,182,176,0.08)] px-3.5 py-3 text-left text-[0.85rem] leading-6 text-accent" role="status">
+                <p className="glass-card mt-3 flex items-center gap-2.5 rounded-xl border-l-4 border-l-accent px-4 py-3 text-left text-[0.85rem] leading-6 text-accent" role="status">
                   <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full border border-accent text-[0.7rem] font-bold" aria-hidden="true">✓</span>
                   <span><strong className="font-medium text-primary">Thanks for reaching out.</strong> I'll get back to you soon.</span>
                 </p>
               )}
               {status === 'error' && (
-                <p className="mt-3 border border-[rgba(255,87,87,0.3)] bg-[rgba(255,87,87,0.1)] px-3.5 py-3 text-[0.85rem] leading-6 text-red">
+                <p className="glass-card mt-3 rounded-xl border border-[rgba(255,87,87,0.4)] px-4 py-3 text-[0.85rem] leading-6 text-red">
                   ❌ Something went wrong. Please try again.
                 </p>
               )}

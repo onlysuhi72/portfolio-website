@@ -6,15 +6,15 @@ const NAV_LINKS = [
   { label: 'Skills', href: '#skills' },
   { label: 'Projects', href: '#projects' },
   { label: 'Resume', href: '#resume' },
-  { label: 'Contact', href: '#contact', cta: true },
+  { label: 'Contact', href: '#contact' },
 ]
 
 function ThemeToggle({ theme, onChange, className = '' }) {
   return (
-    <div className={`inline-flex items-center gap-0.5 rounded-sm border border-border bg-surface p-1 ${className}`} role="group" aria-label="Color theme">
+    <div className={`inline-flex items-center gap-0.5 rounded-full border border-border bg-surface/60 p-1 shadow-sm backdrop-blur-xl ${className}`} role="group" aria-label="Color theme">
       <button
         type="button"
-        className={`inline-flex min-h-[30px] items-center gap-1.5 rounded px-2 py-1 text-xs leading-none transition-colors ${theme === 'light' ? 'bg-bg-3 text-primary' : 'text-secondary'}`}
+        className={`inline-flex min-h-[28px] items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium leading-none transition-all duration-200 ${theme === 'light' ? 'bg-surface shadow-sm text-primary' : 'text-secondary hover:text-primary'}`}
         aria-pressed={theme === 'light'}
         onClick={(event) => onChange('light', event)}
       >
@@ -26,7 +26,7 @@ function ThemeToggle({ theme, onChange, className = '' }) {
       </button>
       <button
         type="button"
-        className={`inline-flex min-h-[30px] items-center gap-1.5 rounded px-2 py-1 text-xs leading-none transition-colors ${theme === 'dark' ? 'bg-bg-3 text-primary' : 'text-secondary'}`}
+        className={`inline-flex min-h-[28px] items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium leading-none transition-all duration-200 ${theme === 'dark' ? 'bg-surface shadow-sm text-primary' : 'text-secondary hover:text-primary'}`}
         aria-pressed={theme === 'dark'}
         onClick={(event) => onChange('dark', event)}
       >
@@ -168,7 +168,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`fixed inset-x-0 top-0 z-[900] border-b border-transparent py-5 transition-[background,padding,border-color] duration-[400ms] ease-portfolio ${scrolled ? `border-border py-3.5 backdrop-blur-2xl ${theme === 'light' ? 'bg-[rgba(255,255,255,0.9)]' : 'bg-[rgba(10,10,10,0.88)]'}` : ''}`}>
+      <nav className={`fixed inset-x-0 top-0 z-[900] py-4 transition-[background,padding,border-color,box-shadow] duration-[400ms] ease-portfolio ${scrolled ? 'border-b border-border bg-surface/75 py-3 shadow-lg backdrop-blur-2xl [box-shadow:var(--glass-shadow),var(--glass-inner-bevel)]' : 'bg-transparent'}`}>
         <div className="mx-auto flex w-[min(90%,1100px)] items-center justify-between">
 
           {/* Logo */}
@@ -177,12 +177,12 @@ export default function Navbar() {
           </a>
 
           {/* Desktop Links */}
-          <ul className="flex items-center gap-10 max-[768px]:hidden">
-            {NAV_LINKS.map(({ label, href, cta }) => (
+          <ul className="flex items-center gap-8 max-[768px]:hidden">
+            {NAV_LINKS.map(({ label, href }) => (
               <li key={href}>
                 <a
                   href={href}
-                  className={`${cta ? 'rounded-sm border-[1.5px] border-blue px-4 py-1.5 text-[0.82rem] font-medium text-blue transition-all duration-300 hover:bg-[rgba(87,184,255,0.12)] hover:text-blue' : `relative text-[0.85rem] font-normal tracking-[0.04em] text-secondary transition-colors after:absolute after:bottom-[-3px] after:left-0 after:h-px after:w-0 after:bg-accent after:transition-[width] after:duration-300 hover:text-primary hover:after:w-full ${activeSection === href.replace('#', '') ? 'text-accent after:w-full' : ''}`}`}
+                  className={`relative text-[0.85rem] font-normal tracking-[0.04em] transition-colors after:absolute after:bottom-[-3px] after:left-0 after:h-px after:bg-accent after:transition-[width] after:duration-300 hover:text-primary ${activeSection === href.replace('#', '') ? 'text-accent after:w-full font-medium' : 'text-secondary after:w-0 hover:after:w-full'}`}
                   onClick={(e) => handleNavClick(e, href)}
                 >
                   {label}
@@ -207,7 +207,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Menu */}
-        <div id="mobile-navigation" className={`fixed inset-0 z-[800] flex min-h-[100dvh] flex-col items-center justify-center gap-8 overflow-y-auto bg-bg px-6 pb-12 pt-28 transition-[opacity,transform,visibility] duration-[400ms] ease-portfolio-out max-[768px]:justify-start ${menuOpen ? 'visible pointer-events-auto translate-x-0 opacity-100' : 'invisible pointer-events-none translate-x-full opacity-0'}`}>
+        <div id="mobile-navigation" className={`fixed inset-0 z-[800] flex min-h-[100dvh] flex-col items-center justify-center gap-8 overflow-y-auto bg-bg/95 backdrop-blur-3xl px-6 pb-12 pt-28 transition-[opacity,transform,visibility] duration-[400ms] ease-portfolio-out max-[768px]:justify-start ${menuOpen ? 'visible pointer-events-auto translate-x-0 opacity-100' : 'invisible pointer-events-none translate-x-full opacity-0'}`}>
           {NAV_LINKS.map(({ label, href }) => (
             <a
               key={href}

@@ -9,6 +9,8 @@ import Contact from './sections/Contact'
 import Footer from './components/Footer'
 import CustomCursor from './components/CustomCursor'
 import ScrollProgress from './components/ScrollProgress'
+import ContinuousBackground from './components/ContinuousBackground'
+import SectionTransition from './components/SectionTransition'
 
 const loadingTitles = [
   { firstLine: 'Code. Design.', secondLine: 'Create.' },
@@ -91,14 +93,86 @@ function App() {
       </div>
       <CustomCursor />
       <ScrollProgress />
+      <ContinuousBackground />
       <Navbar />
       <a className="fixed left-3 top-3 z-[1100] -translate-y-[150%] bg-accent px-4 py-2.5 text-[#0a0a0a] transition-transform focus:translate-y-0" href="#main-content">Skip to content</a>
-      <main id="main-content">
+      <main id="main-content" className="relative z-10">
         <Hero isReady={isHeroReady} />
+
+        {/* Transition Bridge 1: Hero → About */}
+        <SectionTransition
+          watermarkNumber="01"
+          watermarkLabel="ABOUT ME"
+          tickerItems={[
+            'CREATIVE DEVELOPER',
+            'FULL-STACK ARCHITECTURE',
+            'CLEAN & RESPONSIVE UI',
+            'ROBUST BACKEND LOGIC',
+            'DATABASE SYSTEM DESIGN'
+          ]}
+        />
+
         <About />
+
+        {/* Transition Bridge 2: About → Skills */}
+        <SectionTransition
+          watermarkNumber="02"
+          watermarkLabel="TECHNICAL SKILLS"
+          reverse={true}
+          tickerItems={[
+            'REACT & JAVASCRIPT',
+            'PHP & MYSQL',
+            'TAILWIND CSS & UI/UX',
+            'UNITY & PYTHON',
+            'CLOUD & SUPABASE'
+          ]}
+        />
+
         <Skills />
+
+        {/* Transition Bridge 3: Skills → Projects */}
+        <SectionTransition
+          watermarkNumber="03"
+          watermarkLabel="SELECTED WORKS"
+          tickerItems={[
+            'ADLAON OPTICAL SYSTEM',
+            'HOMEZY RENTAL PLATFORM',
+            'SWIFTEATS MOBILE DESIGN',
+            'BULSU E-HANDBOOK',
+            'CLASH CIRCUIT GAMING'
+          ]}
+        />
+
         <Projects />
+
+        {/* Transition Bridge 4: Projects → Resume */}
+        <SectionTransition
+          watermarkNumber="04"
+          watermarkLabel="JOURNEY & EXPERIENCE"
+          reverse={true}
+          tickerItems={[
+            'BSIT 4TH YEAR',
+            'ASICS TECH SUMMIT',
+            'NETWORKING CERTIFIED',
+            'COLLABORATIVE BUILDER',
+            'LIFELONG LEARNER'
+          ]}
+        />
+
         <Resume />
+
+        {/* Transition Bridge 5: Resume → Contact */}
+        <SectionTransition
+          watermarkNumber="05"
+          watermarkLabel="GET IN TOUCH"
+          tickerItems={[
+            'OPEN FOR OPPORTUNITIES',
+            'INTERNSHIP INQUIRIES',
+            'FREELANCE PROJECTS',
+            'LET’S BUILD TOGETHER'
+          ]}
+        />
+
         <Contact />
       </main>
       <Footer />

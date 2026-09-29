@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const SKILL_GROUPS = [
   {
@@ -36,9 +36,33 @@ const SKILL_GROUPS = [
 const ALSO_LEARNING = ['Python', 'C#', 'Unity', 'Supabase', 'Vercel', 'Hostinger']
 
 export default function Skills() {
+  const [offsetY, setOffsetY] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const el = document.getElementById('skills')
+      if (!el) return
+      const rect = el.getBoundingClientRect()
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        setOffsetY((window.innerHeight - rect.top) * 0.08)
+      }
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <section className="bg-transparent py-[clamp(5rem,10vw,9rem)]" id="skills">
-      <div className="mx-auto w-[min(90%,1100px)]">
+    <section className="relative bg-transparent py-[clamp(4rem,8vw,7rem)] overflow-hidden" id="skills">
+      {/* Background Watermark */}
+      <div
+        className="watermark-text right-[-1rem] top-1/4 text-[clamp(10rem,20vw,20rem)] opacity-[0.03]"
+        style={{ transform: `translateY(${offsetY}px)` }}
+        aria-hidden="true"
+      >
+        TOOLKIT
+      </div>
+
+      <div className="mx-auto w-[min(90%,1100px)] relative z-10">
 
         <div className="mb-[clamp(2.5rem,5vw,4rem)] max-w-[560px]">
           <p className="relative mb-5 flex items-center gap-3 pl-6 font-body text-[0.72rem] font-medium uppercase tracking-[0.18em] text-accent opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out [&.visible]:translate-y-0 [&.visible]:opacity-100 before:absolute before:left-0 before:top-1/2 before:h-0.5 before:w-4 before:-translate-y-1/2 before:bg-accent">Skills</p>
@@ -47,17 +71,20 @@ export default function Skills() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-3 border-l border-t border-border max-[800px]:grid-cols-1">
+        <div className="grid grid-cols-3 gap-5 max-[800px]:grid-cols-1">
           {SKILL_GROUPS.map((group, gi) => (
-            <div className="group relative border-b border-r border-border px-7 py-8 transition-colors duration-300 hover:bg-surface opacity-0 translate-y-8 transition-[opacity,transform,background-color] duration-[700ms] ease-portfolio-out [&.visible]:translate-y-0 [&.visible]:opacity-100" key={group.category} style={{ transitionDelay: `${gi * 80}ms` }}>
-              <div className="mb-5 flex items-baseline gap-2.5">
-                <span className="font-display text-xs font-semibold text-accent opacity-60">{group.number}</span>
-                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">{group.category}</p>
+            <div className="glass-card group relative rounded-2xl p-7 opacity-0 translate-y-8 transition-all duration-[700ms] ease-portfolio-out [&.visible]:translate-y-0 [&.visible]:opacity-100" key={group.category} style={{ transitionDelay: `${gi * 80}ms` }}>
+              <div className="mb-5 flex items-baseline justify-between border-b border-white/5 pb-4">
+                <div className="flex items-center gap-2">
+                  <span className="glass-pill px-2.5 py-0.5 rounded-full font-display text-[0.7rem] font-bold text-accent">{group.number}</span>
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">{group.category}</p>
+                </div>
+                <span className="text-xs text-accent opacity-40 font-mono">✦</span>
               </div>
               <ul className="m-0 list-none p-0">
                 {group.items.map((item) => (
-                  <li className="group/item relative flex flex-col border-t border-dashed border-border py-[0.9rem] first:border-t-0 before:absolute before:left-[-1.75rem] before:top-1/2 before:h-0 before:w-[3px] before:-translate-y-1/2 before:bg-accent before:transition-[height] before:duration-150 hover:before:h-[60%]" key={item.name}>
-                    <span className="font-display text-[1.05rem] font-bold text-primary transition-all duration-150 group-hover/item:translate-x-1 group-hover/item:text-accent">{item.name}</span>
+                  <li className="group/item relative flex flex-col border-t border-white/5 py-[0.85rem] first:border-t-0 before:absolute before:left-[-1.75rem] before:top-1/2 before:h-0 before:w-[3px] before:-translate-y-1/2 before:bg-accent before:transition-[height] before:duration-200 hover:before:h-[70%]" key={item.name}>
+                    <span className="font-display text-[1.05rem] font-bold text-primary transition-all duration-200 group-hover/item:translate-x-1.5 group-hover/item:text-accent">{item.name}</span>
                     <span className="mt-1 text-[0.8rem] text-secondary">{item.note}</span>
                   </li>
                 ))}
@@ -66,10 +93,16 @@ export default function Skills() {
           ))}
         </div>
 
-        <div className="mt-14 rounded-md border border-border bg-surface px-7 py-8 opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out [&.visible]:translate-y-0 [&.visible]:opacity-100">
-          <p className="mb-2 text-[0.78rem] uppercase tracking-[0.1em] text-muted">Currently learning</p>
-          <p className="font-display text-xl font-semibold text-primary">{ALSO_LEARNING.join(' · ')}</p>
-          <p className="mt-4 max-w-[650px] text-[0.86rem] leading-[1.7] text-secondary">
+        <div className="glass-card mt-10 rounded-2xl p-8 opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out [&.visible]:translate-y-0 [&.visible]:opacity-100 relative overflow-hidden before:absolute before:top-0 before:left-0 before:h-[2px] before:w-full before:bg-gradient-to-r before:from-transparent before:via-accent before:to-transparent">
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-3">
+            <p className="text-[0.78rem] uppercase tracking-[0.12em] text-accent font-medium flex items-center gap-2">
+              <span className="inline-block h-2 w-2 rounded-full bg-accent animate-pulse" />
+              Currently learning &amp; exploring
+            </p>
+            <span className="glass-pill rounded-full px-3 py-0.5 text-xs font-mono text-muted">Next-gen stack</span>
+          </div>
+          <p className="font-display text-xl font-bold text-primary tracking-wide">{ALSO_LEARNING.join(' · ')}</p>
+          <p className="mt-4 max-w-[650px] text-[0.86rem] leading-[1.75] text-secondary">
             My short-term goal is to strengthen my Python and Unity skills while building and deploying more complete full-stack applications.
           </p>
         </div>

@@ -37,7 +37,7 @@ export default function Hero({ isReady }) {
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </button>
-          <button className="relative inline-flex items-center gap-2 rounded-sm border border-border-hover bg-transparent px-7 py-3 font-body text-[0.9rem] font-medium tracking-[0.02em] text-primary transition-all duration-300 ease-portfolio hover:-translate-y-0.5 hover:border-accent hover:text-accent" onClick={() => scrollTo('#contact')}>
+          <button className="glass-button relative inline-flex items-center gap-2 rounded-sm px-7 py-3 font-body text-[0.9rem] font-medium tracking-[0.02em] text-primary" onClick={() => scrollTo('#contact')}>
             Contact Me
           </button>
         </div>
