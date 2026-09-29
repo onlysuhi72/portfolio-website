@@ -48,6 +48,27 @@
   --radius-lg: 20px;
 }
 
+:root[data-theme='light'] {
+  --bg: #f4f7f6;
+  --bg-2: #e9efee;
+  --bg-3: #dce5e3;
+  --surface: #ffffff;
+  --surface-2: #eef3f2;
+  --border: #d4dfdd;
+  --border-hover: #4c8881;
+
+  --text-primary: #202a2b;
+  --text-secondary: #526263;
+  --text-muted: #718181;
+
+  --accent: #4c8881;
+  --accent-dim: #376a65;
+  --accent-glow: rgba(76, 136, 129, 0.15);
+
+  --red: #c83f45;
+  --blue: #1877b8;
+}
+
 /* --- Reset & Base --- */
 *,
 *::before,
