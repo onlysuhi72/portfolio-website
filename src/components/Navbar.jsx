@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { flushSync } from 'react-dom'
 
 const NAV_LINKS = [
   { label: 'About', href: '#about' },
@@ -15,7 +16,7 @@ function ThemeToggle({ theme, onChange, className = '' }) {
         type="button"
         className={`inline-flex min-h-[30px] items-center gap-1.5 rounded px-2 py-1 text-xs leading-none transition-colors ${theme === 'light' ? 'bg-bg-3 text-primary' : 'text-secondary'}`}
         aria-pressed={theme === 'light'}
-        onClick={() => onChange('light')}
+        onClick={(event) => onChange('light', event)}
       >
         <svg className="h-3.5 w-3.5 fill-none stroke-current [stroke-linecap:round] [stroke-linejoin:round] [stroke-width:1.6]" viewBox="0 0 24 24" aria-hidden="true">
           <circle cx="12" cy="12" r="4" />
@@ -27,7 +28,7 @@ function ThemeToggle({ theme, onChange, className = '' }) {
         type="button"
         className={`inline-flex min-h-[30px] items-center gap-1.5 rounded px-2 py-1 text-xs leading-none transition-colors ${theme === 'dark' ? 'bg-bg-3 text-primary' : 'text-secondary'}`}
         aria-pressed={theme === 'dark'}
-        onClick={() => onChange('dark')}
+        onClick={(event) => onChange('dark', event)}
       >
         <svg className="h-3.5 w-3.5 fill-none stroke-current [stroke-linecap:round] [stroke-linejoin:round] [stroke-width:1.6]" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M20.2 15.3A8.5 8.5 0 0 1 8.7 3.8 8.5 8.5 0 1 0 20.2 15.3Z" />
@@ -44,6 +45,28 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState('')
   const [navigation, setNavigation] = useState(null)
   const [theme, setTheme] = useState(() => window.localStorage.getItem('portfolio-theme') || 'dark')
+
+  const changeTheme = (nextTheme, event) => {
+    const root = document.documentElement
+    const updateTheme = () => {
+      root.dataset.theme = nextTheme
+      setTheme(nextTheme)
+    }
+
+    if (!document.startViewTransition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      updateTheme()
+      return
+    }
+
+    root.style.setProperty('--theme-x', `${event.clientX}px`)
+    root.style.setProperty('--theme-y', `${event.clientY}px`)
+    const transition = document.startViewTransition(() => flushSync(updateTheme))
+    const clearOrigin = () => {
+      root.style.removeProperty('--theme-x')
+      root.style.removeProperty('--theme-y')
+    }
+    transition.finished.then(clearOrigin, clearOrigin)
+  }
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
@@ -168,7 +191,7 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <ThemeToggle theme={theme} onChange={setTheme} className="max-[768px]:hidden" />
+          <ThemeToggle theme={theme} onChange={changeTheme} className="max-[768px]:hidden" />
 
           {/* Hamburger */}
           <button
@@ -195,7 +218,7 @@ export default function Navbar() {
               {label}
             </a>
           ))}
-          <ThemeToggle theme={theme} onChange={setTheme} className="mt-2 hidden max-[768px]:inline-flex" />
+          <ThemeToggle theme={theme} onChange={changeTheme} className="mt-2 hidden max-[768px]:inline-flex" />
         </div>
       </nav>
       {navigation && (
