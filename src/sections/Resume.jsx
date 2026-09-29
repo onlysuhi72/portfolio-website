@@ -76,7 +76,7 @@ function TimelineItem({ role, org, period, desc }) {
 
 export default function Resume() {
   return (
-    <section className="bg-bg py-[clamp(5rem,10vw,9rem)] odd:bg-bg even:bg-bg-2" id="resume">
+    <section className="bg-transparent py-[clamp(5rem,10vw,9rem)]" id="resume">
       <div className="mx-auto w-[min(90%,1100px)]">
 
         <p className="relative mb-5 flex items-center gap-3 pl-6 font-body text-[0.72rem] font-medium uppercase tracking-[0.18em] text-accent opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out [&.visible]:translate-y-0 [&.visible]:opacity-100 before:absolute before:left-0 before:top-1/2 before:h-0.5 before:w-4 before:-translate-y-1/2 before:bg-accent">Resume</p>

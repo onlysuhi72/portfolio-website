@@ -244,7 +244,7 @@ export default function Projects() {
   })
 
   return (
-    <section className="bg-bg py-[clamp(5rem,10vw,9rem)] odd:bg-bg even:bg-bg-2" id="projects">
+    <section className="bg-transparent py-[clamp(5rem,10vw,9rem)]" id="projects">
       <div className="mx-auto w-[min(94%,1280px)]">
 
         <div className="mb-[clamp(2.5rem,5vw,4rem)] flex flex-wrap items-end justify-between gap-6 max-[480px]:flex-col max-[480px]:items-start">

@@ -37,7 +37,7 @@ const ALSO_LEARNING = ['Python', 'C#', 'Unity', 'Supabase', 'Vercel', 'Hostinger
 
 export default function Skills() {
   return (
-    <section className="bg-bg py-[clamp(5rem,10vw,9rem)] odd:bg-bg even:bg-bg-2" id="skills">
+    <section className="bg-transparent py-[clamp(5rem,10vw,9rem)]" id="skills">
       <div className="mx-auto w-[min(90%,1100px)]">
 
         <div className="mb-[clamp(2.5rem,5vw,4rem)] max-w-[560px]">

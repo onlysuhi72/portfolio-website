@@ -5,7 +5,7 @@ import PaoloWhiteImg from '../images/Paolo-White.png'
 
 export default function About() {
   return (
-    <section className="relative bg-bg py-[clamp(5rem,10vw,9rem)] odd:bg-bg even:bg-bg-2" id="about">
+    <section className="relative bg-transparent py-[clamp(5rem,10vw,9rem)]" id="about">
       <div className="mx-auto w-[min(90%,1100px)]">
         <div className="grid grid-cols-[0.9fr_1.1fr] items-center gap-[clamp(3rem,6vw,6rem)] max-[768px]:grid-cols-1">
 

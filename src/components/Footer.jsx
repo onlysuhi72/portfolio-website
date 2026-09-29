@@ -5,7 +5,7 @@ export default function Footer() {
   const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
   return (
-    <footer className="border-t border-border bg-bg">
+    <footer className="border-t border-border bg-transparent">
       <div className="mx-auto grid w-[min(90%,1100px)] grid-cols-[1fr_auto] items-start gap-x-12 gap-y-8 border-b border-border pb-10 pt-14 max-[560px]:grid-cols-1">
 
         <div>
