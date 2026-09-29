@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+﻿import React, { useEffect, useRef, useState } from 'react'
 import resumePdf from '../components/JuanPaoloPeralta-Resume.pdf'
 
 const EDUCATION = [
@@ -91,17 +91,15 @@ function TimelineItem({ role, org, period, desc, index = 0 }) {
   return (
     <div
       ref={itemRef}
-      className={`group relative flex gap-5 pb-8 last:pb-2 before:absolute before:bottom-0 before:left-[9px] before:top-5 before:w-px before:bg-gradient-to-b before:from-accent/60 before:to-border last:before:hidden transition-all duration-700 ease-portfolio-out ${
-        isVisible
+      className={`group relative flex gap-5 pb-8 last:pb-2 before:absolute before:bottom-0 before:left-[9px] before:top-5 before:w-px before:bg-gradient-to-b before:from-accent/60 before:to-border last:before:hidden transition-all duration-700 ease-portfolio-out ${isVisible
           ? 'opacity-100 translate-y-0 scale-100'
           : 'opacity-0 translate-y-12 scale-[0.97]'
-      }`}
+        }`}
       style={{ transitionDelay: `${(index % 3) * 100}ms` }}
     >
       <div
-        className={`glass-pill mt-[3px] h-[18px] w-[18px] shrink-0 rounded-full transition-all duration-500 group-hover:scale-125 group-hover:border-accent group-hover:bg-accent/30 group-hover:shadow-[0_0_14px_var(--accent)] ${
-          isVisible ? 'border-accent bg-accent/20 shadow-[0_0_10px_var(--accent-glow)]' : 'border-border'
-        }`}
+        className={`glass-pill mt-[3px] h-[18px] w-[18px] shrink-0 rounded-full transition-all duration-500 group-hover:scale-125 group-hover:border-accent group-hover:bg-accent/30 group-hover:shadow-[0_0_14px_var(--accent)] ${isVisible ? 'border-accent bg-accent/20 shadow-[0_0_10px_var(--accent-glow)]' : 'border-border'
+          }`}
       />
       <div className="glass-card flex-1 rounded-xl p-5 transition-all duration-300 group-hover:border-accent/40 group-hover:shadow-[0_12px_32px_rgba(0,0,0,0.35)]">
         <div className="flex flex-wrap items-baseline justify-between gap-2 mb-1">
@@ -152,9 +150,8 @@ function TimelineCategory({ title, items }) {
   return (
     <div ref={catRef} className="mb-14 last:mb-0">
       <p
-        className={`mb-6 flex items-center gap-3 font-display text-[0.75rem] font-bold uppercase tracking-[0.16em] text-accent after:h-px after:flex-1 after:bg-gradient-to-r after:from-accent/50 after:to-border transition-all duration-700 ease-portfolio-out ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-        }`}
+        className={`mb-6 flex items-center gap-3 font-display text-[0.75rem] font-bold uppercase tracking-[0.16em] text-accent after:h-px after:flex-1 after:bg-gradient-to-r after:from-accent/50 after:to-border transition-all duration-700 ease-portfolio-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+          }`}
       >
         {title}
       </p>
