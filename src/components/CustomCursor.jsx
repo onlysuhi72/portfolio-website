@@ -31,10 +31,7 @@ export default function CustomCursor() {
     }
 
     let mouseX = window.innerWidth / 2
-    let mouseY = window.innerHeight / 2
-    let ringX = mouseX
-    let ringY = mouseY
-    let rafId
+    let mouseY = window.innerHeight / 2 
 
     const resetCard = (card) => {
       if (!card) return
@@ -59,6 +56,9 @@ export default function CustomCursor() {
 
       if (dotRef.current) {
         dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`
+      }
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`
       }
 
       const target = e.target
@@ -142,18 +142,6 @@ export default function CustomCursor() {
       }
     }
 
-    // Trailing ring with lerp physics
-    const renderLoop = () => {
-      ringX += (mouseX - ringX) * 0.22
-      ringY += (mouseY - ringY) * 0.22
-
-      if (ringRef.current) {
-        ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`
-      }
-
-      rafId = requestAnimationFrame(renderLoop)
-    }
-
     const onMouseDown = () => setClicking(true)
     const onMouseUp = () => setClicking(false)
 
@@ -173,14 +161,12 @@ export default function CustomCursor() {
     window.addEventListener('mousedown', onMouseDown)
     window.addEventListener('mouseup', onMouseUp)
     document.addEventListener('mouseleave', onMouseLeaveWindow)
-    rafId = requestAnimationFrame(renderLoop)
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove)
       window.removeEventListener('mousedown', onMouseDown)
       window.removeEventListener('mouseup', onMouseUp)
       document.removeEventListener('mouseleave', onMouseLeaveWindow)
-      cancelAnimationFrame(rafId)
     }
   }, [])
 
@@ -229,7 +215,7 @@ export default function CustomCursor() {
       {/* Reactive Trailing Aura Ring with Contextual Badge */}
       <div
         ref={ringRef}
-        className={`fixed left-0 top-0 z-[9998] pointer-events-none rounded-full border flex items-center justify-center transition-[width,height,background-color,border-color,box-shadow,border-radius,transform] duration-200 ease-out max-[768px]:hidden will-change-transform ${getRingStyles()}`}
+        className={`fixed left-0 top-0 z-[9998] pointer-events-none rounded-full border flex items-center justify-center transition-[width,height,background-color,border-color,box-shadow,border-radius] duration-200 ease-out max-[768px]:hidden will-change-transform ${getRingStyles()}`}
         aria-hidden="true"
       >
         {hoverLabel && hoverState !== 'input' && !clicking && (

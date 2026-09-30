@@ -90,6 +90,7 @@
         @apply scroll-smooth;
         font-size: 16px;
         -webkit-font-smoothing: antialiased;
+        overflow-x: clip;
     }
 
     html.is-loading {
@@ -140,6 +141,11 @@
 
     @media (hover: none),
     (max-width: 768px) {
+        html {
+            touch-action: pan-y pinch-zoom;
+            overscroll-behavior-x: none;
+        }
+
         body {
             cursor: auto;
         }

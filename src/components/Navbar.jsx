@@ -270,8 +270,15 @@ export default function Navbar() {
                   <span style={{ animationDelay: '650ms' }}>{navigation.label}</span>
                 </span>
               </h2>
-              <div className="mx-auto mt-7 h-0.5 w-40 overflow-hidden bg-border" aria-hidden="true">
-                <span className="nv-bar block h-full w-full" />
+              <div
+                className="nv-fade mx-auto mt-7 h-0.5 w-40 overflow-hidden bg-border"
+                style={{ animationDelay: '750ms' }}
+                aria-hidden="true"
+              >
+                <span
+                  className="nv-bar block h-full w-full"
+                  style={{ animationDelay: '850ms', animationFillMode: 'backwards' }}
+                />
               </div>
             </div>
           </div>
