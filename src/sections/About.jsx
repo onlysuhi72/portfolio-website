@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PaoloBlackImg from '../images/Paolo-Black.png'
 import PaoloWhiteImg from '../images/Paolo-White.png'
+import ScrambleText from '../components/ScrambleText'
 
 export default function About() {
   const [offsetY, setOffsetY] = useState(0)
@@ -37,8 +38,11 @@ export default function About() {
 
             {/* Top floating mini pill */}
             <div className="glass-pill absolute -top-4 -left-3 z-[3] flex items-center gap-2 rounded-full px-3.5 py-1.5 shadow-lg">
-              <span className="text-xs">⚡</span>
-              <span className="font-display text-[0.72rem] font-bold text-accent">Full-Stack Passion</span>
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+              </span>
+              <span className="font-display text-[0.72rem] font-bold text-accent">Open for Internships</span>
             </div>
 
             <div className="glass-card relative aspect-[4/5] w-full overflow-hidden rounded-2xl p-1.5 shadow-2xl before:absolute before:-inset-0.5 before:-z-10 before:rounded-[inherit] before:bg-[linear-gradient(135deg,var(--accent),transparent_40%,transparent_60%,var(--accent))] before:bg-[length:200%_200%] before:opacity-40 before:animate-gradient-shift">
@@ -54,7 +58,7 @@ export default function About() {
               />
 
               {/* Floating badge in lower right */}
-              <div className="glass-card absolute bottom-3 right-3 z-[2] flex items-center gap-3 rounded-xl px-4 py-3 shadow-xl transition-transform duration-300 hover:scale-105">
+              <div className="glass-card magnetic absolute bottom-3 right-3 z-[2] flex items-center gap-3 rounded-xl px-4 py-3 shadow-xl transition-[transform,translate] duration-300 [translate:var(--mag-x,0px)_var(--mag-y,0px)] hover:scale-105">
                 <span className="font-display text-[2rem] font-extrabold leading-none text-accent">3+</span>
                 <span className="text-xs font-medium leading-[1.35] text-secondary">Years learning<br />and improving</span>
               </div>
@@ -69,8 +73,11 @@ export default function About() {
           {/* Right column — text */}
           <div className="[&>p:not(.section-label)]:mb-5 [&>p:not(.section-label)]:text-[0.97rem] [&>p:not(.section-label)]:leading-[1.85] [&>p:not(.section-label)]:text-secondary [&>p:not(.section-label)>strong]:font-semibold [&>p:not(.section-label)>strong]:text-primary">
             <p className="section-label relative mb-5 flex items-center gap-3 pl-6 font-body text-[0.72rem] font-medium uppercase tracking-[0.18em] text-accent opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out [&.visible]:translate-y-0 [&.visible]:opacity-100 before:absolute before:left-0 before:top-1/2 before:h-0.5 before:w-4 before:-translate-y-1/2 before:bg-accent">About Me</p>
-            <h2 className="font-display text-[clamp(2rem,5vw,3.25rem)] font-extrabold leading-[1.08] text-primary [letter-spacing:-0.03em] opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out delay-[100ms] [&.visible]:translate-y-0 [&.visible]:opacity-100">
-              Building things<br />for the <span className="text-accent">web</span>
+            <h2 aria-label="Building things for the web" className="nm-name font-display text-[clamp(2rem,5vw,3.25rem)] font-extrabold leading-[1.08] text-primary [letter-spacing:-0.03em] opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out delay-[100ms] [&.visible]:translate-y-0 [&.visible]:opacity-100">
+              <ScrambleText text="Building things" />
+              <br />
+              <ScrambleText text="for the" start={16} />{' '}
+              <span className="text-accent"><ScrambleText text="web" start={24} /></span>
             </h2>
             <br />
             <p className="opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out delay-[200ms] [&.visible]:translate-y-0 [&.visible]:opacity-100">

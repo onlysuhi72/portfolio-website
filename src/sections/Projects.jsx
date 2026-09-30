@@ -5,6 +5,7 @@ import SwiftEatsImg from '../images/SwiftEats.png'
 import BulSUEHandbookImg from '../images/BulSU-E-Handbook.jpg'
 import ClashCircuitImg from '../images/ClashCircuit.png'
 import OneDataImg from '../images/OneData.png'
+import ScrambleText from '../components/ScrambleText'
 
 const PROJECTS = [
   {
@@ -120,94 +121,74 @@ function ProjectCard({ project }) {
   const isFeatured = project.layout === 'featured'
 
   return (
-    <article className={`glass-card group relative mx-auto flex w-full max-w-[900px] flex-col overflow-hidden rounded-2xl opacity-0 translate-y-8 transition-all duration-[700ms] ease-portfolio-out [&.visible]:translate-y-0 [&.visible]:opacity-100 ${project.revealed ? 'visible' : ''} ${isFull ? 'col-span-12 flex-row max-[900px]:flex-col' : 'col-span-6 max-[900px]:col-span-12'}`}>
-      <div className={`relative aspect-video shrink-0 overflow-hidden bg-bg-3/40 after:absolute after:inset-0 after:bg-[linear-gradient(135deg,rgba(126,182,176,0.12),transparent)] after:opacity-0 after:transition-opacity after:duration-300 group-hover:after:opacity-100 ${isFull ? 'w-[340px] aspect-auto max-[900px]:w-full max-[900px]:aspect-video' : ''}`}>
-        <div className="absolute inset-0 flex items-center justify-center bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[length:24px_24px] text-6xl transition-transform duration-700 ease-portfolio-out group-hover:scale-105">
-          {project.id === '01' ? (
-            <img src={AdlaonImg} alt="Adlaon Optical project preview" loading="lazy" className="h-full w-full object-cover" />
-          ) : project.id === '02' ? (
-            <img src={HomezyImg} alt="Homezy project preview" loading="lazy" className="h-full w-full object-cover" />
-          ) : project.id === '03' ? (
-            <img src={SwiftEatsImg} alt="SwiftEats mobile app prototype preview" loading="lazy" className="h-full w-full object-cover" />
-          ) : project.id === '04' ? (
-            <img src={BulSUEHandbookImg} alt="BulSU E-Handbook project preview" loading="lazy" className="h-full w-full object-cover" />
-          ) : project.id === '05' ? (
-            <img src={OneDataImg} alt="OneData project preview" loading="lazy" className="h-full w-full object-cover" />
-          ) : project.id === '06' ? (
-            <img src={ClashCircuitImg} alt="Clash Circuit project preview" loading="lazy" className="h-full w-full object-cover" />
-          ) : (
-            project.emoji
-          )}
-        </div>
-      </div>
-
-      {/* Body */}
-      <div className="flex flex-1 flex-col p-6">
-        <div className="mb-3 flex items-center justify-between">
-          <span className="font-display text-[0.7rem] font-bold tracking-[0.1em] text-muted">Project {project.id}</span>
-          {project.date && <span className={`glass-pill rounded-full px-2.5 py-0.5 text-[0.7rem] font-medium uppercase tracking-[0.08em] ${project.date === '2025' || project.date === '2026' ? 'text-[#57b8ff] border-[#57b8ff]/30' : 'text-accent border-accent/30'}`}>
-            {project.date}
-          </span>}
-        </div>
-
-        <h3 className="mb-2 font-display text-xl font-extrabold leading-tight text-primary [letter-spacing:-0.02em] group-hover:text-accent transition-colors duration-200">{project.title}</h3>
-        <p className={`mb-5 flex-1 text-[0.85rem] leading-[1.7] text-secondary ${isFeatured ? 'flex-none' : ''}`}>{project.desc}</p>
-
-        {(project.role || project.team || project.contributions) && <div className="mb-5 grid gap-1 border-y border-white/5 py-3.5 text-[0.76rem] leading-[1.5] text-secondary [&_strong]:inline-block [&_strong]:min-w-[6.8rem] [&_strong]:font-medium [&_strong]:text-accent">
-          {project.role && <p><strong>Role</strong> {project.role}</p>}
-          {project.team && <p><strong>Type</strong> {project.team}</p>}
-          {project.contributions && <p><strong>Contributions</strong> {project.contributions.join(' · ')}</p>}
-        </div>}
-
-        {/* Tech stack */}
-        <div className="mb-5 flex flex-wrap gap-1.5">
-          {(project.stack ?? []).map((tech) => (
-            <span key={tech} className="glass-pill rounded-full px-2.5 py-0.5 text-[0.72rem] text-muted font-mono">{tech}</span>
-          ))}
-        </div>
-
-        {/* Links */}
-        {(project.github || project.demo || project.figma || project.showPlaceholders) && (
-          <div className="flex flex-wrap gap-3 [&_.btn]:leading-[inherit] [&_button:disabled]:cursor-not-allowed [&_button:disabled]:opacity-[0.55]">
-            {project.github && <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="glass-button inline-flex items-center gap-1.5 rounded-md px-3.5 py-2 text-[0.8rem] font-medium leading-[inherit] text-secondary hover:text-accent"
-            >
-              <GitHubIcon /> GitHub
-            </a>}
-            {project.showPlaceholders && !project.github && (
-              <button type="button" className="glass-button inline-flex items-center gap-1.5 rounded-md px-3.5 py-2 text-[0.8rem] font-medium leading-[inherit] text-secondary opacity-[0.55]" disabled>
-                <GitHubIcon /> GitHub
-              </button>
+    <div className={`mx-auto w-full max-w-[900px] opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out [&.visible]:translate-y-0 [&.visible]:opacity-100 ${project.revealed ? 'visible' : ''} ${isFull ? 'col-span-12' : 'col-span-6 max-[900px]:col-span-12'}`}>
+      <article className={`glass-card group relative flex h-full w-full flex-col overflow-hidden rounded-2xl ${isFull ? 'flex-row max-[900px]:flex-col' : ''}`}>
+        <div className={`relative aspect-video shrink-0 overflow-hidden bg-bg-3/40 after:absolute after:inset-0 after:bg-[linear-gradient(135deg,rgba(126,182,176,0.12),transparent)] after:opacity-0 after:transition-opacity after:duration-300 group-hover:after:opacity-100 ${isFull ? 'w-[340px] aspect-auto max-[900px]:w-full max-[900px]:aspect-video' : ''}`}>
+          <div className="absolute inset-0 flex items-center justify-center bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[length:24px_24px] text-6xl transition-transform duration-700 ease-portfolio-out group-hover:scale-105">
+            {project.id === '01' ? (
+              <img src={AdlaonImg} alt="Adlaon Optical project preview" loading="lazy" className="h-full w-full object-cover" />
+            ) : project.id === '02' ? (
+              <img src={HomezyImg} alt="Homezy project preview" loading="lazy" className="h-full w-full object-cover" />
+            ) : project.id === '03' ? (
+              <img src={SwiftEatsImg} alt="SwiftEats mobile app prototype preview" loading="lazy" className="h-full w-full object-cover" />
+            ) : project.id === '04' ? (
+              <img src={BulSUEHandbookImg} alt="BulSU E-Handbook project preview" loading="lazy" className="h-full w-full object-cover" />
+            ) : project.id === '05' ? (
+              <img src={OneDataImg} alt="OneData project preview" loading="lazy" className="h-full w-full object-cover" />
+            ) : project.id === '06' ? (
+              <img src={ClashCircuitImg} alt="Clash Circuit project preview" loading="lazy" className="h-full w-full object-cover" />
+            ) : (
+              project.emoji
             )}
-            {project.demo && <a
-              href={project.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative inline-flex items-center gap-1 rounded-md bg-accent px-3.5 py-2 text-[0.85rem] font-semibold text-[#0a0a0a] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-accent-glow after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity hover:after:opacity-[0.08]"
-            >
-              Live Demo
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.1">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                <polyline points="15 3 21 3 21 9" />
-                <line x1="10" y1="14" x2="21" y2="3" />
-              </svg>
-            </a>}
-            {project.figma && <a
-              href={project.figma}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="glass-button inline-flex items-center gap-1.5 rounded-md px-3.5 py-2 text-[0.8rem] font-medium leading-[inherit] text-secondary hover:text-accent"
-            >
-              <FigmaIcon /> Figma
-            </a>}
-            {project.showPlaceholders && !project.demo && (
-              <button
-                type="button"
-                className="relative inline-flex items-center gap-1 rounded-md bg-accent px-3.5 py-2 text-[0.85rem] font-semibold text-[#0a0a0a] opacity-[0.55] after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity"
-                disabled
+          </div>
+        </div>
+
+        {/* Body */}
+        <div className="flex flex-1 flex-col p-6">
+          <div className="mb-3 flex items-center justify-between">
+            <span className="font-display text-[0.7rem] font-bold tracking-[0.1em] text-muted">Project {project.id}</span>
+            {project.date && <span className={`glass-pill rounded-full px-2.5 py-0.5 text-[0.7rem] font-medium uppercase tracking-[0.08em] ${project.date === '2025' || project.date === '2026' ? 'text-[#57b8ff] border-[#57b8ff]/30' : 'text-accent border-accent/30'}`}>
+              {project.date}
+            </span>}
+          </div>
+
+          <h3 className="mb-2 font-display text-xl font-extrabold leading-tight text-primary [letter-spacing:-0.02em] group-hover:text-accent transition-colors duration-200">{project.title}</h3>
+          <p className={`mb-5 flex-1 text-[0.85rem] leading-[1.7] text-secondary ${isFeatured ? 'flex-none' : ''}`}>{project.desc}</p>
+
+          {(project.role || project.team || project.contributions) && <div className="mb-5 grid gap-1 border-y border-white/5 py-3.5 text-[0.76rem] leading-[1.5] text-secondary [&_strong]:inline-block [&_strong]:min-w-[6.8rem] [&_strong]:font-medium [&_strong]:text-accent">
+            {project.role && <p><strong>Role</strong> {project.role}</p>}
+            {project.team && <p><strong>Type</strong> {project.team}</p>}
+            {project.contributions && <p><strong>Contributions</strong> {project.contributions.join(' · ')}</p>}
+          </div>}
+
+          {/* Tech stack */}
+          <div className="mb-5 flex flex-wrap gap-1.5">
+            {(project.stack ?? []).map((tech) => (
+              <span key={tech} className="glass-pill rounded-full px-2.5 py-0.5 text-[0.72rem] text-muted font-mono">{tech}</span>
+            ))}
+          </div>
+
+          {/* Links */}
+          {(project.github || project.demo || project.figma || project.showPlaceholders) && (
+            <div className="flex flex-wrap gap-3 [&_.btn]:leading-[inherit] [&_button:disabled]:cursor-not-allowed [&_button:disabled]:opacity-[0.55]">
+              {project.github && <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-button inline-flex items-center gap-1.5 rounded-md px-3.5 py-2 text-[0.8rem] font-medium leading-[inherit] text-secondary hover:text-accent"
+              >
+                <GitHubIcon /> GitHub
+              </a>}
+              {project.showPlaceholders && !project.github && (
+                <button type="button" className="glass-button inline-flex items-center gap-1.5 rounded-md px-3.5 py-2 text-[0.8rem] font-medium leading-[inherit] text-secondary opacity-[0.55]" disabled>
+                  <GitHubIcon /> GitHub
+                </button>
+              )}
+              {project.demo && <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative inline-flex items-center gap-1 rounded-md bg-accent px-3.5 py-2 text-[0.85rem] font-semibold text-[#0a0a0a] transition-all duration-150 [transform:translate(var(--mag-x,0px),var(--mag-y,0px))] hover:[transform:translate(var(--mag-x,0px),calc(var(--mag-y,0px)_-_2px))] hover:shadow-accent-glow after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity hover:after:opacity-[0.08]"
               >
                 Live Demo
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.1">
@@ -215,12 +196,34 @@ function ProjectCard({ project }) {
                   <polyline points="15 3 21 3 21 9" />
                   <line x1="10" y1="14" x2="21" y2="3" />
                 </svg>
-              </button>
-            )}
-          </div>
-        )}
-      </div>
-    </article>
+              </a>}
+              {project.figma && <a
+                href={project.figma}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-button inline-flex items-center gap-1.5 rounded-md px-3.5 py-2 text-[0.8rem] font-medium leading-[inherit] text-secondary hover:text-accent"
+              >
+                <FigmaIcon /> Figma
+              </a>}
+              {project.showPlaceholders && !project.demo && (
+                <button
+                  type="button"
+                  className="relative inline-flex items-center gap-1 rounded-md bg-accent px-3.5 py-2 text-[0.85rem] font-semibold text-[#0a0a0a] opacity-[0.55] after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity"
+                  disabled
+                >
+                  Live Demo
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.1">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                </button>
+              )}
+            </div>
+          )}
+        </div>
+      </article>
+    </div>
   )
 }
 
@@ -228,6 +231,16 @@ export default function Projects() {
   const [search, setSearch] = React.useState('')
   const [category, setCategory] = React.useState('All types')
   const [hasInteracted, setHasInteracted] = React.useState(false)
+  const [menuOpen, setMenuOpen] = React.useState(false)
+  const menuRef = React.useRef(null)
+
+  React.useEffect(() => {
+    const closeOnOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) setMenuOpen(false)
+    }
+    document.addEventListener('pointerdown', closeOnOutside)
+    return () => document.removeEventListener('pointerdown', closeOnOutside)
+  }, [])
   const categories = ['All types', ...new Set(PROJECTS.map((project) => project.category))]
   const filteredProjects = PROJECTS.filter((project) => {
     const searchText = [
@@ -258,8 +271,10 @@ export default function Projects() {
         <div className="mb-[clamp(2.5rem,5vw,4rem)] flex flex-wrap items-end justify-between gap-6 max-[480px]:flex-col max-[480px]:items-start">
           <div>
             <p className="relative mb-5 flex items-center gap-3 pl-6 font-body text-[0.72rem] font-medium uppercase tracking-[0.18em] text-accent opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out [&.visible]:translate-y-0 [&.visible]:opacity-100 before:absolute before:left-0 before:top-1/2 before:h-0.5 before:w-4 before:-translate-y-1/2 before:bg-accent">Projects</p>
-            <h2 className="font-display text-[clamp(2rem,5vw,3.25rem)] font-extrabold leading-[1.08] text-primary [letter-spacing:-0.03em] opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out delay-[100ms] [&.visible]:translate-y-0 [&.visible]:opacity-100">
-              Things I've <span className="text-accent">built</span>
+            <h2 aria-label="Things I've built" className="nm-name font-display text-[clamp(2rem,5vw,3.25rem)] font-extrabold leading-[1.08] text-primary [letter-spacing:-0.03em] opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out delay-[100ms] [&.visible]:translate-y-0 [&.visible]:opacity-100">
+              <ScrambleText text="Things" />{' '}
+              <ScrambleText text="I've" start={7} />{' '}
+              <span className="text-accent"><ScrambleText text="built" start={12} /></span>
             </h2>
           </div>
           <div className="flex flex-1 flex-wrap items-center justify-center gap-3 max-[480px]:w-full max-[480px]:justify-start">
@@ -280,19 +295,47 @@ export default function Projects() {
                 className="glass-input w-full rounded-xl py-2.5 pl-10 pr-3 text-sm text-primary placeholder:text-muted focus:outline-none"
               />
             </label>
-            <label>
-              <span className="sr-only">Filter projects by type</span>
-              <select
-                value={category}
-                onChange={(event) => {
-                  setCategory(event.target.value)
-                  setHasInteracted(true)
-                }}
-                className="glass-input min-h-10 rounded-xl px-3 py-2 text-sm text-secondary focus:outline-none"
+            <div ref={menuRef} className="relative max-[480px]:w-full">
+              <button
+                type="button"
+                aria-haspopup="listbox"
+                aria-expanded={menuOpen}
+                aria-label="Filter projects by type"
+                onClick={() => setMenuOpen((open) => !open)}
+                className="glass-input flex min-h-10 w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-sm text-secondary focus:outline-none"
               >
-                {categories.map((option) => <option key={option} value={option} className="bg-bg text-primary">{option}</option>)}
-              </select>
-            </label>
+                {category}
+                <svg className={`h-4 w-4 transition-transform duration-200 ${menuOpen ? 'rotate-180' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </button>
+
+              {menuOpen && (
+                <ul
+                  role="listbox"
+                  className="absolute left-0 top-full z-20 mt-2 w-full min-w-[11rem] overflow-hidden rounded-xl border border-white/10 bg-bg p-1 shadow-lg"
+                >
+                  {categories.map((option) => (
+                    <li key={option} role="option" aria-selected={category === option}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setCategory(option)
+                          setHasInteracted(true)
+                          setMenuOpen(false)
+                        }}
+                        className={`w-full rounded-lg px-3 py-2.5 text-left text-sm transition-colors ${category === option
+                            ? 'bg-accent/15 text-accent'
+                            : 'text-secondary hover:bg-white/5 hover:text-primary'
+                          }`}
+                      >
+                        {option}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
             <p className="glass-pill rounded-full px-3.5 py-1 whitespace-nowrap font-display text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-muted">
               {filteredProjects.length === PROJECTS.length ? `${PROJECTS.length} projects` : `${filteredProjects.length} of ${PROJECTS.length} projects`}
             </p>

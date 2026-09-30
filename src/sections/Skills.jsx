@@ -1,4 +1,5 @@
 ﻿import React, { useEffect, useState } from 'react'
+import ScrambleText from '../components/ScrambleText'
 
 const SKILL_GROUPS = [
   {
@@ -66,14 +67,16 @@ export default function Skills() {
 
         <div className="mb-[clamp(2.5rem,5vw,4rem)] max-w-[560px]">
           <p className="relative mb-5 flex items-center gap-3 pl-6 font-body text-[0.72rem] font-medium uppercase tracking-[0.18em] text-accent opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out [&.visible]:translate-y-0 [&.visible]:opacity-100 before:absolute before:left-0 before:top-1/2 before:h-0.5 before:w-4 before:-translate-y-1/2 before:bg-accent">Skills</p>
-          <h2 className="font-display text-[clamp(2rem,5vw,3.25rem)] font-extrabold leading-[1.08] text-primary [letter-spacing:-0.03em] opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out delay-[100ms] [&.visible]:translate-y-0 [&.visible]:opacity-100">
-            My <span className="text-accent">Toolkit</span>
+          <h2 aria-label="My Toolkit" className="nm-name font-display text-[clamp(2rem,5vw,3.25rem)] font-extrabold leading-[1.08] text-primary [letter-spacing:-0.03em] opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out delay-[100ms] [&.visible]:translate-y-0 [&.visible]:opacity-100">
+            <ScrambleText text="My" />{' '}
+            <span className="text-accent"><ScrambleText text="Toolkit" start={3} /></span>
           </h2>
         </div>
 
         <div className="grid grid-cols-3 gap-5 max-[800px]:grid-cols-1">
           {SKILL_GROUPS.map((group, gi) => (
-            <div className="glass-card group relative rounded-2xl p-7 opacity-0 translate-y-8 transition-all duration-[700ms] ease-portfolio-out [&.visible]:translate-y-0 [&.visible]:opacity-100" key={group.category} style={{ transitionDelay: `${gi * 80}ms` }}>
+            <div className="opacity-0 translate-y-8 transition-all duration-[700ms] ease-portfolio-out [&.visible]:translate-y-0 [&.visible]:opacity-100" key={group.category} style={{ transitionDelay: `${gi * 80}ms` }}>
+            <div className="glass-card group relative h-full rounded-2xl p-7">
               <div className="mb-5 flex items-baseline justify-between border-b border-white/5 pb-4">
                 <div className="flex items-center gap-2">
                   <span className="glass-pill px-2.5 py-0.5 rounded-full font-display text-[0.7rem] font-bold text-accent">{group.number}</span>
@@ -88,23 +91,25 @@ export default function Skills() {
                     <span className="mt-1 text-[0.8rem] text-secondary">{item.note}</span>
                   </li>
                 ))}
-              </ul>
+                </ul>
+              </div>
             </div>
           ))}
         </div>
 
-        <div className="glass-card mt-10 rounded-2xl p-8 opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out [&.visible]:translate-y-0 [&.visible]:opacity-100 relative overflow-hidden before:absolute before:top-0 before:left-0 before:h-[2px] before:w-full before:bg-gradient-to-r before:from-transparent before:via-accent before:to-transparent">
+        <div className="mt-10 opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out [&.visible]:translate-y-0 [&.visible]:opacity-100">
+          <div className="glass-card relative overflow-hidden rounded-2xl p-8 before:absolute before:top-0 before:left-0 before:h-[2px] before:w-full before:bg-gradient-to-r before:from-transparent before:via-accent before:to-transparent">
           <div className="flex flex-wrap items-center justify-between gap-4 mb-3">
             <p className="text-[0.78rem] uppercase tracking-[0.12em] text-accent font-medium flex items-center gap-2">
               <span className="inline-block h-2 w-2 rounded-full bg-accent animate-pulse" />
               Currently learning &amp; exploring
-            </p>
-            <span className="glass-pill rounded-full px-3 py-0.5 text-xs font-mono text-muted">Next-gen stack</span>
+            </p>            
           </div>
           <p className="font-display text-xl font-bold text-primary tracking-wide">{ALSO_LEARNING.join(' · ')}</p>
           <p className="mt-4 max-w-[650px] text-[0.86rem] leading-[1.75] text-secondary">
-            My short-term goal is to strengthen my Python and Unity skills while building and deploying more complete full-stack applications.
-          </p>
+              My short-term goal is to strengthen my Python and Unity skills while building and deploying more complete full-stack applications.
+            </p>
+          </div>
         </div>
 
       </div>

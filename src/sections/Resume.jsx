@@ -1,5 +1,6 @@
 ﻿import React, { useEffect, useRef, useState } from 'react'
 import resumePdf from '../components/JuanPaoloPeralta-Resume.pdf'
+import ScrambleText from '../components/ScrambleText'
 
 const EDUCATION = [
   {
@@ -101,7 +102,7 @@ function TimelineItem({ role, org, period, desc, index = 0 }) {
         className={`glass-pill mt-[3px] h-[18px] w-[18px] shrink-0 rounded-full transition-all duration-500 group-hover:scale-125 group-hover:border-accent group-hover:bg-accent/30 group-hover:shadow-[0_0_14px_var(--accent)] ${isVisible ? 'border-accent bg-accent/20 shadow-[0_0_10px_var(--accent-glow)]' : 'border-border'
           }`}
       />
-      <div className="glass-card flex-1 rounded-xl p-5 transition-all duration-300 group-hover:border-accent/40 group-hover:shadow-[0_12px_32px_rgba(0,0,0,0.35)]">
+      <div className="glass-card flex-1 rounded-xl p-5 group-hover:border-accent/40 group-hover:shadow-[0_12px_32px_rgba(0,0,0,0.35)]">
         <div className="flex flex-wrap items-baseline justify-between gap-2 mb-1">
           <p className="font-display text-[1rem] font-bold text-primary group-hover:text-accent transition-colors duration-200">
             {role}
@@ -196,8 +197,9 @@ export default function Resume() {
         <p className="relative mb-5 flex items-center gap-3 pl-6 font-body text-[0.72rem] font-medium uppercase tracking-[0.18em] text-accent opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out [&.visible]:translate-y-0 [&.visible]:opacity-100 before:absolute before:left-0 before:top-1/2 before:h-0.5 before:w-4 before:-translate-y-1/2 before:bg-accent">
           Resume &amp; Experience
         </p>
-        <h2 className="mb-[clamp(2rem,4vw,3.5rem)] font-display text-[clamp(2rem,5vw,3.25rem)] font-extrabold leading-[1.08] text-primary [letter-spacing:-0.03em] opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out delay-[100ms] [&.visible]:translate-y-0 [&.visible]:opacity-100">
-          My <span className="text-accent">Journey</span>
+        <h2 aria-label="My Journey" className="nm-name mb-[clamp(2rem,4vw,3.5rem)] font-display text-[clamp(2rem,5vw,3.25rem)] font-extrabold leading-[1.08] text-primary [letter-spacing:-0.03em] opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out delay-[100ms] [&.visible]:translate-y-0 [&.visible]:opacity-100">
+          <ScrambleText text="My" />{' '}
+          <span className="text-accent"><ScrambleText text="Journey" start={3} /></span>
         </h2>
 
         {/* Two-column layout: Left sticky download card, Right scrollable timeline */}
@@ -206,7 +208,7 @@ export default function Resume() {
           {/* Left — sticky download card that stays fixed/scrolls alongside the timeline */}
           <div className="sticky top-28 z-20 opacity-0 transition-opacity duration-700 ease-portfolio-out [&.visible]:opacity-100 max-[768px]:static max-[768px]:top-0 w-full">
             <div className="glass-card rounded-2xl p-8 text-center shadow-2xl">
-              <div className="glass-card relative mx-auto mb-6 flex h-[88px] w-[72px] items-center justify-center rounded-xl text-[2rem] shadow-inner after:absolute after:right-0 after:top-0 after:h-5 after:w-5 after:rounded-[0_12px_0_12px] after:border-b after:border-l after:border-white/10 after:bg-surface/80">
+              <div className="glass-card magnetic relative mx-auto mb-6 flex h-[88px] w-[72px] items-center justify-center rounded-xl text-[2rem] shadow-inner transition-[transform,translate] duration-150 [translate:var(--mag-x,0px)_var(--mag-y,0px)] after:absolute after:right-0 after:top-0 after:h-5 after:w-5 after:rounded-[0_12px_0_12px] after:border-b after:border-l after:border-white/10 after:bg-surface/80">
                 📄
               </div>
               <p className="mb-1 font-display text-[1.15rem] font-extrabold text-primary">My Resume</p>

@@ -8,6 +8,7 @@ import Resume from './sections/Resume'
 import Contact from './sections/Contact'
 import Footer from './components/Footer'
 import CustomCursor from './components/CustomCursor'
+import CursorTrail from './components/CursorTrail'
 import ScrollProgress from './components/ScrollProgress'
 import ContinuousBackground from './components/ContinuousBackground'
 import SectionTransition from './components/SectionTransition'
@@ -23,6 +24,8 @@ const loadingTitles = [
 function App() {
   const [isLoading, setIsLoading] = useState(true)
   const [isHeroReady, setIsHeroReady] = useState(false)
+  const [isGone, setIsGone] = useState(false)
+  const [progress, setProgress] = useState(0)
   const [loadingTitle] = useState(
     () => loadingTitles[Math.floor(Math.random() * loadingTitles.length)],
   )
@@ -38,11 +41,42 @@ function App() {
     return () => root.classList.remove('is-loading')
   }, [isHeroReady])
 
+  // Animate the counter 0 → 100
   useEffect(() => {
-    const delay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 100 : 3500
-    const timeout = window.setTimeout(() => setIsLoading(false), delay)
-    return () => window.clearTimeout(timeout)
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const duration = reduced ? 100 : 3500
+    const start = performance.now()
+    let raf = 0
+    let holdTimeout = 0
+
+    const tick = (now) => {
+      const t = Math.min((now - start) / duration, 1)
+      setProgress(Math.round((1 - Math.pow(1 - t, 3)) * 100))
+      if (t < 1) {
+        raf = requestAnimationFrame(tick)
+      } else {
+        holdTimeout = window.setTimeout(() => setIsLoading(false), reduced ? 0 : 350)
+      }
+    }
+
+    raf = requestAnimationFrame(tick)
+    return () => {
+      cancelAnimationFrame(raf)
+      window.clearTimeout(holdTimeout)
+    }
   }, [])
+
+  // Start the hero while the curtain is still opening, then remove the overlay
+  useEffect(() => {
+    if (isLoading) return
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const heroTimeout = window.setTimeout(() => setIsHeroReady(true), reduced ? 0 : 700)
+    const goneTimeout = window.setTimeout(() => setIsGone(true), reduced ? 0 : 1300)
+    return () => {
+      window.clearTimeout(heroTimeout)
+      window.clearTimeout(goneTimeout)
+    }
+  }, [isLoading])
 
   // Intersection Observer for scroll-triggered animations
   useEffect(() => {
@@ -65,33 +99,57 @@ function App() {
 
   return (
     <>
-      <div
-        className={`fixed inset-0 z-[2000] grid place-items-center overflow-hidden bg-bg transition-[opacity,visibility] duration-[450ms] ease-portfolio-out ${isLoading ? 'visible opacity-100 [transition:opacity_450ms_cubic-bezier(0.16,1,0.3,1),visibility_0s]' : 'invisible pointer-events-none opacity-0 [transition:opacity_450ms_cubic-bezier(0.16,1,0.3,1),visibility_0s_linear_450ms]'}`}
-        onTransitionEnd={(event) => {
-          if (event.target === event.currentTarget && event.propertyName === 'opacity' && !isLoading) {
-            setIsHeroReady(true)
-          }
-        }}
-        role="status"
-        aria-label="Preparing portfolio"
-        aria-live="polite"
-        aria-hidden={!isLoading}
-      >
-        <div className="pointer-events-none absolute inset-0 [background-image:linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] [background-size:60px_60px] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_50%,black_30%,transparent_100%)]" aria-hidden="true" />
-        <div className="pointer-events-none absolute right-[-2rem] top-1/2 -translate-y-1/2 select-none font-display text-[clamp(14rem,28vw,28rem)] font-extrabold leading-none text-transparent [letter-spacing:-0.05em] [-webkit-text-stroke:1px_rgba(255,255,255,0.04)]" aria-hidden="true">01</div>
-        <div className="pointer-events-none absolute right-[10%] top-[20%] h-[400px] w-[400px] animate-loading-orb-pulse rounded-full bg-[radial-gradient(circle,rgba(184,255,87,0.08)_0%,transparent_70%)]" aria-hidden="true" />
-        <div className="relative z-[1] w-[min(20rem,86vw)] text-center">
-          <h1 className="mt-4 font-display text-[2.6rem] font-extrabold leading-none text-primary">
-            {loadingTitle.firstLine}<br />
-            <span className="text-accent">{loadingTitle.secondLine}</span>
-          </h1>
-          <div className="mt-6 h-0.5 overflow-hidden bg-border" aria-hidden="true">
-            <span className="block h-full w-[34%] animate-loading-progress bg-accent" />
+      {!isGone && (
+        <div
+          className={`ld-root ${isLoading ? '' : 'ld-exit'}`}
+          role="status"
+          aria-label="Preparing portfolio"
+          aria-live="polite"
+          aria-hidden={!isLoading}
+        >
+          {/* Curtain panels */}
+          <div className="ld-panel ld-panel-top bg-bg" />
+          <div className="ld-panel ld-panel-bottom bg-bg" />
+
+          {/* Content */}
+          <div className="ld-content grid place-items-center">
+            <div className="pointer-events-none absolute inset-0 [background-image:linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] [background-size:60px_60px] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_50%,black_30%,transparent_100%)]" aria-hidden="true" />
+            <div className="ld-scan" aria-hidden="true" />
+            <div className="pointer-events-none absolute right-[10%] top-[20%] h-[400px] w-[400px] animate-loading-orb-pulse rounded-full bg-[radial-gradient(circle,color-mix(in_srgb,var(--accent)_8%,transparent)_0%,transparent_70%)]" aria-hidden="true" />
+            <div className="ld-ring" aria-hidden="true" />
+
+            {/* Corner labels */}
+            <span className="ld-corner left-6 top-6">JUAN PAOLO PERALTA</span>
+            <span className="ld-corner right-6 top-6">MY PORTFOLIO © 2026</span>
+            <span className="ld-corner bottom-6 right-6">{['Loading projects...', 'Compiling components...', 'Polishing pixels...', 'Almost there...', 'Ready ✓'][Math.min(Math.floor(progress / 25), 4)]}</span>
+
+            {/* Big counter */}
+            <div className="pointer-events-none absolute bottom-2 left-6 select-none font-display text-[clamp(5rem,16vw,12rem)] font-extrabold leading-none tabular-nums text-transparent [letter-spacing:-0.05em] [-webkit-text-stroke:1px_rgba(255,255,255,0.14)]" aria-hidden="true">
+              {String(progress).padStart(3, '0')}
+              <span className="text-accent [-webkit-text-stroke:0] text-[0.25em] align-top">%</span>
+            </div>
+
+            {/* Title + progress bar */}
+            <div className="relative z-[1] w-[min(22rem,86vw)] text-center">
+              <h1 className="font-display text-[2.6rem] font-extrabold leading-none text-primary">
+                <span className="ld-line"><span style={{ animationDelay: '150ms' }}>{loadingTitle.firstLine}</span></span>
+                <span className="ld-line text-accent"><span style={{ animationDelay: '350ms' }}>{loadingTitle.secondLine}</span></span>
+              </h1>
+              <div className="mt-6 h-0.5 overflow-hidden bg-border" aria-hidden="true">
+                <span
+                  className="block h-full bg-accent shadow-[0_0_12px_color-mix(in_srgb,var(--accent)_70%,transparent)]"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+            </div>
           </div>
-          <p className="mt-2.5 text-[0.68rem] uppercase tracking-[0.12em] text-muted">Loading projects...</p>
+
+          {/* Accent seam that flashes when the curtain splits */}
+          <div className="ld-seam" aria-hidden="true" />
         </div>
-      </div>
+      )}
       <CustomCursor />
+      <CursorTrail />
       <ScrollProgress />
       <ContinuousBackground />
       <Navbar />

@@ -113,8 +113,8 @@ export default function Navbar() {
 
     document.body.style.overflow = 'hidden'
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const holdDuration = reduceMotion ? 0 : 1000
-    const fadeDuration = reduceMotion ? 0 : 500
+    const holdDuration = reduceMotion ? 0 : 1200
+    const fadeDuration = reduceMotion ? 0 : 750
 
     if (navigation.phase === 'enter') {
       const timeout = window.setTimeout(() => {
@@ -159,6 +159,18 @@ export default function Navbar() {
     return () => window.removeEventListener('keydown', closeOnEscape)
   }, [])
 
+  // Lets other components (like the footer) start the same transition
+  useEffect(() => {
+    const onNavigate = (e) => {
+      const { href, label } = e.detail || {}
+      if (!href) return
+      setMenuOpen(false)
+      setNavigation({ href, label: label || 'Home', phase: 'enter' })
+    }
+    window.addEventListener('portfolio:navigate', onNavigate)
+    return () => window.removeEventListener('portfolio:navigate', onNavigate)
+  }, [])
+
   const handleNavClick = (e, href) => {
     e.preventDefault()
     setMenuOpen(false)
@@ -168,7 +180,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`fixed inset-x-0 top-0 z-[900] py-4 transition-[background,padding,border-color,box-shadow] duration-[400ms] ease-portfolio ${scrolled ? 'border-b border-border bg-surface/75 py-3 shadow-lg backdrop-blur-2xl [box-shadow:var(--glass-shadow),var(--glass-inner-bevel)]' : 'bg-transparent'}`}>
+      <nav className={`fixed inset-x-0 top-0 z-[900] py-4 transition-[background,padding,border-color,box-shadow] duration-[400ms] ease-portfolio ${scrolled && !menuOpen ? 'border-b border-border bg-surface/75 py-3 shadow-lg backdrop-blur-2xl [box-shadow:var(--glass-shadow),var(--glass-inner-bevel)]' : 'bg-transparent'}`}>
         <div className="mx-auto flex w-[min(90%,1100px)] items-center justify-between">
 
           {/* Logo */}
@@ -205,8 +217,9 @@ export default function Navbar() {
             <span className={`absolute h-0.5 w-6 origin-center bg-primary transition-transform duration-300 ${menuOpen ? 'rotate-45' : '-translate-y-[7px]'}`} /><span className={`absolute h-0.5 w-6 bg-primary transition-all duration-300 ${menuOpen ? 'scale-x-0 opacity-0' : ''}`} /><span className={`absolute h-0.5 w-6 origin-center bg-primary transition-transform duration-300 ${menuOpen ? '-rotate-45' : 'translate-y-[7px]'}`} />
           </button>
         </div>
+      </nav>
 
-        {/* Mobile Menu */}
+      {/* Mobile Menu */}
         <div id="mobile-navigation" className={`fixed inset-0 z-[800] flex min-h-[100dvh] flex-col items-center justify-center gap-8 overflow-y-auto bg-bg/95 backdrop-blur-3xl px-6 pb-12 pt-28 transition-[opacity,transform,visibility] duration-[400ms] ease-portfolio-out max-[768px]:justify-start ${menuOpen ? 'visible pointer-events-auto translate-x-0 opacity-100' : 'invisible pointer-events-none translate-x-full opacity-0'}`}>
           {NAV_LINKS.map(({ label, href }) => (
             <a
@@ -218,21 +231,48 @@ export default function Navbar() {
               {label}
             </a>
           ))}
-          <ThemeToggle theme={theme} onChange={changeTheme} className="mt-2 hidden max-[768px]:inline-flex" />
-        </div>
-      </nav>
+        <ThemeToggle theme={theme} onChange={changeTheme} className="mt-2 hidden max-[768px]:inline-flex" />
+      </div>
       {navigation && (
         <div
-          className={`fixed inset-0 z-[1500] grid place-items-center overflow-hidden bg-bg transition-opacity duration-500 ease-portfolio-out ${navigation.phase === 'leave' ? 'pointer-events-none opacity-0' : 'opacity-100'}`}
+          className={`nv-root ${navigation.phase === 'leave' ? 'nv-leave' : ''}`}
           aria-live="polite"
           aria-label={`Navigating to ${navigation.label}`}
         >
-          <div className="pointer-events-none absolute inset-0 [background-image:linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] [background-size:60px_60px] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_50%,black_30%,transparent_100%)]" aria-hidden="true" />
-          <div className="relative z-[1] text-center animate-fade-up">
-            <p className="mb-4 font-body text-[0.7rem] font-medium uppercase tracking-[0.18em] text-accent">Going to</p>
-            <h2 className="font-display text-[clamp(2.8rem,10vw,6rem)] font-extrabold leading-none text-primary">{navigation.label}</h2>
-            <div className="mx-auto mt-7 h-0.5 w-32 overflow-hidden bg-border" aria-hidden="true">
-              <span className="block h-full w-full origin-left bg-accent animate-[loading-progress_2s_ease-in-out_infinite]" />
+          {/* Curtain panels */}
+          <div className="nv-panel nv-panel-accent" aria-hidden="true" />
+          <div className="nv-panel nv-panel-main bg-bg" aria-hidden="true" />
+
+          {/* Content */}
+          <div className="nv-content grid place-items-center">
+            <div className="pointer-events-none absolute inset-0 [background-image:linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] [background-size:60px_60px] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_50%,black_30%,transparent_100%)]" aria-hidden="true" />
+
+            {/* Big outlined section number */}
+            <div
+              className="nv-fade pointer-events-none absolute right-[-1rem] top-1/2 -translate-y-1/2 select-none font-display text-[clamp(12rem,32vw,30rem)] font-extrabold leading-none text-transparent [letter-spacing:-0.05em] [-webkit-text-stroke:1px_rgba(255,255,255,0.06)]"
+              style={{ animationDelay: '550ms' }}
+              aria-hidden="true"
+            >
+              {String(NAV_LINKS.findIndex((link) => link.href === navigation.href) + 1).padStart(2, '0')}
+            </div>
+
+            <div className="relative z-[1] px-6 text-center">
+              <p
+                className="nv-fade mb-4 flex items-center justify-center gap-3 font-body text-[0.7rem] font-medium uppercase tracking-[0.18em] text-accent"
+                style={{ animationDelay: '550ms' }}
+              >
+                <span className="h-px w-8 bg-accent/60" aria-hidden="true" />
+                Going to
+                <span className="h-px w-8 bg-accent/60" aria-hidden="true" />
+              </p>
+              <h2 className="font-display text-[clamp(2.8rem,10vw,6rem)] font-extrabold leading-none text-primary">
+                <span className="nv-line">
+                  <span style={{ animationDelay: '650ms' }}>{navigation.label}</span>
+                </span>
+              </h2>
+              <div className="mx-auto mt-7 h-0.5 w-40 overflow-hidden bg-border" aria-hidden="true">
+                <span className="nv-bar block h-full w-full" />
+              </div>
             </div>
           </div>
         </div>

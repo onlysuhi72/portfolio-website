@@ -99,7 +99,7 @@ export default function CustomCursor() {
       }
 
       // --- 2. Magnetic Button / CTA Attraction Physics ---
-      const btn = target.closest('button, a, .glass-button, .btn-accent-magnetic, .glass-pill')
+      const btn = target.closest('button, a, .glass-button, .btn-accent-magnetic, .glass-pill, .magnetic')
       if (btn) {
         if (activeBtnRef.current && activeBtnRef.current !== btn) {
           resetBtn(activeBtnRef.current)

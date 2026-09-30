@@ -99,7 +99,7 @@
     body {
         @apply m-0 overflow-x-hidden bg-bg font-body font-light leading-[1.7] text-primary;
         background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-                          linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+            linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
         background-size: 60px 60px;
         background-attachment: fixed;
         cursor: none;
@@ -107,7 +107,7 @@
 
     :root[data-theme='light'] body {
         background-image: linear-gradient(rgba(0, 0, 0, 0.025) 1px, transparent 1px),
-                          linear-gradient(90deg, rgba(0, 0, 0, 0.025) 1px, transparent 1px);
+            linear-gradient(90deg, rgba(0, 0, 0, 0.025) 1px, transparent 1px);
     }
 
     a {
@@ -203,17 +203,17 @@
         transform-style: preserve-3d;
         transform: perspective(1000px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg)) translate3d(var(--mag-x, 0px), var(--mag-y, 0px), var(--tilt-z, 0px));
         transition: transform 0.12s ease-out,
-                    border-color 0.3s ease,
-                    background-color 0.3s ease,
-                    box-shadow 0.3s ease;
+            border-color 0.3s ease,
+            background-color 0.3s ease,
+            box-shadow 0.3s ease;
         will-change: transform;
     }
 
     .glass-card.is-resetting {
         transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                    border-color 0.3s ease,
-                    background-color 0.3s ease,
-                    box-shadow 0.3s ease;
+            border-color 0.3s ease,
+            background-color 0.3s ease,
+            box-shadow 0.3s ease;
     }
 
     .glass-card::before {
@@ -246,9 +246,9 @@
         -webkit-backdrop-filter: blur(12px);
         transform: translate3d(var(--mag-x, 0px), var(--mag-y, 0px), 0);
         transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-                    border-color 0.2s ease,
-                    background-color 0.2s ease,
-                    box-shadow 0.2s ease;
+            border-color 0.2s ease,
+            background-color 0.2s ease,
+            box-shadow 0.2s ease;
     }
 
     .glass-pill:hover {
@@ -288,9 +288,9 @@
         -webkit-backdrop-filter: blur(12px);
         transform: translate3d(var(--mag-x, 0px), var(--mag-y, 0px), 0);
         transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
-                    border-color 0.25s ease,
-                    background-color 0.25s ease,
-                    box-shadow 0.25s ease;
+            border-color 0.25s ease,
+            background-color 0.25s ease,
+            box-shadow 0.25s ease;
         overflow: hidden;
     }
 
@@ -323,8 +323,8 @@
         position: relative;
         transform: translate3d(var(--mag-x, 0px), var(--mag-y, 0px), 0);
         transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
-                    box-shadow 0.25s ease,
-                    background-color 0.25s ease;
+            box-shadow 0.25s ease,
+            background-color 0.25s ease;
     }
 
     .btn-accent-magnetic:hover {
@@ -432,5 +432,547 @@
 
     100% {
         transform: translate3d(0, 0, 0);
+    }
+}
+
+/* ===== Loading screen ===== */
+.ld-root {
+    /* R, G, B of your site's blue */
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    overflow: hidden;
+}
+
+.ld-exit {
+    pointer-events: none;
+}
+
+/* Curtain panels */
+.ld-panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: calc(50% + 1px);
+    will-change: transform;
+    transition: transform 850ms cubic-bezier(0.76, 0, 0.24, 1) 250ms;
+}
+
+.ld-panel-top {
+    top: 0;
+}
+
+.ld-panel-bottom {
+    bottom: 0;
+}
+
+.ld-exit .ld-panel-top {
+    transform: translateY(-101%);
+}
+
+.ld-exit .ld-panel-bottom {
+    transform: translateY(101%);
+}
+
+/* Content fades, blurs, and scales out */
+.ld-content {
+    position: absolute;
+    inset: 0;
+    transition: opacity 450ms ease, transform 600ms cubic-bezier(0.16, 1, 0.3, 1), filter 450ms ease;
+}
+
+.ld-exit .ld-content {
+    opacity: 0;
+    transform: scale(1.06);
+    filter: blur(6px);
+}
+
+/* Center seam flash */
+.ld-seam {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(50% - 1px);
+    height: 2px;
+    height: 2px;
+    background: var(--accent);
+    box-shadow: 0 0 24px 4px color-mix(in srgb, var(--accent) 60%, transparent);
+    transform: scaleX(0);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.ld-exit .ld-seam {
+    animation: ld-seam 900ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+@keyframes ld-seam {
+    0% {
+        transform: scaleX(0);
+        opacity: 1;
+    }
+
+    35% {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scaleX(1);
+        opacity: 0;
+    }
+}
+
+/* Title line reveal */
+.ld-line {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.12em;
+}
+
+.ld-line>span {
+    display: block;
+    transform: translateY(110%);
+    animation: ld-rise 800ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes ld-rise {
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Scan line */
+.ld-scan {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 140px;
+    pointer-events: none;
+    background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--accent) 12%, transparent), transparent);
+    animation: ld-scan 3s linear infinite;
+}
+
+@keyframes ld-scan {
+    from {
+        transform: translateY(-140px);
+    }
+
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+/* Spinning dashed ring */
+.ld-ring {
+    position: absolute;
+    left: 12%;
+    bottom: 22%;
+    width: 120px;
+    height: 120px;
+    border-radius: 9999px;
+    border: 1px dashed color-mix(in srgb, var(--accent) 25%, transparent);
+    animation: ld-spin 12s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes ld-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Corner labels */
+.ld-corner {
+    position: absolute;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-muted, #8a8a8a);
+    opacity: 0;
+    animation: ld-fade 700ms ease 500ms forwards;
+}
+
+@keyframes ld-fade {
+    to {
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .ld-scan,
+    .ld-ring {
+        animation: none;
+    }
+
+    .ld-line>span {
+        animation: none;
+        transform: none;
+    }
+}
+
+/* ===== Form status messages ===== */
+.msg-pop {
+    animation: msg-pop 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes msg-pop {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.msg-check {
+    stroke-dasharray: 24;
+    stroke-dashoffset: 24;
+    animation: msg-draw 450ms ease 250ms forwards;
+}
+
+@keyframes msg-draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.msg-shake {
+    animation: msg-pop 500ms cubic-bezier(0.16, 1, 0.3, 1) both, msg-shake 450ms ease 300ms;
+}
+
+@keyframes msg-shake {
+
+    0%,
+    100% {
+        translate: 0;
+    }
+
+    20% {
+        translate: -6px;
+    }
+
+    40% {
+        translate: 6px;
+    }
+
+    60% {
+        translate: -4px;
+    }
+
+    80% {
+        translate: 4px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .msg-pop,
+    .msg-shake,
+    .msg-check {
+        animation: none;
+        stroke-dashoffset: 0;
+    }
+}
+
+/* ===== Navigation transition ===== */
+.nv-root {
+    /* R, G, B of your site's blue */
+    position: fixed;
+    inset: 0;
+    z-index: 1500;
+    overflow: hidden;
+}
+
+.nv-leave {
+    pointer-events: none;
+}
+
+/* Curtain panels */
+.nv-panel {
+    position: absolute;
+    inset: 0;
+    will-change: transform;
+}
+
+.nv-panel-accent {
+    background: var(--accent);
+    animation: nv-in 650ms cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+.nv-panel-main {
+    animation: nv-in 650ms cubic-bezier(0.76, 0, 0.24, 1) 120ms both;
+}
+
+.nv-leave .nv-panel-main {
+    animation: nv-out 600ms cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+.nv-leave .nv-panel-accent {
+    animation: nv-out 600ms cubic-bezier(0.76, 0, 0.24, 1) 120ms both;
+}
+
+@keyframes nv-in {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes nv-out {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+/* Content fades and blurs out on exit */
+.nv-content {
+    position: absolute;
+    inset: 0;
+    transition: opacity 350ms ease, transform 500ms cubic-bezier(0.16, 1, 0.3, 1), filter 350ms ease;
+}
+
+.nv-leave .nv-content {
+    opacity: 0;
+    transform: scale(1.05);
+    filter: blur(6px);
+}
+
+/* Fade-in for small pieces */
+.nv-fade {
+    opacity: 0;
+    animation: nv-fade 500ms ease forwards;
+}
+
+@keyframes nv-fade {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Title reveal */
+.nv-line {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.12em;
+}
+
+.nv-line>span {
+    display: block;
+    transform: translateY(110%);
+    animation: nv-rise 550ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes nv-rise {
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Progress bar */
+.nv-bar {
+    background: var(--accent);
+    box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 70%, transparent);
+    transform-origin: left;
+    animation: nv-fill 500ms cubic-bezier(0.65, 0, 0.35, 1) 650ms both;
+}
+
+@keyframes nv-fill {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .nv-panel,
+    .nv-bar {
+        animation: none;
+    }
+
+    .nv-fade {
+        animation: none;
+        opacity: 1;
+    }
+
+    .nv-line>span {
+        animation: none;
+        transform: none;
+    }
+}
+
+/* ===== Hero name glitch ===== */
+.nm-l {
+    display: inline-block;
+    text-align: center;
+}
+
+/* Idle: a quick twitch that fires once every few seconds */
+.nm-name .nm-l {
+    animation: nm-idle 5s steps(1, end) infinite;
+    animation-delay: calc(var(--i) * -230ms);
+}
+
+@keyframes nm-idle {
+
+    0%,
+    92%,
+    100% {
+        transform: none;
+        text-shadow: none;
+    }
+
+    93% {
+        transform: translateX(-2px) skewX(-6deg);
+        text-shadow: 2px 0 rgba(255, 60, 120, 0.7), -2px 0 var(--accent);
+    }
+
+    95% {
+        transform: translateX(2px);
+        text-shadow: -2px 0 rgba(255, 60, 120, 0.7), 2px 0 var(--accent);
+    }
+
+    97% {
+        transform: none;
+        text-shadow: none;
+    }
+}
+
+/* Hover: constant jitter with a color split */
+.nm-w:hover .nm-l,
+.nm-w:active .nm-l {
+    animation: nm-jitter 320ms steps(1, end) infinite;
+    animation-delay: calc(var(--i) * -37ms);
+}
+
+@keyframes nm-jitter {
+    0% {
+        transform: translate(0, 0);
+        text-shadow: 2px 0 rgba(255, 60, 120, 0.8), -2px 0 var(--accent);
+    }
+
+    25% {
+        transform: translate(-2px, 1px) skewX(-6deg);
+        text-shadow: -3px 0 rgba(255, 60, 120, 0.8), 3px 0 var(--accent);
+    }
+
+    50% {
+        transform: translate(2px, -1px);
+        text-shadow: 3px 0 rgba(255, 60, 120, 0.8), -3px 0 var(--accent);
+    }
+
+    75% {
+        transform: translate(-1px, 0) skewX(5deg);
+        text-shadow: -2px 0 rgba(255, 60, 120, 0.8), 2px 0 var(--accent);
+    }
+
+    100% {
+        transform: translate(0, 0);
+        text-shadow: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .nm-name .nm-l,
+    .nm-w:hover .nm-l,
+    .nm-w:active .nm-l {
+        animation: none;
+    }
+}
+
+/* ===== Hero name glitch ===== */
+.nm-l {
+    display: inline-block;
+    text-align: center;
+}
+
+/* Idle: a quick twitch that fires once every few seconds */
+.nm-name .nm-l {
+    animation: nm-idle 4s steps(1, end) infinite;
+    animation-delay: calc(var(--i) * 25ms);
+}
+
+@keyframes nm-idle {
+
+    0%,
+    92%,
+    100% {
+        transform: none;
+        text-shadow: none;
+    }
+
+    93% {
+        transform: translateX(-2px) skewX(-6deg);
+        text-shadow: 2px 0 rgba(255, 60, 120, 0.7), -2px 0 var(--accent);
+    }
+
+    95% {
+        transform: translateX(2px);
+        text-shadow: -2px 0 rgba(255, 60, 120, 0.7), 2px 0 var(--accent);
+    }
+
+    97% {
+        transform: none;
+        text-shadow: none;
+    }
+}
+
+/* Hover: constant jitter with a color split */
+.nm-name:hover .nm-l,
+.nm-name:active .nm-l {
+    animation: nm-jitter 320ms steps(1, end) infinite;
+    animation-delay: calc(var(--i) * -37ms);
+}
+
+@keyframes nm-jitter {
+    0% {
+        transform: translate(0, 0);
+        text-shadow: 2px 0 rgba(255, 60, 120, 0.8), -2px 0 var(--accent);
+    }
+
+    25% {
+        transform: translate(-2px, 1px) skewX(-6deg);
+        text-shadow: -3px 0 rgba(255, 60, 120, 0.8), 3px 0 var(--accent);
+    }
+
+    50% {
+        transform: translate(2px, -1px);
+        text-shadow: 3px 0 rgba(255, 60, 120, 0.8), -3px 0 var(--accent);
+    }
+
+    75% {
+        transform: translate(-1px, 0) skewX(5deg);
+        text-shadow: -2px 0 rgba(255, 60, 120, 0.8), 2px 0 var(--accent);
+    }
+
+    100% {
+        transform: translate(0, 0);
+        text-shadow: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .nm-name .nm-l,
+    .nm-name:hover .nm-l,
+    .nm-name:active .nm-l {
+        animation: none;
     }
 }
