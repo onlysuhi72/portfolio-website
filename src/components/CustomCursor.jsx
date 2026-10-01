@@ -31,7 +31,7 @@ export default function CustomCursor() {
     }
 
     let mouseX = window.innerWidth / 2
-    let mouseY = window.innerHeight / 2 
+    let mouseY = window.innerHeight / 2
 
     const resetCard = (card) => {
       if (!card) return
@@ -215,7 +215,7 @@ export default function CustomCursor() {
       {/* Reactive Trailing Aura Ring with Contextual Badge */}
       <div
         ref={ringRef}
-        className={`fixed left-0 top-0 z-[9998] pointer-events-none rounded-full border flex items-center justify-center transition-[width,height,background-color,border-color,box-shadow,border-radius] duration-200 ease-out max-[768px]:hidden will-change-transform ${getRingStyles()}`}
+        className={`custom-cursor-ring fixed left-0 top-0 z-[9998] pointer-events-none rounded-full border flex items-center justify-center transition-[width,height,background-color,border-color,box-shadow,border-radius] duration-200 ease-out max-[768px]:hidden will-change-transform ${getRingStyles()}`}
         aria-hidden="true"
       >
         {hoverLabel && hoverState !== 'input' && !clicking && (

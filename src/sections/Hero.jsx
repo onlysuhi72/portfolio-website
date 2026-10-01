@@ -10,7 +10,7 @@ export default function Hero({ isReady }) {
     <section className="relative flex min-h-[100svh] items-center overflow-hidden bg-transparent pt-20 pb-[clamp(5rem,10vw,9rem)]" id="hero">
       {/* Background decoration */}
       <div className="pointer-events-none absolute right-[-2rem] top-1/2 -translate-y-1/2 select-none font-display text-[clamp(14rem,28vw,28rem)] font-extrabold leading-none text-transparent [letter-spacing:-0.05em] [-webkit-text-stroke:1px_rgba(255,255,255,0.04)]" aria-hidden="true">01</div>
-      <div className="pointer-events-none absolute right-[10%] top-[20%] h-[400px] w-[400px] animate-orb-pulse rounded-full bg-[radial-gradient(circle,rgba(184,255,87,0.08)_0%,transparent_70%)] max-[600px]:right-[-2rem] max-[600px]:top-[10%] max-[600px]:h-[240px] max-[600px]:w-[240px]" aria-hidden="true" />
+      <div className="pointer-events-none absolute right-[10%] top-[20%] h-[400px] w-[400px] animate-orb-pulse rounded-full bg-[radial-gradient(circle,var(--hero-glow)_0%,transparent_70%)] max-[600px]:right-[-2rem] max-[600px]:top-[10%] max-[600px]:h-[240px] max-[600px]:w-[240px]" aria-hidden="true" />
 
       <div className="mx-auto w-[min(90%,1100px)] relative z-[2] max-w-[780px]">
 

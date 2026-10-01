@@ -58,6 +58,12 @@
         --glass-border-highlight: rgba(255, 255, 255, 0.16);
         --glass-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.5);
         --glass-inner-bevel: inset 0 1px 1px 0 rgba(255, 255, 255, 0.12);
+
+        /* Loading screen */
+        --ld-line: rgba(255, 255, 255, 0.025);
+        --hero-glow: rgba(184, 255, 87, 0.08);
+        --ld-stroke: rgba(255, 255, 255, 0.14);
+        --ld-orb: 8%;
     }
 
     :root[data-theme='light'] {
@@ -84,6 +90,12 @@
         --glass-border-highlight: rgba(255, 255, 255, 0.95);
         --glass-shadow: 0 16px 36px -12px rgba(31, 50, 48, 0.1);
         --glass-inner-bevel: inset 0 1px 1px 0 rgba(255, 255, 255, 0.8);
+
+        /* Loading screen */
+        --ld-line: rgba(0, 0, 0, 0.12);
+        --hero-glow: rgba(184, 255, 87, 0.45);
+        --ld-stroke: rgba(0, 0, 0, 0.38);
+        --ld-orb: 22%;
     }
 
     html {
@@ -98,17 +110,12 @@
     }
 
     body {
-        @apply m-0 overflow-x-hidden bg-bg font-body font-light leading-[1.7] text-primary;
-        background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+        @apply m-0 overflow-x-clip bg-bg font-body font-light leading-[1.7] text-primary;
+        background-image: linear-gradient(var(--ld-line) 1px, transparent 1px),
+            linear-gradient(90deg, var(--ld-line) 1px, transparent 1px);
         background-size: 60px 60px;
         background-attachment: fixed;
         cursor: none;
-    }
-
-    :root[data-theme='light'] body {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.025) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0, 0, 0, 0.025) 1px, transparent 1px);
     }
 
     a {
@@ -604,6 +611,22 @@
     to {
         opacity: 1;
     }
+}
+
+:root[data-theme='light'] .ld-scan {
+    background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--accent) 40%, transparent), transparent);
+}
+
+:root[data-theme='light'] .ld-ring {
+    border-color: color-mix(in srgb, var(--accent) 75%, transparent);
+}
+
+:root[data-theme='light'] .ld-corner {
+    color: var(--text-secondary);
+}
+
+:root[data-theme='light'] .custom-cursor-ring {
+    border-color: var(--accent-dim);
 }
 
 @media (prefers-reduced-motion: reduce) {

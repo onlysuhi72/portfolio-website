@@ -100,9 +100,9 @@ export default function About() {
 
             {/* Quick Highlights Pill Row */}
             <div className="mt-6 flex flex-wrap gap-2.5 opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out delay-[500ms] [&.visible]:translate-y-0 [&.visible]:opacity-100">
-              <span className="glass-pill rounded-full px-3.5 py-1 text-xs text-secondary font-medium">🎓 BulSU BSIT</span>
-              <span className="glass-pill rounded-full px-3.5 py-1 text-xs text-secondary font-medium">💻 Full-Stack Focus</span>
-              <span className="glass-pill rounded-full px-3.5 py-1 text-xs text-secondary font-medium">📍 Bulacan, PH</span>
+              <span className="glass-pill rounded-full px-3.5 py-1 text-xs text-secondary font-medium">🎓 Bulacan State University</span>
+              <span className="glass-pill rounded-full px-3.5 py-1 text-xs text-secondary font-medium">💻 Full-Stack Developer</span>
+              <span className="glass-pill rounded-full px-3.5 py-1 text-xs text-secondary font-medium">📍 Bulacan, Philippines</span>
             </div>
           </div>
 
