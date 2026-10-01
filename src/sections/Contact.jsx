@@ -5,6 +5,7 @@ import ScrambleText from '../components/ScrambleText'
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+const RECIPIENT_EMAIL = 'paoloperalta.dev@gmail.com'
 
 const CONTACT_LINKS = [
   {
@@ -53,6 +54,7 @@ export default function Contact() {
     setStatus(null)
 
     emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+      to_email: RECIPIENT_EMAIL,
       name: form.name,
       email: form.email,
       subject: form.subject,
@@ -106,9 +108,9 @@ export default function Contact() {
 
             <div className="mb-10 flex flex-col gap-3.5">
               <p className="mb-1 text-[0.72rem] uppercase tracking-[0.12em] text-muted">Email me at</p>
-              <a href="mailto:paoloperalta246@gmail.com" className="glass-button mb-4 flex items-center gap-3.5 rounded-xl p-3 text-[0.9rem] text-primary group">
+              <a href="mailto:paoloperalta.dev@gmail.com" className="glass-button mb-4 flex items-center gap-3.5 rounded-xl p-3 text-[0.9rem] text-primary group">
                 <span className="glass-pill pointer-events-none flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-base transition-colors group-hover:border-accent group-hover:text-accent [--mag-x:0px] [--mag-y:0px]">📧</span>
-                paoloperalta246@gmail.com
+                paoloperalta.dev@gmail.com
               </a>
               <p className="mb-1 text-[0.72rem] uppercase tracking-[0.12em] text-muted">You can also find me on</p>
               <div className="flex flex-col gap-2.5">
@@ -120,7 +122,7 @@ export default function Contact() {
                     </a>
                   ) : (
                     <div key={label} className="glass-card flex cursor-default items-center gap-3.5 rounded-xl p-3 text-[0.9rem] text-secondary">
-                        <span className="glass-pill pointer-events-none flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-base [--mag-x:0px] [--mag-y:0px]">{icon}</span>
+                      <span className="glass-pill pointer-events-none flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-base [--mag-x:0px] [--mag-y:0px]">{icon}</span>
                       <span className="font-medium">{label}</span>
                     </div>
                   )
@@ -132,106 +134,106 @@ export default function Contact() {
           {/* Right: form */}
           <div className="opacity-0 translate-y-8 transition-[opacity,transform] duration-[700ms] ease-portfolio-out delay-[200ms] [&.visible]:translate-y-0 [&.visible]:opacity-100">
             <div className="glass-card relative h-full overflow-hidden rounded-2xl p-[clamp(1.5rem,4vw,2.5rem)] shadow-2xl before:absolute before:top-0 before:left-0 before:h-[2px] before:w-full before:bg-gradient-to-r before:from-transparent before:via-accent before:to-transparent">
-            <form className="flex flex-col gap-[1.2rem]" onSubmit={handleSubmit}>
+              <form className="flex flex-col gap-[1.2rem]" onSubmit={handleSubmit}>
 
-              <div className="grid grid-cols-2 gap-4 max-[768px]:grid-cols-1">
+                <div className="grid grid-cols-2 gap-4 max-[768px]:grid-cols-1">
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[0.78rem] font-medium tracking-[0.05em] text-secondary" htmlFor="name">Name</label>
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      placeholder="Your name"
+                      className="glass-input w-full rounded-xl px-4 py-3 font-body text-[0.9rem] text-primary transition-[transform,border-color,background-color,box-shadow] duration-200 hover:scale-[1.02] placeholder:text-muted focus:outline-none"
+                      value={form.name}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[0.78rem] font-medium tracking-[0.05em] text-secondary" htmlFor="email">Email</label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="your@email.com"
+                      className="glass-input w-full rounded-xl px-4 py-3 font-body text-[0.9rem] text-primary transition-[transform,border-color,background-color,box-shadow] duration-200 hover:scale-[1.02] placeholder:text-muted focus:outline-none"
+                      value={form.email}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                </div>
+
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-[0.78rem] font-medium tracking-[0.05em] text-secondary" htmlFor="name">Name</label>
+                  <label className="text-[0.78rem] font-medium tracking-[0.05em] text-secondary" htmlFor="subject">Subject</label>
                   <input
-                    id="name"
-                    name="name"
+                    id="subject"
+                    name="subject"
                     type="text"
-                    placeholder="Your name"
-                      className="glass-input w-full rounded-xl px-4 py-3 font-body text-[0.9rem] text-primary transition-[transform,border-color,background-color,box-shadow] duration-200 hover:scale-[1.02] placeholder:text-muted focus:outline-none"
-                    value={form.name}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-[0.78rem] font-medium tracking-[0.05em] text-secondary" htmlFor="email">Email</label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="your@email.com"
-                      className="glass-input w-full rounded-xl px-4 py-3 font-body text-[0.9rem] text-primary transition-[transform,border-color,background-color,box-shadow] duration-200 hover:scale-[1.02] placeholder:text-muted focus:outline-none"
-                    value={form.email}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[0.78rem] font-medium tracking-[0.05em] text-secondary" htmlFor="subject">Subject</label>
-                <input
-                  id="subject"
-                  name="subject"
-                  type="text"
-                  placeholder="Internship opportunity / Project inquiry / etc."
+                    placeholder="Internship opportunity / Project inquiry / etc."
                     className="glass-input w-full rounded-xl px-4 py-3 font-body text-[0.9rem] text-primary transition-[transform,border-color,background-color,box-shadow] duration-200 hover:scale-[1.02] placeholder:text-muted focus:outline-none"
-                  value={form.subject}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+                    value={form.subject}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
 
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[0.78rem] font-medium tracking-[0.05em] text-secondary" htmlFor="message">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  placeholder="Tell me what you have in mind..."
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[0.78rem] font-medium tracking-[0.05em] text-secondary" htmlFor="message">Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    placeholder="Tell me what you have in mind..."
                     className="glass-input min-h-[140px] w-full resize-none rounded-xl px-4 py-3 font-body text-[0.9rem] text-primary transition-[transform,border-color,background-color,box-shadow] duration-200 hover:scale-[1.02] placeholder:text-muted focus:outline-none"
-                  value={form.message}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+                    value={form.message}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
 
-              <button
-                type="submit"
-                className="relative flex h-[3.2rem] w-full items-center justify-center gap-1.5 rounded-xl bg-accent font-body text-[0.98rem] font-semibold text-[#0a0a0a] transition-all duration-150 [transform:translate(var(--mag-x,0px),var(--mag-y,0px))] hover:[transform:translate(var(--mag-x,0px),calc(var(--mag-y,0px)_-_2px))] hover:shadow-[0_12px_32px_rgba(184,255,87,0.25)] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:[transform:none] after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity hover:after:opacity-[0.08]"
-                disabled={loading}
-              >
-                {loading ? 'Sending...' : (
-                  <span className="flex items-center gap-1.5">
-                    <SendIcon />
-                    Send Message
-                  </span>
+                <button
+                  type="submit"
+                  className="relative flex h-[3.2rem] w-full items-center justify-center gap-1.5 rounded-xl bg-accent font-body text-[0.98rem] font-semibold text-[#0a0a0a] transition-all duration-150 [transform:translate(var(--mag-x,0px),var(--mag-y,0px))] hover:[transform:translate(var(--mag-x,0px),calc(var(--mag-y,0px)_-_2px))] hover:shadow-[0_12px_32px_rgba(184,255,87,0.25)] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:[transform:none] after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity hover:after:opacity-[0.08]"
+                  disabled={loading}
+                >
+                  {loading ? 'Sending...' : (
+                    <span className="flex items-center gap-1.5">
+                      <SendIcon />
+                      Send Message
+                    </span>
+                  )}
+                </button>
+
+                {status === 'success' && (
+                  <div className="msg-pop glass-card mt-3 flex items-start gap-3.5 rounded-xl border border-accent/40 px-4 py-4 text-left" role="status">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-accent text-[#0a0a0a]" aria-hidden="true">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                        <path className="msg-check" d="M5 12.5l4.5 4.5L19 7.5" />
+                      </svg>
+                    </span>
+                    <div>
+                      <p className="font-display text-[0.95rem] font-bold text-primary">Message sent!</p>
+                      <p className="mt-0.5 text-[0.82rem] leading-5 text-secondary">Thanks for reaching out. I'll get back to you soon.</p>
+                    </div>
+                  </div>
                 )}
-              </button>
-
-              {status === 'success' && (
-                <div className="msg-pop glass-card mt-3 flex items-start gap-3.5 rounded-xl border border-accent/40 px-4 py-4 text-left" role="status">
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-accent text-[#0a0a0a]" aria-hidden="true">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                      <path className="msg-check" d="M5 12.5l4.5 4.5L19 7.5" />
-                    </svg>
-                  </span>
-                  <div>
-                    <p className="font-display text-[0.95rem] font-bold text-primary">Message sent!</p>
-                    <p className="mt-0.5 text-[0.82rem] leading-5 text-secondary">Thanks for reaching out. I'll get back to you soon.</p>
+                {status === 'error' && (
+                  <div className="msg-pop msg-shake glass-card mt-3 flex items-start gap-3.5 rounded-xl border border-[rgba(255,87,87,0.4)] px-4 py-4 text-left" role="alert">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[rgba(255,87,87,0.15)] text-red" aria-hidden="true">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M6 6l12 12M18 6L6 18" />
+                      </svg>
+                    </span>
+                    <div>
+                      <p className="font-display text-[0.95rem] font-bold text-primary">Message not sent</p>
+                      <p className="mt-0.5 text-[0.82rem] leading-5 text-secondary">
+                        Something went wrong. Please try again, and if it keeps failing, email me at{' '}
+                        <a href="mailto:paoloperalta.dev@gmail.com" className="text-accent underline underline-offset-2">paoloperalta.dev@gmail.com</a>.
+                      </p>
+                    </div>
                   </div>
-                </div>
-              )}
-              {status === 'error' && (
-                <div className="msg-pop msg-shake glass-card mt-3 flex items-start gap-3.5 rounded-xl border border-[rgba(255,87,87,0.4)] px-4 py-4 text-left" role="alert">
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[rgba(255,87,87,0.15)] text-red" aria-hidden="true">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M6 6l12 12M18 6L6 18" />
-                    </svg>
-                  </span>
-                  <div>
-                    <p className="font-display text-[0.95rem] font-bold text-primary">Message not sent</p>
-                    <p className="mt-0.5 text-[0.82rem] leading-5 text-secondary">
-                      Something went wrong. Please try again, and if it keeps failing, email me at{' '}
-                      <a href="mailto:paoloperalta246@gmail.com" className="text-accent underline underline-offset-2">paoloperalta246@gmail.com</a>.
-                    </p>
-                  </div>
-                </div>
-              )}
+                )}
 
               </form>
             </div>

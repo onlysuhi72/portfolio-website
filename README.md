@@ -26,7 +26,7 @@ GitHub: https://github.com/onlysuhi72
 
 LinkedIn: https://www.linkedin.com/in/juan-paolo-peralta-8b3900435
 
-Email: paoloperalta246@gmail.com
+Email: paoloperalta.dev@gmail.com
 
 License
 
