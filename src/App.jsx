@@ -7,8 +7,7 @@ import Projects from './sections/Projects'
 import Resume from './sections/Resume'
 import Contact from './sections/Contact'
 import Footer from './components/Footer'
-import CustomCursor from './components/CustomCursor'
-import CursorTrail from './components/CursorTrail'
+import GlobalInteractions from './components/GlobalInteractions'
 import ScrollProgress from './components/ScrollProgress'
 import ContinuousBackground from './components/ContinuousBackground'
 import SectionTransition from './components/SectionTransition'
@@ -148,8 +147,7 @@ function App() {
           <div className="ld-seam" aria-hidden="true" />
         </div>
       )}
-      <CustomCursor />
-      <CursorTrail />
+      <GlobalInteractions />
       <ScrollProgress />
       <ContinuousBackground />
       <Navbar />

@@ -115,11 +115,10 @@
             linear-gradient(90deg, var(--ld-line) 1px, transparent 1px);
         background-size: 60px 60px;
         background-attachment: fixed;
-        cursor: none;
     }
 
     a {
-        @apply text-inherit no-underline;
+        @apply cursor-pointer text-inherit no-underline;
     }
 
     img,
@@ -623,10 +622,6 @@
 
 :root[data-theme='light'] .ld-corner {
     color: var(--text-secondary);
-}
-
-:root[data-theme='light'] .custom-cursor-ring {
-    border-color: var(--accent-dim);
 }
 
 @media (prefers-reduced-motion: reduce) {
