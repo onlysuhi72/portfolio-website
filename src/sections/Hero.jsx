@@ -2,8 +2,10 @@ import React, { useEffect, useRef, useState } from 'react'
 import ScrambleText from '../components/ScrambleText'
 
 export default function Hero({ isReady }) {
-  const scrollTo = (id) => {
-    document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' })
+  const navigateTo = (href, label) => {
+    window.dispatchEvent(
+      new CustomEvent('portfolio:navigate', { detail: { href, label } }),
+    )
   }
 
   return (
@@ -32,13 +34,13 @@ export default function Hero({ isReady }) {
 
         {/* CTAs */}
         <div className={`flex flex-wrap items-center gap-4 max-[600px]:justify-center ${isReady ? 'animate-fade-up [animation-delay:850ms]' : 'opacity-0'}`}>
-          <button className="relative inline-flex items-center gap-2 rounded-sm bg-accent px-7 py-3 max-[600px]:px-5 font-body text-[0.9rem] font-semibold tracking-[0.02em] text-[#0a0a0a] transition-all duration-300 ease-portfolio [transform:translate(var(--mag-x,0px),var(--mag-y,0px))] hover:[transform:translate(var(--mag-x,0px),calc(var(--mag-y,0px)-2px))] hover:shadow-accent-glow after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity hover:after:opacity-[0.08] active:after:opacity-[0.16]" onClick={() => scrollTo('#projects')}>
+          <button type="button" className="relative inline-flex items-center gap-2 rounded-sm bg-accent px-7 py-3 max-[600px]:px-5 font-body text-[0.9rem] font-semibold tracking-[0.02em] text-[#0a0a0a] transition-all duration-300 ease-portfolio [transform:translate(var(--mag-x,0px),var(--mag-y,0px))] hover:[transform:translate(var(--mag-x,0px),calc(var(--mag-y,0px)-2px))] hover:shadow-accent-glow after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity hover:after:opacity-[0.08] active:after:opacity-[0.16]" onClick={() => navigateTo('#projects', 'Projects')}>
             View Projects
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </button>
-          <button className="glass-button relative inline-flex items-center gap-2 rounded-sm px-7 py-3 max-[600px]:px-5 font-body text-[0.9rem] font-medium tracking-[0.02em] text-primary" onClick={() => scrollTo('#contact')}>
+          <button type="button" className="glass-button relative inline-flex items-center gap-2 rounded-sm px-7 py-3 max-[600px]:px-5 font-body text-[0.9rem] font-medium tracking-[0.02em] text-primary" onClick={() => navigateTo('#contact', 'Contact')}>
             Contact Me
           </button>
         </div>
