@@ -278,9 +278,9 @@ export default function Projects() {
             </h2>
           </div>
           <div className="flex flex-1 flex-wrap items-center justify-center gap-3 max-[480px]:w-full max-[480px]:justify-start">
-            <label className="relative min-w-[min(100%,15rem)] flex-1 max-w-[20rem] max-[480px]:max-w-none">
+            <label className="magnetic relative min-w-[min(100%,15rem)] flex-1 max-w-[20rem] max-[480px]:max-w-none [translate:var(--mag-x,0px)_var(--mag-y,0px)] transition-[translate] duration-200">
               <span className="sr-only">Search projects</span>
-              <svg className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <svg className="pointer-events-none absolute left-3.5 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                 <circle cx="11" cy="11" r="7" />
                 <path d="m20 20-4-4" />
               </svg>
@@ -302,7 +302,7 @@ export default function Projects() {
                 aria-expanded={menuOpen}
                 aria-label="Filter projects by type"
                 onClick={() => setMenuOpen((open) => !open)}
-                className="glass-input flex min-h-10 w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-sm text-secondary focus:outline-none"
+                className="glass-input magnetic flex min-h-10 w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-sm text-secondary [translate:var(--mag-x,0px)_var(--mag-y,0px)] transition-[translate] duration-200 focus:outline-none"
               >
                 {category}
                 <svg className={`h-4 w-4 transition-transform duration-200 ${menuOpen ? 'rotate-180' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
